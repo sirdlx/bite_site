@@ -1,0 +1,102 @@
+import 'package:flutter/material.dart';
+import 'package:losbetos/components/menuItemTile.dart';
+import 'package:losbetos/models/menu.functions.dart';
+import 'package:losbetos/models/models.dart';
+import 'package:losbetos/state.dart';
+import 'package:losbetos/utilities.dart';
+
+class PageCategory extends StatefulWidget {
+  final String id;
+  const PageCategory({
+    Key? key,
+    required this.id,
+  }) : super(key: key);
+
+  @override
+  _PageCategoryState createState() => _PageCategoryState();
+}
+
+class _PageCategoryState extends State<PageCategory> {
+  @override
+  Widget build(BuildContext context) {
+    // final name = ModalRoute.of(context)!.settings.name;
+
+    // // print('name::$name');
+    // var uri = Uri.dataFromString(name as String);
+    // // print(uri.pathSegments.last);
+
+    // var id = uri.pathSegments.last;
+
+    // var menuCatgeoriesItems = getMenuCategories;
+
+    MenuCatagory? menuCategory = menuCategorySingle(widget.id);
+
+    // if (menuCategory == null) {
+    //   return PageError(
+    //     errorCode: 404.toString(),
+    //     msg: 'Category number $id doesnt exist',
+    //   );
+    // }
+
+    List<Menuitem> items = [];
+
+    var menuItems = getMenuItems;
+
+    for (var i = 0; i < menuItems.length; i++) {
+      Menuitem menuItem = menuItems[i];
+      print(menuItems[i].categoryId);
+      if (menuItem.categoryId == menuCategory!.id) {
+        items.add(menuItem);
+      }
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          menuCategory!.title!,
+          style: TextStyle(color: Colors.black87),
+        ),
+      ),
+      body: items.length == 0
+          ? Container(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'No Items in this Category',
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
+                  ],
+                ),
+              ),
+            )
+          : Center(
+              child: Container(
+                constraints: BoxConstraints(
+                  maxWidth: 600,
+                  minWidth: 320,
+                ),
+                child: Card(
+                  child: ListView(
+                    padding: EdgeInsets.all(0),
+                    children: List.generate(
+                      items.length,
+                      (index) {
+                        Menuitem item = items[index];
+                        print(item.imageUrl);
+                        return MenuItemTile(
+                          menuItem: item,
+                          // onTap: () => GlobalNav.currentState!.pushNamed(
+                          //     '/catalog/${item.id}',
+                          //     arguments: item),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ),
+    );
+  }
+}
