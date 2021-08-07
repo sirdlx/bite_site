@@ -60,32 +60,21 @@ List<Menuitem> parseItems(Map<String, dynamic> e) {
 MenuCatagory? menuCategorySingle(String id) {
   // print('menuCategorySingle::$id');
   return getMenuCategories.where((element) => element.id == id).first;
-  // 002
-  // Map map = catagories.where((element) => element['id'] == id).first;
-  // print(map);
-  // 001
-  // for (var i = 0; i < catagories.length; i++) {
-  //   print(catagories[i].id == id);
-  //   if (catagories[i].id == id) {
-  //     // return catagories[i];
-  //   }
-  // }
 }
 
-// List<Menuitem> menuCategoryItems(String id) {
-//   print('menuCategoryItems::$menuCategoryItems');
-//   MenuCatagory? cat = menuCategorySingle(id);
-//   if (cat == null) {
-//     return [];
-//   }
-//   return cat.items!.map((e) {
-//     return Menuitem(
-//       id: e['id'],
-//       description: e.containsKey('description') ? e['description'] : '',
-//       title: e['title'],
-//       basePrice: e['base_price'],
-//       imageUrl: (e as Map).containsKey('imageUrl') ? e['imageUrl'] : null,
-//       categoryId: (e).containsKey('category_id') ? e['category_id'] : null,
-//     );
-//   }).toList();
-// }
+List<Menuitem> getMenuItemsAll() {
+  return menuItems
+      .map((Map e) => Menuitem(
+            id: e['id'],
+            basePrice: e['base_price'],
+            description: e.containsKey('description') ? e['description'] : '',
+            title: e['title'],
+            imageUrl: e.containsKey('imageUrl') ? e['imageUrl'] : null,
+            categoryId: e.containsKey('category_id') ? e['category_id'] : null,
+          ))
+      .toList();
+}
+
+Menuitem getMenuItemsSingle(String id) {
+  return getMenuItemsAll().where((element) => element.id == id).first;
+}

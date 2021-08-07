@@ -33,33 +33,20 @@ List catagories = [
   tortas,
 ];
 
-List get _getMenuItems => [
-      ...beverages['items'],
-      ...breakfestburritos['items'],
-      ...burritos['items'],
-      ...chimichangadinners['items'],
-      ...desserts['items'],
-      ...enchiladas['items'],
-      ...losbetosspecialties['items'],
-      ...mexicandrinksandsodas['items'],
-      ...nachos['items'],
-      ...quesadillas['items'],
-      ...salads['items'],
-      ...sideordersandextras['items'],
-      ...soups['items'],
-      ...tacos['items'],
-      ...tortas['items'],
-    ];
-
-List<Menuitem> get getMenuItems {
-  return (_getMenuItems).map((e) {
-    return Menuitem(
-      id: e['id'],
-      description: e.containsKey('description') ? e['description'] : '',
-      title: e['title'],
-      basePrice: e['base_price'],
-      imageUrl: (e as Map).containsKey('imageUrl') ? e['imageUrl'] : null,
-      categoryId: (e).containsKey('category_id') ? e['category_id'] : null,
-    );
-  }).toList();
-}
+List<Map<String, dynamic>> menuItems = [
+  ...beverages['items'],
+  ...breakfestburritos['items'],
+  ...burritos['items'],
+  ...chimichangadinners['items'],
+  ...desserts['items'],
+  ...enchiladas['items'],
+  ...losbetosspecialties['items'],
+  ...mexicandrinksandsodas['items'],
+  ...nachos['items'],
+  ...quesadillas['items'],
+  ...salads['items'],
+  ...sideordersandextras['items'],
+  ...soups['items'],
+  ...tacos['items'],
+  ...tortas['items'],
+];

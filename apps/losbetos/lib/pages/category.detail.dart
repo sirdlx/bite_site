@@ -40,17 +40,17 @@ class _PageCategoryState extends State<PageCategory> {
     //   );
     // }
 
-    List<Menuitem> items = [];
+    // List<Menuitem> items = [];
 
-    var menuItems = getMenuItems;
+    // var menuItems = getMenuItems;
 
-    for (var i = 0; i < menuItems.length; i++) {
-      Menuitem menuItem = menuItems[i];
-      // print(menuItems[i].categoryId);
-      if (menuItem.categoryId == menuCategory!.id) {
-        items.add(menuItem);
-      }
-    }
+    // for (var i = 0; i < menuItems.length; i++) {
+    //   Menuitem menuItem = menuItems[i];
+    //   // print(menuItems[i].categoryId);
+    //   if (menuItem.categoryId == menuCategory!.id) {
+    //     items.add(menuItem);
+    //   }
+    // }
 
     return Scaffold(
       appBar: AppBar(
@@ -59,7 +59,7 @@ class _PageCategoryState extends State<PageCategory> {
           style: TextStyle(color: Colors.black87),
         ),
       ),
-      body: items.length == 0
+      body: menuCategory.items.length == 0
           ? Container(
               child: Center(
                 child: Column(
@@ -83,9 +83,9 @@ class _PageCategoryState extends State<PageCategory> {
                   child: ListView(
                     padding: EdgeInsets.all(0),
                     children: List.generate(
-                      items.length,
+                      menuCategory.items.length,
                       (index) {
-                        Menuitem item = items[index];
+                        Menuitem item = menuCategory.items[index];
                         print(item.imageUrl);
                         return MenuItemTile(
                           menuItem: item,
