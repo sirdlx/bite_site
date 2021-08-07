@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:losbetos/components/menuItemTile.dart';
-import 'package:losbetos/models/menu.functions.dart';
+import 'package:losbetos/models/menu02/_functions.dart';
+import 'package:losbetos/models/menu02/menu.dart';
 import 'package:losbetos/models/models.dart';
-import 'package:losbetos/state.dart';
 import 'package:losbetos/utilities.dart';
 
 class PageCategory extends StatefulWidget {
@@ -31,6 +31,8 @@ class _PageCategoryState extends State<PageCategory> {
 
     MenuCatagory? menuCategory = menuCategorySingle(widget.id);
 
+    // print('widget.id::${menuCategory!.items.toString()}');
+
     // if (menuCategory == null) {
     //   return PageError(
     //     errorCode: 404.toString(),
@@ -44,7 +46,7 @@ class _PageCategoryState extends State<PageCategory> {
 
     for (var i = 0; i < menuItems.length; i++) {
       Menuitem menuItem = menuItems[i];
-      print(menuItems[i].categoryId);
+      // print(menuItems[i].categoryId);
       if (menuItem.categoryId == menuCategory!.id) {
         items.add(menuItem);
       }

@@ -1,4 +1,4 @@
-import 'package:losbetos/models/losbetos.menu.dart';
+import 'package:losbetos/models/menu1/losbetos.menu.01.dart';
 import 'package:losbetos/models/models.dart';
 
 List<MenuCatagory> get getMenuCategories {

@@ -1,7 +1,6 @@
 import 'package:flavor/layout/FlavorResponsiveView.dart';
 import 'package:flavor/layout/adaptive.dart';
 import 'package:flutter/material.dart';
-import 'package:losbetos/components/homeAppbar.dart';
 import 'package:losbetos/components/pageviewer.dart';
 import 'package:losbetos/pages/home.dart';
 import 'package:losbetos/routes/routes.dart';
@@ -81,10 +80,10 @@ class _AppLayoutWidgetState extends State<AppLayoutWidget>
             ],
           ),
         ),
-        DisplayType.xl: Scaffold(
-          appBar: homeAppBar(context),
-          body: BiteSiteHomeBody(),
-        ),
+        // DisplayType.xl: Scaffold(
+        //   appBar: homeAppBar(context),
+        //   body: BiteSiteHomeBody(),
+        // ),
       },
     );
   }

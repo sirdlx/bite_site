@@ -18,12 +18,14 @@ class MenuCatagory {
   final String? description;
   final String type = 'bitesite.catagory';
   final String? imageUrl;
+  final List<Menuitem> items;
 
   MenuCatagory({
     required this.id,
     this.title,
     this.description,
     this.imageUrl,
+    this.items = const [],
   });
 }
 

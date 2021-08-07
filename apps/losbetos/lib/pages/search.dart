@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:losbetos/components/categoryGrid.dart';
 import 'package:losbetos/components/gridItem.dart';
 import 'package:losbetos/components/menuItemTile.dart';
-import 'package:losbetos/models/menu.functions.dart';
+import 'package:losbetos/models/menu02/_functions.dart';
+import 'package:losbetos/models/menu02/menu.dart';
 import 'package:losbetos/models/models.dart';
 import 'package:losbetos/state.dart';
 import 'package:losbetos/utilities.dart';
@@ -56,71 +57,72 @@ class _PageSearchState extends State<PageSearch> {
           slivers: [
             buildSearchAppBar(context),
 
-            viewMode == View_Mode.search
-                ? buildSearchResults()
-                : SliverToBoxAdapter(),
-            //
-            //
-            //
-            //
-            viewMode == View_Mode.category
-                ? FutureBuilder<List<Menuitem>?>(
-                    future: Future.delayed(Duration(milliseconds: 0))
-                        .then((value) => menuCategoryItems(selectedCategory!)),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        print(snapshot.data!.length.toString());
+            // viewMode == View_Mode.search
+            //     ? buildSearchResults()
+            //     : SliverToBoxAdapter(),
+            // //
+            // //
+            // //
+            // //
+            // viewMode == View_Mode.category
+            //     ? FutureBuilder<MenuCatagory?>(
+            //         future: Future.delayed(Duration(milliseconds: 0)).then(
+            //             (value) => Future.value(
+            //                 menuCategorySingle(selectedCategory!))),
+            //         builder: (context, snapshot) {
+            //           if (snapshot.connectionState == ConnectionState.done) {
+            //             print(snapshot.data!.items.length.toString());
 
-                        if (snapshot.data!.length > 0) {
-                          return buildMenuItemListCategory(
-                              context, snapshot.data as List<Menuitem>);
-                        }
+            //             if (snapshot.data!.items.length > 0) {
+            //               return buildMenuItemListCategory(
+            //                   context, snapshot.data as List<Menuitem>);
+            //             }
 
-                        if (snapshot.data!.length == 0) {
-                          return SliverToBoxAdapter(
-                            child: AspectRatio(
-                              aspectRatio: 1,
-                              child: Container(
-                                // color: Colors.red,
-                                child: Center(
-                                  child: Text(
-                                    ' No Items in this Category today',
-                                    style:
-                                        Theme.of(context).textTheme.headline5,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        }
-                      }
+            //             if (snapshot.data!.items.length == 0) {
+            //               return SliverToBoxAdapter(
+            //                 child: AspectRatio(
+            //                   aspectRatio: 1,
+            //                   child: Container(
+            //                     // color: Colors.red,
+            //                     child: Center(
+            //                       child: Text(
+            //                         ' No Items in this Category today',
+            //                         style:
+            //                             Theme.of(context).textTheme.headline5,
+            //                       ),
+            //                     ),
+            //                   ),
+            //                 ),
+            //               );
+            //             }
+            //           }
 
-                      return SliverToBoxAdapter(
-                        child: AspectRatio(
-                          aspectRatio: 1,
-                          child: Container(
-                            // color: Colors.red,
-                            height: 500,
-                            child: Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          ),
-                        ),
-                      );
-                    })
-                : SliverToBoxAdapter(),
-            //
-            //
-            // Popular Section
-            viewMode == View_Mode.main
-                ? buildSearchDefaultView(context)
-                : SliverToBoxAdapter(),
+            //           return SliverToBoxAdapter(
+            //             child: AspectRatio(
+            //               aspectRatio: 1,
+            //               child: Container(
+            //                 // color: Colors.red,
+            //                 height: 500,
+            //                 child: Center(
+            //                   child: CircularProgressIndicator(),
+            //                 ),
+            //               ),
+            //             ),
+            //           );
+            //         })
+            //     : SliverToBoxAdapter(),
+            // //
+            // //
+            // // Popular Section
+            // viewMode == View_Mode.main
+            //     ? buildSearchDefaultView(context)
+            //     : SliverToBoxAdapter(),
 
-            // Category Grid Section
+            // // Category Grid Section
 
-            viewMode == View_Mode.main
-                ? CategoryGrid(scrollController: _scrollController)
-                : SliverToBoxAdapter(),
+            // viewMode == View_Mode.main
+            //     ? CategoryGrid(scrollController: _scrollController)
+            //     : SliverToBoxAdapter(),
           ],
         ),
       ),
@@ -139,11 +141,11 @@ class _PageSearchState extends State<PageSearch> {
               child: buildSection(context),
             ),
             DisplayType.m: AspectRatio(
-              aspectRatio: 2.8,
+              aspectRatio: 2.4,
               child: buildSection(context),
             ),
             DisplayType.l: AspectRatio(
-              aspectRatio: 3.6,
+              aspectRatio: 2.6,
               child: buildSection(context),
             ),
             DisplayType.xl: AspectRatio(
@@ -255,17 +257,17 @@ class _PageSearchState extends State<PageSearch> {
                 aspectRatio: 4,
                 child: Container(
                   decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: Image.asset(
-                              menuCategorySingle(selectedCategory!)!.imageUrl!)
-                          .image,
-                      fit: BoxFit.cover,
-                      alignment: Alignment.center,
-                    ),
-                  ),
+                      // image: DecorationImage(
+                      //   image: Image.asset(
+                      //           menuCategorySingle(selectedCategory!)!.imageUrl!)
+                      //       .image,
+                      //   fit: BoxFit.cover,
+                      //   alignment: Alignment.center,
+                      // ),
+                      ),
                 ),
               ),
-              ...menuItems.map((e) => MenuItemTile(menuItem: e)),
+              // ...menuItems.map((e) => MenuItemTile(menuItem: e)),
             ],
           ),
         ),
@@ -340,31 +342,34 @@ class _PageSearchState extends State<PageSearch> {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: getMenuCategories
-                        .map(
-                          (e) => Container(
-                            padding: EdgeInsets.all(4),
-                            child: InputChip(
-                              showCheckmark: false,
-                              elevation: selectedCategory == e.id ? 6.5 : 1,
-                              selected: selectedCategory == e.id,
-                              onSelected: (value) =>
-                                  selectCategory(e.id, value),
-                              selectedColor: Theme.of(context).accentColor,
-                              label: Text(
-                                e.title!,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .button!
-                                    .copyWith(
-                                      color: Colors.white,
-                                    ),
-                              ),
-                              // onPressed: () {},
+                    children: getMenuCategories.map(
+                      (e) {
+                        print(e.id);
+                        return Container();
+                        return Container(
+                          padding: EdgeInsets.all(4),
+                          child: InputChip(
+                            showCheckmark: false,
+                            elevation: selectedCategory != null &&
+                                    selectedCategory == e.id
+                                ? 6.5
+                                : 1,
+                            selected: selectedCategory != null &&
+                                selectedCategory == e.id,
+                            onSelected: (value) => selectCategory(e.id, value),
+                            selectedColor: Theme.of(context).accentColor,
+                            label: Text(
+                              e.title!,
+                              style:
+                                  Theme.of(context).textTheme.button!.copyWith(
+                                        color: Colors.white,
+                                      ),
                             ),
+                            // onPressed: () {},
                           ),
-                        )
-                        .toList(),
+                        );
+                      },
+                    ).toList(),
                   ),
                 )
               : viewMode == View_Mode.search

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:losbetos/components/heroImage.dart';
-import 'package:losbetos/models/menu.functions.dart';
+import 'package:losbetos/models/menu1/menu.functions.dart';
 import 'package:losbetos/models/models.dart';
 import 'package:losbetos/state.dart';
 import 'package:losbetos/utilities.dart';

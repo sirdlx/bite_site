@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:losbetos/components/gridItem.dart';
-import 'package:losbetos/models/menu.functions.dart';
+import 'package:losbetos/models/menu02/_functions.dart';
 import 'package:losbetos/state.dart';
 
 class CategoryGrid extends StatelessWidget {

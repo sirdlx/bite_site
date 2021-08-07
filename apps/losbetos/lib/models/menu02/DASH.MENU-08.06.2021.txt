@@ -47,8 +47,8 @@
             1/2 Pint of Pico De Gallo
             $2.70
             1/2 Pint of Rice
-            $2.7
-            01/2 Pint of Beans
+            $2.70
+            1/2 Pint of Beans
             $2.70
             1/2 Pint of Guacamole
             $5.05
@@ -66,7 +66,7 @@
         Desserts
         Churros
         $1.95
-        Flan
+        Churros
         $4.05
         Cheesecake
         $3.70
@@ -75,7 +75,8 @@
         
     },
     {
-        BeveragesSoda
+        Beverages
+        Soda
         $2.20
         Water
         $2.15
@@ -113,8 +114,8 @@
     {
         Los Betos Specialties
         Carne Asada Fries
-        $11.243 
-        Rolled Tacos Dinner
+        $11.24
+        3 Rolled Tacos Dinner
         Rolled tacos. Tacos come with shredded beef inside. Served with rice and beans.
         $6.75
         Rolled Tacos Dinner
@@ -126,9 +127,10 @@
         Mexican BowlBeef or chicken
         Served with rice and beans
         $6.25
-        Carne Asada Super BurritoBurrito includes rice, beans, guacamole, cheese, sour cream, lettuce and pico de gallo
-        $8.243 
-        Mini Chimichangas
+        Carne Asada Super Burrito
+        Burrito includes rice, beans, guacamole, cheese, sour cream, lettuce and pico de gallo
+        $8.24
+        3 Mini Chimichangas
         Includes rice and beans
         $7.60
         Sampler Platter
@@ -190,63 +192,84 @@
     },
     {
         Burritos
-        Ground Beef BurritoBeef, lettuce and cheese. Wet burrito would be topped with enchilada sauce
+        Ground Beef Burrito
+        Beef, lettuce and cheese. Wet burrito would be topped with enchilada sauce
         $5.60
         California Burrito
         Potatoes, carne asada, cheese and pico de gallo. Wet burrito would be topped with enchilada sauce
         $7.95
-        Machaca BurritoMachaca (dried beef), eggs, bell pepper and onion. Wet burrito would be topped with enchilada sauce
+        Machaca Burrito
+        Machaca (dried beef), eggs, bell pepper and onion. Wet burrito would be topped with enchilada sauce
         $6.50
         Chorizo Burrito
         Chorizo, potato, and egg. Wet burrito would be topped with enchilada sauce
         $5.60
-        Mixed BurritoMixed with beef and bean, bell pepper and onion. Wet burrito would be topped with enchilada sauce
+        Mixed Burrito
+        Mixed with beef and bean, bell pepper and onion. Wet burrito would be topped with enchilada sauce
         $5.60
-        Beef BurritoBeef, bell pepper and onion. Wet burrito would be topped with enchilada sauce
+        Beef Burrito
+        Beef, bell pepper and onion. Wet burrito would be topped with enchilada sauce
         $5.90
-        Chicken BurritoRed chicken and onion. Wet burrito would be topped with enchilada sauce
+        Chicken Burrito
+        Red chicken and onion. Wet burrito would be topped with enchilada sauce
         $5.90
-        Pollo Asado BurritoGrilled chicken, pico de gallo and sour cream. Wet burrito would be topped with enchilada sauce
+        Pollo Asado Burrito
+        Grilled chicken, pico de gallo and sour cream. Wet burrito would be topped with enchilada sauce
         $6.05
-        Beans BurritoBeans and cheese. Wet burrito would be topped with enchilada sauce
+        Beans Burrito
+        Beans and cheese. Wet burrito would be topped with enchilada sauce
         $3.90
-        Carnitas BurritoPork carnitas, pico de gallo and guacamole. Wet burrito would be topped with enchilada sauce
+        Carnitas Burrito
+        Pork carnitas, pico de gallo and guacamole. Wet burrito would be topped with enchilada sauce
         $5.90
         Fish Burrito
         Fish, pico de gallo, mayonnaise and cabbage. Wet burrito would be topped with enchilada sauce
         $5.60
-        Veggie BurritoRice, beans, guacamole, lettuce and pico de gallo and sour cream. Wet burrito would be topped with enchilada sauce
+        Veggie Burrito
+        Rice, beans, guacamole, lettuce and pico de gallo and sour cream. Wet burrito would be topped with enchilada sauce
         $5.40
-        Adobada BurritoPork in red chili sauce, pico and guacamole. Wet burrito would be topped with enchilada sauce
+        Adobada Burrito
+        Pork in red chili sauce, pico and guacamole. Wet burrito would be topped with enchilada sauce
         $5.90
-        Chile Relleno BurritoCheese chili relleno with lettuce, pico de gallo and sour cream. Wet burrito would be topped with enchilada sauce
+        Chile Relleno Burrito
+        Cheese chili relleno with lettuce, pico de gallo and sour cream. Wet burrito would be topped with enchilada sauce
         $5.70
-        Green Chili BurritoRice and beans
+        Green Chili Burrito
+        Rice and beans
         $5.60
-        Chile Colorado BurritoRed chili meat and rice
+        Chile Colorado Burrito
+        Red chili meat and rice
         $5.90
-        Carne Asada BurritoGrilled steak, pico de gallo and guacamole. Wet burrito would be topped with enchilada sauce
+        Carne Asada Burrito
+        Grilled steak, pico de gallo and guacamole. Wet burrito would be topped with enchilada sauce
         $7.95
         Carne Asada Plain Burrito
         Grilled steak only is more meat. Wet burrito would be topped with enchilada sauce.
         $9.20
-        Texas BurritoChicken, potato, sour cream and cheese. Wet burrito would be topped with enchilada sauce.
+        Texas Burrito
+        Chicken, potato, sour cream and cheese. Wet burrito would be topped with enchilada sauce.
         $6.05
-        Shrimp BurritoWet burrito would be topped with enchilada sauce.
+        Shrimp Burrito
+        Wet burrito would be topped with enchilada sauce.
         $7.70
-        Chicken Fajita BurritoChicken fajita, bell pepper and onion. Wet burrito would be topped with enchilada sauce.
+        Chicken Fajita Burrito
+        Chicken fajita, bell pepper and onion. Wet burrito would be topped with enchilada sauce.
         $7.70
-        Beef Fajita BurritoBeef fajita, bell pepper and onion. Wet burrito would be topped with enchilada sauce.
+        Beef Fajita Burrito
+        Beef fajita, bell pepper and onion. Wet burrito would be topped with enchilada sauce.
         $8.75
-        Pastor BurritoPork, pineapple and onion. Wet burrito would be topped with enchilada sauce.
+        Pastor Burrito
+        Pork, pineapple and onion. Wet burrito would be topped with enchilada sauce.
         $6.40
-        Cancun BurritoChicken, avocado, pico de gallo and beans. Wet burrito would be topped with enchilada sauce.
+        Cancun Burrito
+        Chicken, avocado, pico de gallo and beans. Wet burrito would be topped with enchilada sauce.
         $7.20
         Super Carne Asada Burrito
         Grilled steak with even more meat. Wet burrito would be topped with enchilada sauce.
         $9.20
     },
     {
+        // rest
         Chimichangas
         Add side of rice and beans for an additional charge.
         Beef Chimichanga
