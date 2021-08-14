@@ -57,7 +57,7 @@ List<Menuitem> parseItems(Map<String, dynamic> e) {
   // }).toList();
 }
 
-MenuCatagory? menuCategorySingle(String id) {
+MenuCatagory? getMenuCategorySingle(String id) {
   // print('menuCategorySingle::$id');
   return getMenuCategories.where((element) => element.id == id).first;
 }

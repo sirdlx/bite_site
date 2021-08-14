@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:losbetos/main.dart';
 import 'package:losbetos/state.dart';
@@ -21,6 +22,9 @@ void main() {
     WidgetsFlutterBinding.ensureInitialized();
     setPathUrlStrategy();
 
+    await Hive.initFlutter();
+    appBox = await Hive.openBox('losbetos_app');
+
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarBrightness: Brightness.dark,
@@ -28,7 +32,7 @@ void main() {
 
     await tester.pumpWidget(
       ChangeNotifierProvider<AppState>(
-        create: (context) => AppState(),
+        create: (context) => AppState(appBox),
         child: BiteBootstrap(),
       ),
     );

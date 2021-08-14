@@ -19,30 +19,35 @@ class CategoryGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: 4),
       sliver: SliverToBoxAdapter(
-        child: Column(
-          children: [
-            ListTile(
-              contentPadding: EdgeInsets.all(0),
-              title: Text(
-                'Categories',
-                style: Theme.of(context).textTheme.headline5,
-              ),
-              trailing: IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.arrow_right_alt_outlined),
-              ),
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                ListTile(
+                  contentPadding: EdgeInsets.all(0),
+                  title: Text(
+                    'Categories',
+                    style: Theme.of(context).textTheme.headline5,
+                  ),
+                  trailing: IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.arrow_right_alt_outlined),
+                  ),
+                ),
+                FlavorResponsiveView(
+                  breakpoints: {
+                    DisplayType.s: buildGrid(),
+                    DisplayType.m: buildGrid(crossAxisCount: 3),
+                    DisplayType.l: buildGrid(crossAxisCount: 4),
+                    DisplayType.xl: buildGrid(crossAxisCount: 6),
+                  },
+                ),
+              ],
             ),
-            FlavorResponsiveView(
-              breakpoints: {
-                DisplayType.s: buildGrid(),
-                DisplayType.m: buildGrid(crossAxisCount: 3),
-                DisplayType.l: buildGrid(crossAxisCount: 4),
-                DisplayType.xl: buildGrid(crossAxisCount: 6),
-              },
-            ),
-          ],
+          ),
         ),
       ),
     );

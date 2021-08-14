@@ -3,15 +3,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:losbetos/pages/cart.dart';
 import 'package:losbetos/pages/home.dart';
-import 'package:losbetos/pages/search.dart';
+import 'package:losbetos/pages/menu.dart';
 import 'package:losbetos/pages/settings.dart';
 
 final List<FlavorRouteWidget> dashRoutes = [
   FlavorRouteWidget(
     path: '/',
     icon: CupertinoIcons.home,
-    title: 'Search',
-    child: PageSearch(),
+    title: 'Menu',
+    child: PageMenu(),
     backgroundColor: Colors.green,
     routeInDrawer: true,
   ),

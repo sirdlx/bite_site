@@ -19,7 +19,7 @@ class MenuItemTile extends StatelessWidget {
     return ListTile(
       leading: menuItem.imageUrl != null
           ? AspectRatio(
-              aspectRatio: 2.2,
+              aspectRatio: 1,
               child: HeroImage(
                 image: Image.asset(
                   menuItem.imageUrl!,

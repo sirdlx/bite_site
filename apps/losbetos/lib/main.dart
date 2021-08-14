@@ -4,9 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:losbetos/components/appLayout.dart';
 import 'package:losbetos/components/theme.dart';
-import 'package:losbetos/pages/category.detail.dart';
+import 'package:losbetos/pages/menu.category.detail.dart';
+import 'package:losbetos/pages/login.dart';
 import 'package:losbetos/pages/menu.item.detail.dart';
 import 'package:losbetos/state.dart';
 import 'package:provider/provider.dart';
@@ -17,9 +19,12 @@ final Algolia algolia = Algolia.init(
   applicationId: '29GNM5X5TX',
   apiKey: '9242bfc2fc4529a96a0d0fa25426c0b1',
 );
-
+Box? appBox;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  appBox = await Hive.openBox('losbetos_app');
+
   setPathUrlStrategy();
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -29,17 +34,55 @@ void main() async {
 
   runApp(
     ChangeNotifierProvider<AppState>(
-      create: (context) => AppState(),
+      create: (context) => AppState(appBox),
       child: BiteBootstrap(),
     ),
   );
 }
 
-class BiteBootstrap extends StatefulWidget {
+final router = RegexRouter.create({
+  "/": (context, _) => AppLayoutWidget(),
+  "/:viewId": (context, args) => AppLayoutWidget(
+        viewId: args["viewId"]!,
+      ),
+  "/menu/category/:catId/item/:itemId/": (context, args) =>
+      PageMenuItem(id: args["itemId"]!),
+  "/menu/category/:catId": (context, args) => PageCategory(id: args["catId"]!),
+  "/login": (context, args) => LoginScreen(),
+});
+
+class BiteBootstrap extends StatelessWidget {
   const BiteBootstrap({Key? key}) : super(key: key);
 
   @override
-  _BiteBootstrapState createState() => _BiteBootstrapState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      navigatorKey: GlobalNav,
+      debugShowCheckedModeBanner: false,
+      themeMode:
+          context.watch<AppState>().useDark ? ThemeMode.dark : ThemeMode.light,
+      darkTheme: darkTheme(textTheme),
+      theme: lightTheme(textTheme),
+      initialRoute: '/',
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(
+          builder: (context) => PageError(
+            errorCode: 404.toString(),
+            msg: 'Unable to find "${settings.name}"',
+          ),
+        );
+      },
+      onGenerateRoute: router.generateRoute,
+    );
+  }
+
+  MaterialPageRoute bitePage(RouteSettings settings, Widget screen) =>
+      MaterialPageRoute(
+        builder: (context) => screen,
+        fullscreenDialog: true,
+        maintainState: true,
+        settings: settings,
+      );
 }
 
 // ignore: unused_element
@@ -66,75 +109,3 @@ GoogleSignIn _googleSignInUser = GoogleSignIn(
     'email',
   ],
 );
-
-final router = RegexRouter.create({
-  "/": (context, _) => AppLayoutWidget(),
-  "/menu/category/:catId/item/:itemId/": (context, args) =>
-      PageMenuItem(id: args["itemId"]!),
-  "/menu/category/:catId": (context, args) => PageCategory(id: args["catId"]!),
-});
-
-class _BiteBootstrapState extends State<BiteBootstrap> {
-  MaterialPageRoute bitePage(RouteSettings settings, Widget screen) =>
-      MaterialPageRoute(
-        builder: (context) => screen,
-        fullscreenDialog: true,
-        maintainState: true,
-        settings: settings,
-      );
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      navigatorKey: GlobalNav,
-      debugShowCheckedModeBanner: false,
-      themeMode:
-          context.watch<AppState>().useDark ? ThemeMode.dark : ThemeMode.light,
-      darkTheme: darkTheme(textTheme),
-      theme: lightTheme(textTheme),
-      initialRoute: '/',
-
-      onUnknownRoute: (settings) {
-        return MaterialPageRoute(
-          builder: (context) => PageError(
-            errorCode: 404.toString(),
-            msg: 'Unable to find "${settings.name}"',
-          ),
-        );
-      },
-
-      onGenerateRoute: router.generateRoute,
-      // onGenerateRoute: (settings) {
-      //   String routeName = settings.name!.split('/')[1].toString();
-      //   print(routeName);
-      //   switch (routeName) {
-      //     case 'login':
-      //       return bitePage(settings, LoginScreen());
-      //     case 'cart':
-      //       return bitePage(settings, PageCartView());
-
-      //     case 'catalog':
-      //       return bitePage(settings, PageMenuItem(settings.arguments));
-
-      //     case 'orders':
-      //       return bitePage(settings, Container());
-
-      //     default:
-      //       return null;
-      //   }
-      // },
-      // routes: {
-      //   '/login': (BuildContext context) {
-      //     return LoginScreen();
-      //   },
-      //   '/cart': (BuildContext context) {
-      //     return PageCartView();
-      //   },
-      //   '/category': (BuildContext context) {
-      //     return PageCategory();
-      //   },
-      // },
-      // home: AppLayoutWidget(),
-    );
-  }
-}

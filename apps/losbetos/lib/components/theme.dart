@@ -60,10 +60,12 @@ ThemeData lightTheme(TextTheme textTheme) => flavorThemeMaterialLight.copyWith(
         // onSurface: Colors.green,
         // onBackground: Colors.blueGrey,
         // onPrimary: Colors.teal,
-        // surface: Colors.amber,
+        surface: Colors.amber,
         // onSecondary: Colors.limeAccent,
         // primaryVariant: Colors.yellowAccent,
       ),
+
+      buttonColor: Colors.red,
       navigationRailTheme: NavigationRailThemeData(
         // backgroundColor: Colors.white,
         selectedIconTheme: IconThemeData(
@@ -88,7 +90,7 @@ ThemeData lightTheme(TextTheme textTheme) => flavorThemeMaterialLight.copyWith(
       visualDensity: VisualDensity.adaptivePlatformDensity,
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.white,
-        elevation: 0,
+        // elevation: 2,
         // brightness: Brightness.light,
       ),
       // buttonBarTheme: ButtonBarThemeData(
@@ -98,7 +100,7 @@ ThemeData lightTheme(TextTheme textTheme) => flavorThemeMaterialLight.copyWith(
         unselectedLabelColor: Colors.black87,
         labelColor: colorCustom,
       ),
-      scaffoldBackgroundColor: Colors.grey.shade200,
+      scaffoldBackgroundColor: Colors.grey.shade300,
       // buttonTheme: ButtonThemeData(buttonColor: colorCustom),
       // elevatedButtonTheme: ElevatedButtonThemeData(
       //   style: ButtonStyle(

@@ -1,5 +1,6 @@
 import 'package:flavor/layout/FlavorResponsiveView.dart';
 import 'package:flavor/layout/adaptive.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:losbetos/components/categoryGrid.dart';
 import 'package:losbetos/components/gridItem.dart';
@@ -9,8 +10,8 @@ import 'package:losbetos/models/models.dart';
 import 'package:losbetos/state.dart';
 import 'package:losbetos/utilities.dart';
 
-class PageSearch extends StatefulWidget {
-  const PageSearch({Key? key}) : super(key: key);
+class PageMenu extends StatefulWidget {
+  const PageMenu({Key? key}) : super(key: key);
 
   @override
   _PageSearchState createState() => _PageSearchState();
@@ -22,7 +23,7 @@ enum View_Mode {
   category,
 }
 
-class _PageSearchState extends State<PageSearch> {
+class _PageSearchState extends State<PageMenu> {
   String _query = '';
 
   final TextEditingController _textController = TextEditingController();
@@ -30,8 +31,6 @@ class _PageSearchState extends State<PageSearch> {
   final _scrollController = ScrollController();
 
   String? selectedCategory;
-
-  String? _lastSearchCategoryId;
 
   View_Mode get viewMode {
     if (_query.length > 0) {
@@ -66,7 +65,7 @@ class _PageSearchState extends State<PageSearch> {
                 ? FutureBuilder<MenuCatagory?>(
                     future: Future.delayed(Duration(milliseconds: 0)).then(
                         (value) => Future.value(
-                            menuCategorySingle(selectedCategory!))),
+                            getMenuCategorySingle(selectedCategory!))),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         // print(snapshot.data!.items.length.toString());
@@ -135,7 +134,7 @@ class _PageSearchState extends State<PageSearch> {
           global: false,
           breakpoints: {
             DisplayType.s: AspectRatio(
-              aspectRatio: 2,
+              aspectRatio: kIsWeb ? 2 : 1.6,
               child: buildSection(context),
             ),
             DisplayType.m: AspectRatio(
@@ -326,6 +325,8 @@ class _PageSearchState extends State<PageSearch> {
     return SliverPadding(
       padding: const EdgeInsets.all(8.0),
       sliver: SliverAppBar(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8))),
         automaticallyImplyLeading: false,
         elevation: 2,
         floating: true,

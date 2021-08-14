@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:losbetos/components/gridItem.dart';
+import 'package:losbetos/state.dart';
 
 final ScrollController _sc = ScrollController();
-final Key homeScaffoldKey = ValueKey('scaffold');
 
 class BiteSiteHomeBody extends StatelessWidget {
   const BiteSiteHomeBody({Key? key}) : super(key: key);
@@ -10,7 +10,7 @@ class BiteSiteHomeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: homeScaffoldKey,
+      // key: homeScaffoldKey,
       body: Container(
         child: SingleChildScrollView(
           controller: _sc,

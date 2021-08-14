@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:losbetos/components/menuItemTile.dart';
 import 'package:losbetos/models/menu02/_functions.dart';
-import 'package:losbetos/models/menu02/menu.dart';
 import 'package:losbetos/models/models.dart';
-import 'package:losbetos/utilities.dart';
 
 class PageCategory extends StatefulWidget {
   final String id;
@@ -29,7 +27,7 @@ class _PageCategoryState extends State<PageCategory> {
 
     // var menuCatgeoriesItems = getMenuCategories;
 
-    MenuCatagory? menuCategory = menuCategorySingle(widget.id);
+    MenuCatagory? menuCategory = getMenuCategorySingle(widget.id);
 
     // print('widget.id::${menuCategory!.items.toString()}');
 
@@ -73,27 +71,32 @@ class _PageCategoryState extends State<PageCategory> {
                 ),
               ),
             )
-          : Center(
-              child: Container(
-                constraints: BoxConstraints(
-                  maxWidth: 600,
-                  minWidth: 320,
-                ),
-                child: Card(
-                  child: ListView(
-                    padding: EdgeInsets.all(0),
-                    children: List.generate(
-                      menuCategory.items.length,
-                      (index) {
-                        Menuitem item = menuCategory.items[index];
-                        print(item.imageUrl);
-                        return MenuItemTile(
-                          menuItem: item,
-                          // onTap: () => GlobalNav.currentState!.pushNamed(
-                          //     '/catalog/${item.id}',
-                          //     arguments: item),
-                        );
-                      },
+          : Container(
+              child: Center(
+                child: Container(
+                  // color: Colors.amber,
+                  padding: EdgeInsets.all(8),
+                  constraints: BoxConstraints(
+                    maxWidth: 600,
+                    minWidth: 320,
+                  ),
+                  child: Card(
+                    child: ListView(
+                      shrinkWrap: true,
+                      padding: EdgeInsets.all(0),
+                      children: List.generate(
+                        menuCategory.items.length,
+                        (index) {
+                          Menuitem item = menuCategory.items[index];
+                          print(item.imageUrl);
+                          return MenuItemTile(
+                            menuItem: item,
+                            // onTap: () => GlobalNav.currentState!.pushNamed(
+                            //     '/catalog/${item.id}',
+                            //     arguments: item),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),

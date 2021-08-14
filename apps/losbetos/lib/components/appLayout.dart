@@ -2,13 +2,14 @@ import 'package:flavor/layout/FlavorResponsiveView.dart';
 import 'package:flavor/layout/adaptive.dart';
 import 'package:flutter/material.dart';
 import 'package:losbetos/components/pageviewer.dart';
-import 'package:losbetos/pages/home.dart';
 import 'package:losbetos/routes/routes.dart';
 import 'package:losbetos/state.dart';
 
 class AppLayoutWidget extends StatefulWidget {
+  final String? viewId;
   const AppLayoutWidget({
     Key? key,
+    this.viewId,
   }) : super(key: key);
 
   @override
@@ -21,14 +22,34 @@ class _AppLayoutWidgetState extends State<AppLayoutWidget>
 
   int _selectedIndex = 0;
 
+  int get selectedIndex => _selectedIndex;
+
   @override
   void initState() {
     super.initState();
-    _tabController = new TabController(
-      length: routesForDrawer.length,
-      vsync: this,
-      initialIndex: _selectedIndex,
-    );
+
+    if (widget.viewId != null) {
+      print(widget.viewId);
+
+      for (var i = 0; i < routesForDrawer.length; i++) {
+        var route = routesForDrawer[i];
+        if (route.path == widget.viewId) {
+          print(widget.viewId);
+        }
+      }
+
+      _tabController = new TabController(
+        length: routesForDrawer.length,
+        vsync: this,
+        initialIndex: _selectedIndex,
+      );
+    } else {
+      _tabController = new TabController(
+        length: routesForDrawer.length,
+        vsync: this,
+        initialIndex: _selectedIndex,
+      );
+    }
   }
 
   @override
@@ -42,32 +63,30 @@ class _AppLayoutWidgetState extends State<AppLayoutWidget>
             children: [
               Flexible(
                 flex: 3,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 0.0),
-                  child: NavigationRail(
-                    elevation: 1,
-                    onDestinationSelected: (value) {
-                      _tabController.animateTo(value);
-                      setState(() {
-                        _selectedIndex = value;
-                      });
-                    },
-                    extended: true,
-                    leading: Center(child: Text('data')),
-                    destinations: routesForDrawer
-                        .map(
-                          (e) => NavigationRailDestination(
-                            label: Text(e.title.toString()),
-                            icon: Icon(e.icon),
-                            // selectedIcon: Icon(
-                            //   Icons.home_rounded,
-                            //   // color: Colors.amber,
-                            // ),
-                          ),
-                        )
-                        .toList(),
-                    selectedIndex: _selectedIndex,
-                  ),
+                child: NavigationRail(
+                  elevation: 1,
+                  onDestinationSelected: (value) {
+                    _tabController.animateTo(value);
+                    setState(() {
+                      _selectedIndex = value;
+                    });
+                  },
+                  extended: true,
+                  leading: Center(child: Text('data')),
+                  destinations: routesForDrawer
+                      .map(
+                        (e) => NavigationRailDestination(
+                          padding: EdgeInsets.all(4),
+                          label: Text(e.title.toString()),
+                          icon: Icon(e.icon),
+                          // selectedIcon: Icon(
+                          //   Icons.home_rounded,
+                          //   // color: Colors.amber,
+                          // ),
+                        ),
+                      )
+                      .toList(),
+                  selectedIndex: _selectedIndex,
                 ),
               ),
               Flexible(
@@ -93,14 +112,14 @@ class _AppLayoutWidgetState extends State<AppLayoutWidget>
       global: true,
       breakpoints: {
         DisplayType.s: Scaffold(
-          key: homeScaffoldKey,
+          // key: homeScaffoldKey,
           appBar: buildAppBar(context),
           drawer: buildDrawer(),
           body: buildBody(),
           bottomNavigationBar: buildBottomBar(),
         ),
         DisplayType.l: Scaffold(
-          key: homeScaffoldKey,
+          // key: homeScaffoldKey,
           // appBar: buildAppBar(context),
           drawer: buildDrawer(),
           body: buildBody(),
@@ -111,7 +130,7 @@ class _AppLayoutWidgetState extends State<AppLayoutWidget>
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      // elevation: 3,
+      elevation: 0,
       automaticallyImplyLeading: false,
       title: Container(
         height: 58,
