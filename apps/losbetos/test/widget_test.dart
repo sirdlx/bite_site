@@ -23,7 +23,7 @@ void main() {
     setPathUrlStrategy();
 
     await Hive.initFlutter();
-    appBox = await Hive.openBox('losbetos_app');
+    var appBox = await Hive.openBox('losbetos_app');
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,

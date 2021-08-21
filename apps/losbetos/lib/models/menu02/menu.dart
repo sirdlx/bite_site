@@ -13,7 +13,6 @@ import 'package:losbetos/models/menu02/sideordersandextras.dart';
 import 'package:losbetos/models/menu02/soups.dart';
 import 'package:losbetos/models/menu02/tacos.dart';
 import 'package:losbetos/models/menu02/tortas.dart';
-import 'package:losbetos/models/models.dart';
 
 List catagories = [
   beverages,

@@ -1,9 +1,10 @@
-import 'package:flavor/layout/FlavorResponsiveView.dart';
-import 'package:flavor/layout/adaptive.dart';
+import 'package:flavor_client/layout/FlavorResponsiveView.dart';
+import 'package:flavor_client/layout/adaptive.dart';
 import 'package:flutter/material.dart';
 import 'package:losbetos/components/pageviewer.dart';
 import 'package:losbetos/routes/routes.dart';
 import 'package:losbetos/state.dart';
+import 'package:provider/provider.dart';
 
 class AppLayoutWidget extends StatefulWidget {
   final String? viewId;
@@ -129,6 +130,8 @@ class _AppLayoutWidgetState extends State<AppLayoutWidget>
   }
 
   AppBar buildAppBar(BuildContext context) {
+    var app = context.read<AppState>();
+
     return AppBar(
       elevation: 0,
       automaticallyImplyLeading: false,
@@ -147,19 +150,22 @@ class _AppLayoutWidgetState extends State<AppLayoutWidget>
         // height: 18,
       ),
       actions: [
-        IconButton(
-          onPressed: () {
-            GlobalNav.currentState!.pushNamed('/login');
-          },
-          icon: Icon(Icons.person),
+        Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: app.user == null
+              ? TextButton(
+                  onPressed: () =>
+                      GlobalNav.currentState!.pushNamed('/account'),
+                  child: Text('login'))
+              : CircleAvatar(
+                  child: GestureDetector(
+                    child: Icon(Icons.person),
+                    onTap: () => GlobalNav.currentState!.pushNamed('/account'),
+                  ),
+                ),
         ),
-        IconButton(
-          onPressed: () {
-            GlobalNav.currentState!.pushNamed('/login');
-          },
-          icon: CircleAvatar(
-            backgroundColor: Theme.of(context).primaryColor,
-          ),
+        SizedBox(
+          width: 16,
         ),
       ],
     );

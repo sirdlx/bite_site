@@ -1,5 +1,5 @@
-import 'package:flavor/layout/FlavorResponsiveView.dart';
-import 'package:flavor/layout/adaptive.dart';
+import 'package:flavor_client/layout/FlavorResponsiveView.dart';
+import 'package:flavor_client/layout/adaptive.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:losbetos/components/categoryGrid.dart';
@@ -245,7 +245,7 @@ class _PageSearchState extends State<PageMenu> {
   SliverPadding buildMenuItemListCategory(
       BuildContext context, MenuCatagory menuCatagory) {
     return SliverPadding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(6.0),
       sliver: SliverToBoxAdapter(
         child: Card(
           child: Column(
@@ -272,20 +272,17 @@ class _PageSearchState extends State<PageMenu> {
     );
   }
 
-  SliverPadding buildMenuItemListSearch(
+  SingleChildRenderObjectWidget buildMenuItemListSearch(
       BuildContext context, List<Menuitem> menuItems) {
     Map<String, List> sections = {};
 
     // print('menuItems.length::${menuItems.length}');
 
     if (menuItems.length == 0) {
-      return SliverPadding(
-        padding: EdgeInsets.all(8),
-        sliver: SliverToBoxAdapter(
-          child: Container(
-            child: Center(
-              child: Text('no items from results : "$_query" '),
-            ),
+      return SliverToBoxAdapter(
+        child: Container(
+          child: Center(
+            child: Text('no items from results : "$_query" '),
           ),
         ),
       );
@@ -304,7 +301,7 @@ class _PageSearchState extends State<PageMenu> {
     }
 
     return SliverPadding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(6.0),
       sliver: SliverToBoxAdapter(
         child: Card(
           child: ListView.builder(
@@ -330,54 +327,59 @@ class _PageSearchState extends State<PageMenu> {
         automaticallyImplyLeading: false,
         elevation: 2,
         floating: true,
-        bottom:
-            // viewMode == View_Mode.main || viewMode == View_Mode.category?
-            AppBar(
-          automaticallyImplyLeading: false,
-          // backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: viewMode == View_Mode.main || viewMode == View_Mode.category
-              ? SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: getMenuCategories.map(
-                      (e) {
-                        // print(e.id);
-                        // return Container();
-                        return Container(
-                          padding: EdgeInsets.all(4),
-                          child: InputChip(
-                            showCheckmark: false,
-                            elevation: selectedCategory != null &&
-                                    selectedCategory == e.id
-                                ? 6.5
-                                : 1,
-                            selected: selectedCategory != null &&
-                                selectedCategory == e.id,
-                            onSelected: (value) => selectCategory(e.id, value),
-                            selectedColor: Theme.of(context).accentColor,
-                            label: Text(
-                              e.title!,
-                              style:
-                                  Theme.of(context).textTheme.button!.copyWith(
-                                        color: Colors.white,
-                                      ),
-                            ),
-                            // onPressed: () {},
-                          ),
-                        );
-                      },
-                    ).toList(),
-                  ),
-                )
-              : viewMode == View_Mode.search
-                  ? Container()
-                  : null,
-        )
-        // : null
-        ,
+        bottom: viewMode == View_Mode.main || viewMode == View_Mode.category
+            ? AppBar(
+                automaticallyImplyLeading: false,
+                // backgroundColor: Colors.transparent,
+                elevation: 0,
+                primary: false,
+
+                title: viewMode == View_Mode.main ||
+                        viewMode == View_Mode.category
+                    ? SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: getMenuCategories.map(
+                            (e) {
+                              // print(e.id);
+                              // return Container();
+                              return Container(
+                                padding: EdgeInsets.all(4),
+                                child: InputChip(
+                                  showCheckmark: false,
+                                  elevation: selectedCategory != null &&
+                                          selectedCategory == e.id
+                                      ? 6.5
+                                      : 1,
+                                  selected: selectedCategory != null &&
+                                      selectedCategory == e.id,
+                                  onSelected: (value) =>
+                                      selectCategory(e.id, value),
+                                  selectedColor: Theme.of(context).accentColor,
+                                  label: Text(
+                                    e.title!,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .button!
+                                        .copyWith(
+                                          color: Colors.white,
+                                        ),
+                                  ),
+                                  // onPressed: () {},
+                                ),
+                              );
+                            },
+                          ).toList(),
+                        ),
+                      )
+                    : viewMode == View_Mode.search
+                        ? Container()
+                        : null,
+              )
+            : null,
         title: TextField(
+          autofocus: viewMode == View_Mode.search ? true : false,
           controller: _textController,
           // enabled: false,
           enableSuggestions: false,

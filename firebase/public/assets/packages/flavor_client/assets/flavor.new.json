@@ -1,0 +1,50 @@
+{
+    "title": "flavor app",
+    "author": "dlxstudios",
+    "website": "dlxstudios.com",
+    "requireLogin": true,
+    "api": {
+        "baseUrl": "https://us-central1-dlxstudios-f6e64.cloudfunctions.net/"
+    },
+    "theme": {
+        "themeMode": "light",
+        "fontFamily": "Poppins",
+        "primarySwatch": "{Colors.amber}",
+        "primaryColor": "{Colors.amber}"
+    },
+    "pages": [
+        {
+            "type": "splash",
+            "logo": "assets/saucetv_logo.svg"
+        },
+        {
+            "type": "onbording",
+            "once": true
+        },
+        {
+            "type": "settings"
+        },
+        {
+            "type": "page",
+            "path": "somePage"
+        },
+        {
+            "type": "page",
+            "path": "somePageWithTitle",
+            "title": "DLX Studios Page",
+            "showTitle": true
+        },
+        {
+            "type": "page",
+            "path": "users"
+        }
+    ],
+    "plugins": [
+        "settings",
+        "login",
+        "video",
+        "file_local",
+        "file_network",
+        "image_cache"
+    ]
+}

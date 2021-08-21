@@ -14,12 +14,13 @@ class MenuItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // print('menuItem.imageUrl::${menuItem.imageUrl}');
+    // ignore: unused_local_variable
     Widget leading = Container();
 
     return ListTile(
       leading: menuItem.imageUrl != null
           ? AspectRatio(
-              aspectRatio: 1,
+              aspectRatio: 2.2,
               child: HeroImage(
                 image: Image.asset(
                   menuItem.imageUrl!,
@@ -27,12 +28,10 @@ class MenuItemTile extends StatelessWidget {
                 ).image,
               ),
             )
-          // : AspectRatio(
-          //     aspectRatio: 1,
-          //     child: Container(),
-          //   ),
-
-          : null,
+          : AspectRatio(
+              aspectRatio: 1,
+              child: Container(),
+            ),
       title: Text(menuItem.title!),
       subtitle: menuItem.description != null
           ? Text(

@@ -95,6 +95,7 @@ class CartMenuItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // print('menuItem.imageUrl::${menuItem.imageUrl}');
+    // ignore: unused_local_variable
     Widget leading = Container();
 
     return ListTile(
@@ -156,6 +157,7 @@ class CartMenuItemTile extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       context.read<AppState>().cart.remove(cartMenuItem);
+                      // ignore: invalid_use_of_protected_member,invalid_use_of_visible_for_testing_member
                       context.read<AppState>().notifyListeners();
                     },
                     // label: Text(
@@ -183,6 +185,7 @@ class BSCartMenuItem {
 
 class BSCart {
   List<BSCartMenuItem> items = [];
+  // ignore: unused_field
   int _total = 0;
 
   remove(BSCartMenuItem cartMenuItem) {

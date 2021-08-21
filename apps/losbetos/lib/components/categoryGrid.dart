@@ -1,5 +1,5 @@
-import 'package:flavor/layout/FlavorResponsiveView.dart';
-import 'package:flavor/layout/adaptive.dart';
+import 'package:flavor_client/layout/FlavorResponsiveView.dart';
+import 'package:flavor_client/layout/adaptive.dart';
 import 'package:flutter/material.dart';
 import 'package:losbetos/components/gridItem.dart';
 import 'package:losbetos/models/menu02/_functions.dart';

@@ -1,0 +1,12 @@
+{
+    "firebase": {
+        "apiKey": "AIzaSyCnYzzqZdHbbWol5JRUnW3SUt0rI8MzAr0",
+        "authDomain": "dlxstudios-f6e64.firebaseapp.com",
+        "databaseURL": "https://dlxstudios-f6e64.firebaseio.com",
+        "projectId": "dlxstudios-f6e64",
+        "storageBucket": "dlxstudios-f6e64.appspot.com",
+        "messagingSenderId": "633139741304",
+        "appId": "1:633139741304:web:7bc94a4b1c033c6a7f238d",
+        "measurementId": "G-2K6CEBNJSW"
+    }
+}

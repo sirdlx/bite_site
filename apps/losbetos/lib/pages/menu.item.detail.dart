@@ -1,4 +1,4 @@
-import 'package:flavor/components/page.dart';
+import 'package:flavor_client/components/page.dart';
 import 'package:flutter/material.dart';
 import 'package:losbetos/components/heroImage.dart';
 import 'package:losbetos/models/menu02/_functions.dart';
@@ -72,127 +72,75 @@ class _PageMenuItemState extends State<PageMenuItem> {
             ],
           ),
           Align(
-            alignment: Alignment.bottomRight,
+            alignment: Alignment.bottomCenter,
+            widthFactor: 1,
             child: Container(
-              child: Container(
-                margin: EdgeInsets.all(24),
-                constraints: BoxConstraints(
-                  // maxWidth: 420,
-                  minWidth: 320,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Flexible(child: buildQuanityButtons(context)),
-                    // Spacer(),
-                    SizedBox(
-                      width: 16,
-                    ),
-                    Flexible(
-                      flex: 1,
-                      child: FloatingActionButton.extended(
-                        onPressed: () {},
-                        label: Row(
-                          children: [
-                            Icon(
-                              Icons.add_shopping_cart_rounded,
-                              color: Colors.white,
-                            ),
-                            Text(
-                              '${toPricingText(menuItem!.basePrice * cartMenuItem!.quanity)}',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .button!
-                                  .copyWith(color: Colors.white),
-                            ),
-                          ],
+              margin: EdgeInsets.all(24),
+              child: Card(
+                child: Container(
+                  padding: EdgeInsets.all(24),
+                  constraints: BoxConstraints(
+                    maxWidth: 260,
+                    minWidth: 100,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Flexible(child: buildQuanityButtons(context)),
+                      // Spacer(),
+                      SizedBox(
+                        width: 32,
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: FloatingActionButton.extended(
+                          onPressed: () {
+                            app.cart.items.add(cartMenuItem!);
+                            app.notifyListeners();
+
+                            GlobalNav.currentState!.pop();
+                            final snackBar = SnackBar(
+                              content: Text(
+                                  '${cartMenuItem!.menuitem.title} was added to your cart!'),
+                              duration: Duration(milliseconds: 3200),
+                              action: SnackBarAction(
+                                label: 'View Cart',
+                                onPressed: () {},
+                              ),
+                            );
+
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          },
+                          label: Row(
+                            children: [
+                              Icon(
+                                Icons.add_shopping_cart_rounded,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                width: 4,
+                              ),
+                              Text(
+                                '${toPricingText(menuItem!.basePrice * cartMenuItem!.quanity)}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6!
+                                    .copyWith(color: Colors.white),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
           )
         ],
       ),
-      // bottomNavigationBar: Container(
-      //   child: Container(
-      //     constraints: BoxConstraints(
-      //       maxWidth: 320,
-      //       minWidth: 250,
-      //     ),
-      //     child: Card(
-      //       margin: EdgeInsets.all(16),
-      //       child: Container(
-      //         // constraints: BoxConstraints(
-      //         //   maxWidth: 320,
-      //         //   minWidth: 250,
-      //         // ),
-      //         height: 70,
-      //         // color: Colors.amber,
-      //         padding: EdgeInsets.all(16),
-      //         child: Container(
-      //           // width: 200,
-      //           child: Row(
-      //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //             children: [
-      //               Flexible(flex: 0, child: buildQuanityButtons(context)),
-      //               // Spacer(),
-      //               Flexible(
-      //                 flex: 1,
-      //                 // child: ElevatedButton(
-      //                 //   onPressed: () {
-      //                 //     app.cart.items.add(cartMenuItem!);
-      //                 //     app.notifyListeners();
-      //                 //     GlobalNav.currentState!.pop();
-      //                 //     final snackBar = SnackBar(
-      //                 //       content: Text(
-      //                 //           '${cartMenuItem!.menuitem.title} was added to your cart!'),
-      //                 //       duration: Duration(milliseconds: 3200),
-      //                 //       action: SnackBarAction(
-      //                 //         label: 'View Cart',
-      //                 //         onPressed: () {},
-      //                 //       ),
-      //                 //     );
-
-      //                 //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
-      //                 //     // homeScaffoldKey.currentState!
-      //                 //   },
-      //                 //   // child: Container(
-      //                 //   //   child: Text(
-      //                 //   //       '+ ${toPricingText(menuItem!.basePrice * cartMenuItem!.quanity)}'),
-      //                 //   // ),
-
-      //                 // ),
-      //                 child: FloatingActionButton.extended(
-      //                   onPressed: () {},
-      //                   label: Row(
-      //                     children: [
-      //                       Icon(
-      //                         Icons.add_shopping_cart_rounded,
-      //                         color: Colors.white,
-      //                       ),
-      //                       Text(
-      //                         '+ ${toPricingText(menuItem!.basePrice * cartMenuItem!.quanity)}',
-      //                         style: Theme.of(context)
-      //                             .textTheme
-      //                             .button!
-      //                             .copyWith(color: Colors.white),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                 ),
-      //               ),
-      //             ],
-      //           ),
-      //         ),
-      //       ),
-      //     ),
-      //   ),
-      // ),
     );
   }
 
@@ -203,15 +151,10 @@ class _PageMenuItemState extends State<PageMenuItem> {
         minWidth: 100,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           ElevatedButton(
-            style: ButtonStyle(
-                padding: MaterialStateProperty.resolveWith(
-                  (states) => EdgeInsets.all(4),
-                ),
-                minimumSize: MaterialStateProperty.resolveWith(
-                    (states) => Size(16, 30))),
+            style: buttonQStyle(),
             onPressed: () {
               if (cartMenuItem!.quanity == 1) {
                 return;
@@ -225,7 +168,7 @@ class _PageMenuItemState extends State<PageMenuItem> {
             ),
           ),
           SizedBox(
-            width: 6,
+            width: 10,
           ),
           Container(
             child: Text(
@@ -234,9 +177,10 @@ class _PageMenuItemState extends State<PageMenuItem> {
             ),
           ),
           SizedBox(
-            width: 6,
+            width: 10,
           ),
           ElevatedButton(
+            style: buttonQStyle(),
             onPressed: () {
               setState(() {
                 cartMenuItem!.quanity++;
@@ -249,5 +193,14 @@ class _PageMenuItemState extends State<PageMenuItem> {
         ],
       ),
     );
+  }
+
+  ButtonStyle buttonQStyle() {
+    return ButtonStyle(
+        padding: MaterialStateProperty.resolveWith(
+          (states) => EdgeInsets.all(4),
+        ),
+        minimumSize:
+            MaterialStateProperty.resolveWith((states) => Size(16, 30)));
   }
 }

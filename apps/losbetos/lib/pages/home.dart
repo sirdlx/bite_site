@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:losbetos/components/gridItem.dart';
-import 'package:losbetos/state.dart';
 
 final ScrollController _sc = ScrollController();
 

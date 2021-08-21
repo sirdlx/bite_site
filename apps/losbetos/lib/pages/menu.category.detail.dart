@@ -88,7 +88,7 @@ class _PageCategoryState extends State<PageCategory> {
                         menuCategory.items.length,
                         (index) {
                           Menuitem item = menuCategory.items[index];
-                          print(item.imageUrl);
+                          // print(item.imageUrl);
                           return MenuItemTile(
                             menuItem: item,
                             // onTap: () => GlobalNav.currentState!.pushNamed(

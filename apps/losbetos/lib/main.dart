@@ -1,5 +1,6 @@
 import 'package:algolia/algolia.dart';
-import 'package:flavor/components/page.dart';
+import 'package:flavor_client/components/page.dart';
+import 'package:flavor_client/pages/onboarding/onboarding_v3.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,8 +9,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:losbetos/components/appLayout.dart';
 import 'package:losbetos/components/theme.dart';
 import 'package:losbetos/pages/menu.category.detail.dart';
-import 'package:losbetos/pages/login.dart';
 import 'package:losbetos/pages/menu.item.detail.dart';
+import 'package:losbetos/routes/routes.dart';
 import 'package:losbetos/state.dart';
 import 'package:provider/provider.dart';
 import 'package:regex_router/regex_router.dart';
@@ -19,18 +20,18 @@ final Algolia algolia = Algolia.init(
   applicationId: '29GNM5X5TX',
   apiKey: '9242bfc2fc4529a96a0d0fa25426c0b1',
 );
-Box? appBox;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
-  appBox = await Hive.openBox('losbetos_app');
-
   setPathUrlStrategy();
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarBrightness: Brightness.dark,
   ));
+
+  await Hive.initFlutter();
+  var appBox = await Hive.openBox('losbetos_app');
 
   runApp(
     ChangeNotifierProvider<AppState>(
@@ -40,49 +41,11 @@ void main() async {
   );
 }
 
-final router = RegexRouter.create({
-  "/": (context, _) => AppLayoutWidget(),
-  "/:viewId": (context, args) => AppLayoutWidget(
-        viewId: args["viewId"]!,
-      ),
-  "/menu/category/:catId/item/:itemId/": (context, args) =>
-      PageMenuItem(id: args["itemId"]!),
-  "/menu/category/:catId": (context, args) => PageCategory(id: args["catId"]!),
-  "/login": (context, args) => LoginScreen(),
-});
-
-class BiteBootstrap extends StatelessWidget {
+class BiteBootstrap extends StatefulWidget {
   const BiteBootstrap({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      navigatorKey: GlobalNav,
-      debugShowCheckedModeBanner: false,
-      themeMode:
-          context.watch<AppState>().useDark ? ThemeMode.dark : ThemeMode.light,
-      darkTheme: darkTheme(textTheme),
-      theme: lightTheme(textTheme),
-      initialRoute: '/',
-      onUnknownRoute: (settings) {
-        return MaterialPageRoute(
-          builder: (context) => PageError(
-            errorCode: 404.toString(),
-            msg: 'Unable to find "${settings.name}"',
-          ),
-        );
-      },
-      onGenerateRoute: router.generateRoute,
-    );
-  }
-
-  MaterialPageRoute bitePage(RouteSettings settings, Widget screen) =>
-      MaterialPageRoute(
-        builder: (context) => screen,
-        fullscreenDialog: true,
-        maintainState: true,
-        settings: settings,
-      );
+  _BiteBootstrapState createState() => _BiteBootstrapState();
 }
 
 // ignore: unused_element
@@ -109,3 +72,30 @@ GoogleSignIn _googleSignInUser = GoogleSignIn(
     'email',
   ],
 );
+
+class _BiteBootstrapState extends State<BiteBootstrap> {
+  @override
+  Widget build(BuildContext context) {
+    var app = context.watch<AppState>();
+
+    if (app.user == null) {}
+    return MaterialApp(
+      navigatorKey: GlobalNav,
+      debugShowCheckedModeBanner: false,
+      themeMode: app.useDark ? ThemeMode.dark : ThemeMode.light,
+      darkTheme: darkTheme(textTheme),
+      theme: lightTheme(textTheme),
+      // initialRoute: '/',
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(
+          builder: (context) => PageError(
+            errorCode: 404.toString(),
+            msg: 'Unable to find "${settings.name}"',
+          ),
+        );
+      },
+
+      onGenerateRoute: app.router.generateRoute,
+    );
+  }
+}

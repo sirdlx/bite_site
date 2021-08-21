@@ -11,11 +11,5 @@ PreferredSizeWidget homeAppBar(BuildContext context) => AppBar(
           },
           icon: Icon(Icons.person),
         ),
-        IconButton(
-          onPressed: () {
-            GlobalNav.currentState!.pushNamed('/cart');
-          },
-          icon: Icon(Icons.shopping_bag_outlined),
-        ),
       ],
     );

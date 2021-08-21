@@ -10,37 +10,38 @@ class PageSettings extends StatelessWidget {
     AppState app = context.watch<AppState>();
 
     return Scaffold(
-        body: ListView(
-      children: [
-        ListTile(
-          title: Text('Use dark mode'),
-          trailing: Switch(
-            value: app.useDark,
-            onChanged: (value) => app.useDark = !app.useDark,
+      body: ListView(
+        children: [
+          ListTile(
+            title: Text('Use dark mode'),
+            trailing: Switch(
+              value: app.useDark,
+              onChanged: (value) => app.useDark = !app.useDark,
+            ),
           ),
-        ),
-        ListTile(
-          title: Text('Use dark mode'),
-          trailing: Switch(
-            value: app.useDark,
-            onChanged: (value) => app.useDark = !app.useDark,
+          ListTile(
+            title: Text('Use dark mode'),
+            trailing: Switch(
+              value: app.useDark,
+              onChanged: (value) => app.useDark = !app.useDark,
+            ),
           ),
-        ),
-        ListTile(
-          title: Text('Use dark mode'),
-          trailing: Switch(
-            value: !app.useDark,
-            onChanged: (value) => app.useDark = !app.useDark,
+          ListTile(
+            title: Text('Use dark mode'),
+            trailing: Switch(
+              value: !app.useDark,
+              onChanged: (value) => app.useDark = !app.useDark,
+            ),
           ),
-        ),
-        ListTile(
-          title: Text('Use dark mode'),
-          trailing: Switch(
-            value: !app.useDark,
-            onChanged: (value) => app.useDark = !app.useDark,
+          ListTile(
+            title: Text('Use dark mode'),
+            trailing: Switch(
+              value: !app.useDark,
+              onChanged: (value) => app.useDark = !app.useDark,
+            ),
           ),
-        ),
-      ],
-    ));
+        ],
+      ),
+    );
   }
 }
