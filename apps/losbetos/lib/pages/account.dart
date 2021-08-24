@@ -1,7 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavor_auth/flavor_auth.dart';
-import 'package:flavor_client/components/list.dart';
-import 'package:flavor_client/components/refactor_components.dart';
-import 'package:flavor_client/components/tiles.dart';
+import 'package:flavor_client/pages/onboarding/onboarding_v3.dart';
+import 'package:flavor_client/repository/firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:losbetos/state.dart';
 import 'package:provider/provider.dart';
@@ -16,14 +17,42 @@ class PageAccount extends StatefulWidget {
 class _PageAccountState extends State<PageAccount> {
   @override
   Widget build(BuildContext context) {
-    var app = context.read<AppState>();
+    var app = context.watch<AppState>();
 
     return Scaffold(
-      body: buildProfile(app),
+      body: app.user != null
+          ? buildProfile(app)
+          : Center(
+              child: Container(
+                margin: EdgeInsets.only(bottom: 16),
+                child: OutlinedButton.icon(
+                  icon: Icon(Icons.login),
+                  label: Text('Sign in'),
+                  onPressed: () => showDialog(
+                    context: context,
+                    builder: (context) =>
+                        Scaffold(appBar: AppBar(), body: PageLogin()),
+                  ),
+                ),
+              ),
+            ),
     );
   }
 
-  SingleChildScrollView buildProfile(AppState app) {
+  Widget buildProfile(AppState app) {
+    var displayName = TextEditingController(
+      text: app.user!.displayName ?? '',
+    );
+
+    var email = TextEditingController(
+      text: app.user!.displayName ?? '',
+    );
+
+    var phone = TextEditingController(
+      text: app.user!.displayName ?? '',
+    );
+
+    String userDocPath = 'users/${app.user!.email}';
     return SingleChildScrollView(
       child: Container(
         margin: EdgeInsets.all(16),
@@ -39,53 +68,53 @@ class _PageAccountState extends State<PageAccount> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // Personal info
+                  app.user != null
+                      ? Padding(
+                          padding:
+                              const EdgeInsets.only(top: 0.0, bottom: 16.0),
+                          child: ProfileHeader(
+                            title: 'Personal Info',
+                          ),
+                        )
+                      : Container(),
 
-                  Padding(
-                    padding: const EdgeInsets.only(top: 0.0, bottom: 16.0),
-                    child: ProfileHeader(
-                      title: 'Personal Info',
-                    ),
-                  ),
+                  app.user != null
+                      ? ListView(
+                          shrinkWrap: true,
+                          itemExtent: 60,
+                          children: [
+                            AccountTextFeild(
+                              labelText: 'Name',
+                              controller: displayName,
+                              onChanged: (dn) {
+                                FirebaseAuth.instance.currentUser!
+                                    .updateDisplayName(dn);
+                              },
+                            ),
+                            AccountTextFeild(
+                              labelText: 'Email',
+                              controller: TextEditingController(),
+                              onChanged: (dn) => FirebaseAuth
+                                  .instance.currentUser!
+                                  .updateEmail(dn),
+                            ),
+                            AccountTextFeild(
+                              labelText: 'Phone',
+                              controller: TextEditingController(),
+                              onChanged: (dn) => FlavorFirestoreRepository()
+                                  .firestore
+                                  .doc(userDocPath)
+                                  .set({'phone': dn}),
+                            ),
+                          ],
+                        )
+                      : Container(),
 
-                  ListView(
-                    shrinkWrap: true,
-                    itemExtent: 60,
-                    children: [
-                      AccountTextFeild(
-                        labelText: 'Name',
-                        controller: TextEditingController(),
-                      ),
-                      AccountTextFeild(
-                        labelText: 'Email',
-                        controller: TextEditingController(),
-                      ),
-                      AccountTextFeild(
-                        labelText: 'Phone',
-                        controller: TextEditingController(),
-                      ),
-                    ],
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
-                    child: ProfileHeader(
-                      title: 'Settings',
-                    ),
-                  ),
-
-                  ListView(
-                    shrinkWrap: true,
-                    itemExtent: 60,
-                    children: [
-                      ListTile(
-                        title: Text('Use dark mode'),
-                        trailing: Switch(
-                          value: app.useDark,
-                          onChanged: (value) => app.useDark = !app.useDark,
-                        ),
-                      ),
-                    ],
-                  ),
+                  OutlinedButton.icon(
+                    icon: Icon(Icons.exit_to_app),
+                    label: Text('Logout'),
+                    onPressed: () => app.logoutUser(),
+                  )
                 ],
               ),
             ),
@@ -127,10 +156,13 @@ class ProfileHeader extends StatelessWidget {
 class AccountTextFeild extends StatelessWidget {
   final String? labelText;
   final TextEditingController? controller;
+
+  final void Function(String)? onChanged;
   const AccountTextFeild({
     Key? key,
     this.labelText,
     this.controller,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -145,6 +177,54 @@ class AccountTextFeild extends StatelessWidget {
         labelText: labelText,
         isDense: true,
       ),
+      onChanged: onChanged,
+    );
+  }
+}
+
+class PageLogin extends StatelessWidget {
+  const PageLogin({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var app = context.read<AppState>();
+    return FlavorOnboardingV3(
+      gApiKey: 'AIzaSyDaGm_f6SvznyHIQnPHk7s4V2UygStMb6g',
+      isLoggedIn: app.user != null,
+      onEmailLogin: (email, password) => FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then(
+        (value) {
+          print('hee');
+          return app.user = FlavorUser(
+            displayName: value.user!.displayName,
+            email: value.user!.email,
+            emailVerified: value.user!.emailVerified,
+            localId: value.user!.uid,
+            photoUrl: value.user!.photoURL,
+          );
+        },
+      ).then((value) => GlobalNav.currentState!.pop()),
+      // .then((value) => GlobalNav.currentState!.popAndPushNamed('/')),
+      // onEmailLogin: (email, password) {
+      //   print('$email, $password');
+      //   return Future.value();
+      // },
+      onEmailSignup: (email, password, passwordReEnter) => FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      )
+          .then((value) {
+        print(value);
+        return app.user = FlavorUser(
+          displayName: value.user!.displayName,
+          email: value.user!.email,
+          emailVerified: value.user!.emailVerified,
+          localId: value.user!.uid,
+          photoUrl: value.user!.photoURL,
+        );
+      }).then((value) => GlobalNav.currentState!.popAndPushNamed('/')),
     );
   }
 }

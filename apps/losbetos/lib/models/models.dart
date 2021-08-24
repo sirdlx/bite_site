@@ -46,4 +46,28 @@ class Menuitem {
     this.imageUrl,
     this.categoryId,
   });
+
+  Map toMap() {
+    Map _map = {
+      'id': this.id,
+      'title': this.title,
+      'description': this.description,
+      'basePrice': this.basePrice,
+      'imageUrl': this.imageUrl,
+      'categoryId': this.categoryId,
+    };
+
+    return _map;
+  }
+
+  static Menuitem fromMap(Map _map) {
+    return Menuitem(
+      id: _map.containsKey('id') ? _map['id'] : '',
+      title: _map.containsKey('title') ? _map['title'] : null,
+      description: _map.containsKey('description') ? _map['description'] : null,
+      basePrice: _map.containsKey('basePrice') ? _map['basePrice'] : 0,
+      imageUrl: _map.containsKey('imageUrl') ? _map['imageUrl'] : null,
+      categoryId: _map.containsKey('categoryId') ? _map['categoryId'] : null,
+    );
+  }
 }

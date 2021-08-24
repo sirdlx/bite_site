@@ -59,11 +59,11 @@ class _AppLayoutWidgetState extends State<AppLayoutWidget>
       breakpoints: {
         DisplayType.s: buildMobileView(context),
         DisplayType.l: Scaffold(
-          key: homeScaffoldKey,
+          // key: homeScaffoldKey,
           body: Row(
             children: [
-              Flexible(
-                flex: 3,
+              Container(
+                width: 160,
                 child: NavigationRail(
                   elevation: 1,
                   onDestinationSelected: (value) {
@@ -73,7 +73,12 @@ class _AppLayoutWidgetState extends State<AppLayoutWidget>
                     });
                   },
                   extended: true,
-                  leading: Center(child: Text('data')),
+                  leading: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Image.asset('assets/images/logo.png'),
+                    ),
+                  ),
                   destinations: routesForDrawer
                       .map(
                         (e) => NavigationRailDestination(
@@ -131,7 +136,6 @@ class _AppLayoutWidgetState extends State<AppLayoutWidget>
 
   AppBar buildAppBar(BuildContext context) {
     var app = context.read<AppState>();
-
     return AppBar(
       elevation: 0,
       automaticallyImplyLeading: false,
@@ -149,25 +153,25 @@ class _AppLayoutWidgetState extends State<AppLayoutWidget>
         ),
         // height: 18,
       ),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: app.user == null
-              ? TextButton(
-                  onPressed: () =>
-                      GlobalNav.currentState!.pushNamed('/account'),
-                  child: Text('login'))
-              : CircleAvatar(
-                  child: GestureDetector(
-                    child: Icon(Icons.person),
-                    onTap: () => GlobalNav.currentState!.pushNamed('/account'),
-                  ),
-                ),
-        ),
-        SizedBox(
-          width: 16,
-        ),
-      ],
+      // actions: [
+      //   Padding(
+      //     padding: const EdgeInsets.all(12.0),
+      //     child: app.user == null
+      //         ? TextButton(
+      //             onPressed: () =>
+      //                 GlobalNav.currentState!.pushNamed('/account'),
+      //             child: Text('login'))
+      //         : CircleAvatar(
+      //             child: GestureDetector(
+      //               child: Icon(Icons.person),
+      //               onTap: () => GlobalNav.currentState!.pushNamed('/account'),
+      //             ),
+      //           ),
+      //   ),
+      //   SizedBox(
+      //     width: 16,
+      //   ),
+      // ],
     );
   }
 

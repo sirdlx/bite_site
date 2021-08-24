@@ -96,9 +96,7 @@ class _PageMenuItemState extends State<PageMenuItem> {
                         flex: 1,
                         child: FloatingActionButton.extended(
                           onPressed: () {
-                            app.cart.items.add(cartMenuItem!);
-                            app.notifyListeners();
-
+                            app.addToCart(cartMenuItem!);
                             GlobalNav.currentState!.pop();
                             final snackBar = SnackBar(
                               content: Text(
@@ -194,13 +192,12 @@ class _PageMenuItemState extends State<PageMenuItem> {
       ),
     );
   }
+}
 
-  ButtonStyle buttonQStyle() {
-    return ButtonStyle(
-        padding: MaterialStateProperty.resolveWith(
-          (states) => EdgeInsets.all(4),
-        ),
-        minimumSize:
-            MaterialStateProperty.resolveWith((states) => Size(16, 30)));
-  }
+ButtonStyle buttonQStyle() {
+  return ButtonStyle(
+      padding: MaterialStateProperty.resolveWith(
+        (states) => EdgeInsets.all(4),
+      ),
+      minimumSize: MaterialStateProperty.resolveWith((states) => Size(16, 30)));
 }
