@@ -1,55 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:losbetos/components/menuItemTile.dart';
-import 'package:losbetos/models/menu02/_functions.dart';
+import 'package:losbetos/models/menu/_functions.dart';
 import 'package:losbetos/models/models.dart';
 
-class PageCategory extends StatefulWidget {
+class ScreenCategory extends StatefulWidget {
   final String id;
-  const PageCategory({
+  const ScreenCategory({
     Key? key,
     required this.id,
   }) : super(key: key);
 
   @override
-  _PageCategoryState createState() => _PageCategoryState();
+  _ScreenCategoryState createState() => _ScreenCategoryState();
 }
 
-class _PageCategoryState extends State<PageCategory> {
+class _ScreenCategoryState extends State<ScreenCategory> {
   @override
   Widget build(BuildContext context) {
-    // final name = ModalRoute.of(context)!.settings.name;
-
-    // // print('name::$name');
-    // var uri = Uri.dataFromString(name as String);
-    // // print(uri.pathSegments.last);
-
-    // var id = uri.pathSegments.last;
-
-    // var menuCatgeoriesItems = getMenuCategories;
-
     MenuCatagory? menuCategory = getMenuCategorySingle(widget.id);
-
-    // print('widget.id::${menuCategory!.items.toString()}');
-
-    // if (menuCategory == null) {
-    //   return PageError(
-    //     errorCode: 404.toString(),
-    //     msg: 'Category number $id doesnt exist',
-    //   );
-    // }
-
-    // List<Menuitem> items = [];
-
-    // var menuItems = getMenuItems;
-
-    // for (var i = 0; i < menuItems.length; i++) {
-    //   Menuitem menuItem = menuItems[i];
-    //   // print(menuItems[i].categoryId);
-    //   if (menuItem.categoryId == menuCategory!.id) {
-    //     items.add(menuItem);
-    //   }
-    // }
-
     return Scaffold(
       appBar: AppBar(
         title: Text(

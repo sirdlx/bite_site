@@ -71,3 +71,97 @@ class Menuitem {
     );
   }
 }
+
+class BSCartMenuItem {
+  final Menuitem menuitem;
+  Map selectedOptions = {};
+  int quanity = 1;
+  //
+  BSCartMenuItem(this.menuitem);
+  //
+
+  //
+  Map toMap() {
+    // return super.toString();
+    Map _map = {
+      'selectedOptions': selectedOptions,
+      'quanity': quanity,
+      'menuitem': menuitem.toMap(),
+    };
+    return _map;
+  }
+}
+
+class BSCart {
+  BSCart({this.items = const []});
+  List<BSCartMenuItem> items;
+  // ignore: unused_field
+  int _total = 0;
+
+  remove(BSCartMenuItem cartMenuItem) {
+    items.remove(cartMenuItem);
+  }
+
+  add(BSCartMenuItem cartMenuItem) {
+    // items.add(cartMenuItem);
+    items = [...items, cartMenuItem];
+  }
+
+  int get itemsTotal {
+    // print('items.length::${items.length}');
+    var __total = 0;
+    for (var i = 0; i < items.length; i++) {
+      var item = items[i];
+
+      // for (var ii = 1; ii < item.quanity + 1; ii++) {
+      //   print(ii);
+
+      //   // _total = __total + __subtotal;
+      // }
+      __total = __total + (item.menuitem.basePrice * item.quanity);
+    }
+
+    return __total;
+  }
+
+  static BSCart? fromMap(Map _map) {
+    // return BSCart()..items;
+  }
+
+  Map toMap() {
+    Map _map = {};
+
+    for (var i = 0; i < items.length; i++) {
+      _map.putIfAbsent(i, () => items[i].toMap());
+    }
+
+    return _map;
+  }
+
+  List toList() {
+    List _list = [];
+
+    for (var i = 0; i < items.length; i++) {
+      _list.add(items[i].toMap());
+    }
+
+    return _list;
+  }
+
+  static BSCart fromList(List fromList) {
+    List<BSCartMenuItem> items = [];
+    for (var i = 0; i < fromList.length; i++) {
+      var _item = fromList[i] as Map;
+      // _list.add();
+      // print(_item);
+      BSCartMenuItem _bs = BSCartMenuItem(Menuitem.fromMap(_item['menuitem']));
+      // print('_bs.menuitem.title');
+      // print(_bs.menuitem.title);
+      _bs.selectedOptions =
+          _item.containsKey('selectedOptions') ? _item['selectedOptions'] : {};
+      _bs.quanity = _item['quanity'];
+      items.add(_bs);
+    }
+    return BSCart(items: items);
+  }
+}

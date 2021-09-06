@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:losbetos/state.dart';
+import 'package:losbetos/state/state.dart';
 
 PreferredSizeWidget homeAppBar(BuildContext context) => AppBar(
       // backgroundColor: Colors.transparent,

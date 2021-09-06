@@ -1,4 +1,4 @@
-package com.example.losbetos
+package com.dlxstudios.losbetosapp
 
 import io.flutter.embedding.android.FlutterActivity
 

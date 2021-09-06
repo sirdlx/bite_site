@@ -8,13 +8,23 @@
             "type": "shell",
             "command": "firebase deploy --only hosting:losbetosapp",
             "problemMatcher": []
-
         },
         {
             "label": "build|deploy",
             "type": "shell",
             "command": "flutter build web '&&' firebase deploy --only hosting:losbetosapp",
             "problemMatcher": []
+        },
+        {
+            "type": "flutter",
+            "command": "flutter",
+            "args": [
+                "build",
+                "apk"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "label": "flutter: flutter build apk"
         }
     ]
 }

@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "633139741304",
+    "firebase_url": "https://dlxstudios-f6e64.firebaseio.com",
+    "project_id": "dlxstudios-f6e64",
+    "storage_bucket": "dlxstudios-f6e64.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:633139741304:android:f63aba7e926303417f238d",
+        "android_client_info": {
+          "package_name": "com.dlxstudios.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "633139741304-fg54ma020j5n0m8bthhg6tpt6j7ah9ba.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaGm_f6SvznyHIQnPHk7s4V2UygStMb6g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "633139741304-fg54ma020j5n0m8bthhg6tpt6j7ah9ba.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:633139741304:android:855c0170b83b50a57f238d",
+        "android_client_info": {
+          "package_name": "com.dlxstudios.losbetosapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "633139741304-fg54ma020j5n0m8bthhg6tpt6j7ah9ba.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaGm_f6SvznyHIQnPHk7s4V2UygStMb6g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "633139741304-fg54ma020j5n0m8bthhg6tpt6j7ah9ba.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

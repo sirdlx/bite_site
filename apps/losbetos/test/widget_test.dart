@@ -11,8 +11,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:losbetos/main.dart';
-import 'package:losbetos/state.dart';
-import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 void main() {
@@ -23,6 +21,7 @@ void main() {
     setPathUrlStrategy();
 
     await Hive.initFlutter();
+    // ignore: unused_local_variable
     var appBox = await Hive.openBox('losbetos_app');
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -31,10 +30,7 @@ void main() {
     ));
 
     await tester.pumpWidget(
-      ChangeNotifierProvider<AppState>(
-        create: (context) => AppState(appBox),
-        child: BiteBootstrap(),
-      ),
+      BiteBootstrap(),
     );
 
     // Verify that our counter starts at 0.

@@ -21,95 +21,96 @@ Map<int, Color> color = {
 
 MaterialColor colorCustom = MaterialColor(0xFFA73030, color);
 
-ThemeData darkTheme(TextTheme textTheme) => flavorThemeMaterialDark.copyWith(
-      // primaryColor: Colors.white,
-      textTheme: textTheme.merge(defaultTextThemeDark),
-
-      accentColor: colorCustom,
-      colorScheme: ColorScheme.dark().copyWith(
-        primary: colorCustom,
-        secondary: colorCustom,
-      ),
-      indicatorColor: colorCustom,
-      tabBarTheme: TabBarTheme(
-        unselectedLabelColor: Colors.grey.shade400,
-        labelColor: colorCustom,
-      ),
-
+ThemeData darkTheme(TextTheme textTheme) => ThemeData.dark()
+    .copyWith(
       visualDensity: VisualDensity.adaptivePlatformDensity,
-      // buttonColor: Colors.red,
-      // elevatedButtonTheme: ElevatedButtonThemeData(
-      //   style: ButtonStyle(
-      //     backgroundColor: MaterialStateProperty.all(Colors.amberAccent),
-      //   ),
-      // ),
+    )
+    .copyWith(
+      colorScheme: ColorScheme.fromSwatch(
+        primarySwatch: mcgpalette0,
+        // primaryColorDark: Colors.red,
+        cardColor: Colors.grey.shade800,
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        fillColor: Colors.amber,
+        labelStyle: TextStyle(color: Colors.white),
+        suffixStyle: TextStyle(color: Colors.white),
+        helperStyle: TextStyle(color: Colors.white),
+      ),
+      appBarTheme: AppBarTheme(
+        backgroundColor: Colors.grey.shade800,
+      ),
+      unselectedWidgetColor: Colors.white38,
+      primaryColor: Colors.red,
+      accentColor: Colors.red,
+      chipTheme: ThemeData.dark().chipTheme.copyWith(
+            selectedColor: Colors.red,
+          ),
+      navigationRailTheme: NavigationRailThemeData(
+        unselectedIconTheme: IconThemeData(
+          color: Colors.white,
+          opacity: .5,
+        ),
+        unselectedLabelTextStyle: TextStyle(
+          color: Colors.white.withOpacity(.5),
+        ),
+      ),
+      textTheme: textTheme.merge(defaultTextThemeDark),
     );
 ThemeData lightTheme(TextTheme textTheme) => flavorThemeMaterialLight.copyWith(
-      // inputDecorationTheme: InputDecorationTheme(
-      //     // fillColor: Colors.white,
-      //     ),
-      // brightness: Brightness.light,
-      // primaryColor: colorCustom,
-      // accentColor: colorCustom,
-      indicatorColor: colorCustom,
-      colorScheme: ColorScheme.light().copyWith(
-        // primary: Colors.grey.shade300,
-        primary: colorCustom,
-        secondary: colorCustom,
-        // background: colorCustom,
-        // onSurface: Colors.green,
-        // onBackground: Colors.blueGrey,
-        // onPrimary: Colors.teal,
-        // surface: Colors.amber,
-        // onSecondary: Colors.limeAccent,
-        // primaryVariant: Colors.yellowAccent,
+      iconTheme: IconThemeData(color: Colors.black),
+      primaryIconTheme: IconThemeData(color: Colors.black),
+      colorScheme: ColorScheme.fromSwatch(
+        primarySwatch: Colors.red,
+        primaryColorDark: Colors.red,
+        // cardColor: Colors.grey.shade800,
       ),
-
-      buttonColor: Colors.red,
-      navigationRailTheme: NavigationRailThemeData(
-        // backgroundColor: Colors.white,
-        selectedIconTheme: IconThemeData(
-          color: Colors.red,
-        ),
-        unselectedIconTheme: IconThemeData(
-          color: Colors.black87,
-        ),
-        elevation: 5,
+      cardTheme: CardTheme(
+        elevation: 2,
       ),
-
-      // splashColor: Colors.red,
-      splashColor: colorCustom,
-
-      bottomAppBarColor: colorCustom,
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: colorCustom,
-        elevation: 5,
-        selectedItemColor: colorCustom,
-      ),
-      textTheme: textTheme,
-      visualDensity: VisualDensity.adaptivePlatformDensity,
-      appBarTheme: AppBarTheme(
-        backgroundColor: Colors.white,
-        // elevation: 2,
-        // brightness: Brightness.light,
-      ),
-      // buttonBarTheme: ButtonBarThemeData(
-      //   buttonTextTheme: ButtonTextTheme.normal,
-      // ),
-      tabBarTheme: TabBarTheme(
-        unselectedLabelColor: Colors.black87,
-        labelColor: colorCustom,
-      ),
-      scaffoldBackgroundColor: Colors.grey.shade300,
-      // buttonTheme: ButtonThemeData(buttonColor: colorCustom),
-      // elevatedButtonTheme: ElevatedButtonThemeData(
-      //   style: ButtonStyle(
-      //       // elevation: MaterialStateProperty.all(4),
-      //       backgroundColor: MaterialStateProperty.all(Colors.amber)),
-      // ),
-
-      primaryIconTheme: IconThemeData(
-        // color: Colors.black87,
-        color: colorCustom,
-      ),
+      appBarTheme: AppBarTheme(backgroundColor: Colors.white, elevation: 1),
+      // primaryColor: Colors.white,
+      accentColor: Colors.red,
+      chipTheme:
+          ThemeData.light().chipTheme.copyWith(selectedColor: Colors.red),
+      fixTextFieldOutlineLabel: true,
+      navigationRailTheme: NavigationRailThemeData(),
+      textTheme: textTheme.merge(defaultTextThemeLight),
     );
+
+InputDecoration inputBorder(BuildContext context, String? labelText) {
+  return InputDecoration(
+    labelText: labelText ?? '',
+    // isDense: true,
+    labelStyle: Theme.of(context).textTheme.bodyText2,
+    border: OutlineInputBorder(),
+    focusedBorder: OutlineInputBorder(),
+    hoverColor: Colors.green,
+    fillColor: Colors.green,
+    focusColor: Colors.amber,
+  );
+}
+
+const MaterialColor mcgpalette0 =
+    MaterialColor(_mcgpalette0PrimaryValue, <int, Color>{
+  50: Color(0xFFFDFDFD),
+  100: Color(0xFFF9F9F9),
+  200: Color(0xFFF6F6F6),
+  300: Color(0xFFF2F2F2),
+  400: Color(0xFFEFEFEF),
+  500: Color(_mcgpalette0PrimaryValue),
+  600: Color(0xFFEAEAEA),
+  700: Color(0xFFE7E7E7),
+  800: Color(0xFFE4E4E4),
+  900: Color(0xFFDFDFDF),
+});
+const int _mcgpalette0PrimaryValue = 0xFFECECEC;
+
+const MaterialColor mcgpalette0Accent =
+    MaterialColor(_mcgpalette0AccentValue, <int, Color>{
+  100: Color(0xFFFFFFFF),
+  200: Color(_mcgpalette0AccentValue),
+  400: Color(0xFFFFFFFF),
+  700: Color(0xFFFFFFFF),
+});
+const int _mcgpalette0AccentValue = 0xFFFFFFFF;

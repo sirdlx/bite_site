@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.losbetos">
+    package="com.dlxstudios.losbetosapp">
    <application
         android:label="losbetos"
         android:icon="@mipmap/ic_launcher">
