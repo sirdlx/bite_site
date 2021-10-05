@@ -1,4 +1,4 @@
-import 'package:flavor_client/components/page.dart';
+import 'package:flavor/components/page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:losbetos/components/heroImage.dart';
@@ -48,6 +48,14 @@ class _ScreenMenuItemState extends State<ScreenMenuItem> {
             CustomScrollView(
               slivers: [
                 SliverAppBar(
+                  title: menuItem!.imageUrl == null
+                      ? ListTile(
+                          title: Text(menuItem!.title.toString()),
+                          subtitle: menuItem!.description != null
+                              ? Text(menuItem!.description.toString())
+                              : null,
+                        )
+                      : null,
                   // backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   // leading: IconButton(
                   //     onPressed: () => GlobalNav.currentState!.pushNamed('/'),
@@ -62,14 +70,16 @@ class _ScreenMenuItemState extends State<ScreenMenuItem> {
                         )
                       : null,
                   expandedHeight: menuItem!.imageUrl != null ? 300 : 0,
-                  bottom: AppBar(
-                    elevation: 2,
-                    automaticallyImplyLeading: false,
-                    title: ListTile(
-                      title: Text(menuItem!.title.toString()),
-                      subtitle: Text(menuItem!.description.toString()),
-                    ),
-                  ),
+                  bottom: menuItem!.imageUrl != null
+                      ? AppBar(
+                          // elevation: 2,
+                          automaticallyImplyLeading: false,
+                          title: ListTile(
+                            title: Text(menuItem!.title.toString()),
+                            subtitle: Text(menuItem!.description.toString()),
+                          ),
+                        )
+                      : null,
                 ),
                 SliverToBoxAdapter(),
               ],
@@ -84,7 +94,7 @@ class _ScreenMenuItemState extends State<ScreenMenuItem> {
                   child: Container(
                     padding: EdgeInsets.all(12),
                     constraints: BoxConstraints(
-                      maxWidth: 260,
+                      maxWidth: 280,
                       minWidth: 100,
                     ),
                     child: Row(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:losbetos/models/models.dart';
 import 'package:losbetos/screens/layout.dart';
 import 'package:losbetos/screens/menu_item.dart';
@@ -19,21 +20,16 @@ class ScreenCartView extends StatelessWidget {
     // print('app.cart.items.length::${app.cart.items.length}');
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
-        title: Text('Cart'),
-        actions: []
-          ..add(
-            GestureDetector(
-              onTap: () => context
-                  .read(miniPlayerControllerProvider)
-                  .state
-                  .animateToHeight(state: PanelState.MIN),
-              child: Icon(Icons.arrow_drop_down_circle),
-            ),
-          )
-          ..add(SizedBox(
-            width: 16,
-          )),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: Text('Current Order'),
+        leading: GestureDetector(
+          onTap: () => context
+              .read(miniPlayerControllerProvider)
+              .state
+              .animateToHeight(state: PanelState.MIN),
+          child: Icon(FlutterRemix.close_circle_line),
+        ),
       ),
       bottomNavigationBar: app.cart.items.length > 0
           ? Padding(
@@ -49,7 +45,9 @@ class ScreenCartView extends StatelessWidget {
                         TextSpan(text: '${toPricingText(app.cart.itemsTotal)}'),
                       ])),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/checkout');
+                    },
                     child: Text(
                       'Checkout',
                       // style: Theme.of(context).textTheme.headline5,
@@ -92,14 +90,14 @@ class ScreenCartView extends StatelessWidget {
                       children: [
                         Flexible(
                           child: Icon(
-                            Icons.shopping_cart_outlined,
-                            size: 80,
+                            FlutterRemix.shopping_bag_2_line,
+                            size: 72,
                           ),
                         ),
                         Flexible(
                           child: Text(
-                            'No items in your cart.',
-                            style: Theme.of(context).textTheme.headline6,
+                            'No items in your basket.',
+                            style: Theme.of(context).textTheme.headline5,
                           ),
                         )
                       ],

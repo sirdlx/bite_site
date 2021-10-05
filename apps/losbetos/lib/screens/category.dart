@@ -22,7 +22,7 @@ class _ScreenCategoryState extends State<ScreenCategory> {
       appBar: AppBar(
         title: Text(
           menuCategory!.title!,
-          style: TextStyle(color: Colors.black87),
+          // style: TextStyle(color: Colors.black87),
         ),
       ),
       body: menuCategory.items.length == 0

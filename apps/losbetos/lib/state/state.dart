@@ -1,19 +1,19 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flavor_auth/flavor_auth.dart';
-import 'package:flavor_client/repository/firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:losbetos/models/models.dart';
-import 'package:flavor_client/components/route.dart';
 import 'package:losbetos/screens/account.dart';
 import 'package:losbetos/screens/category.dart';
 import 'package:losbetos/screens/layout.dart';
 import 'package:losbetos/screens/menu.dart';
 import 'package:losbetos/screens/menu_item.dart';
+import 'package:losbetos/screens/orders.dart';
 import 'package:losbetos/screens/settings.dart';
+import 'package:losbetos/services/auth.dart';
 import 'package:regex_router/regex_router.dart';
 
 // ignore: non_constant_identifier_names
@@ -62,12 +62,11 @@ class AppState with ChangeNotifier, DiagnosticableTreeMixin {
 
   set user(FlavorUser? newUser) {
     _user = newUser;
-    if (_user != null) {
-      FlavorFirestoreRepository()
-          .firestore
-          .doc('users/${_user!.email}')
-          .set(_user!.toJson() as Map<String, dynamic>);
-    }
+    // if (_user != null) {
+    //   FirebaseFirestore.instance
+    //       .doc('users/${_user!.email}')
+    //       .update(_user!.toJson() as Map<String, dynamic>);
+    // }
     updateAndSave();
   }
 
@@ -80,6 +79,9 @@ class AppState with ChangeNotifier, DiagnosticableTreeMixin {
             ScreenMenuItem(id: args["itemId"]!),
         "/menu/category/:catId": (context, args) =>
             ScreenCategory(id: args["catId"]!),
+        "/orders": (context, args) => ScreenOrders(),
+        "/orders/:orderID": (context, args) =>
+            ScreenOrders(id: args["orderID"]!),
       });
 
   updateQuanity(int index, int quanity) {
@@ -127,14 +129,52 @@ class AppState with ChangeNotifier, DiagnosticableTreeMixin {
   }
 
   logoutUser() {
-    FirebaseAuth.instance.signOut();
-    user = null;
-    updateAndSave();
+    return AuthService.logout().then((value) {
+      user = null;
+      updateAndSave();
+    });
   }
 
-  signInUser() {
-    user = null;
-    updateAndSave();
+  Future<bool> login(String email, String password) async {
+    return AuthService.login(email, password).then((value) {
+      print('/users/${value!.user!.email}');
+      print(value.user!);
+      return FirebaseFirestore.instance
+          .doc('/users/${value.user!.email}')
+          .get();
+    }).then((DocumentSnapshot<Map<String, dynamic>> userJson) {
+      var data = userJson.data();
+      print('data::$data');
+
+      if (data == null) {
+        return Future.error({'message': 'No user data'});
+      }
+      user = FlavorUser(
+        displayName: data['displayName'],
+        email: data['email'],
+        emailVerified: data['emailVerified'],
+        localId: data['localId'],
+      );
+      return true;
+    });
+  }
+
+  Future<bool> signUpUser(
+      String displayName, String email, String password) async {
+    return AuthService.signUpUser(displayName, email, password).then((value) {
+      print('value::$value');
+      if (value == null) {
+        return Future.error({'message': 'No user data'});
+      }
+      user = FlavorUser(
+        displayName: value.displayName,
+        email: value.email,
+        emailVerified: value.emailVerified,
+        localId: value.uid,
+      );
+      return true;
+    });
+    // return Future.value(true);
   }
 
   List<FlavorRouteWidget> get dashRoutes {
@@ -177,6 +217,23 @@ class AppState with ChangeNotifier, DiagnosticableTreeMixin {
     }
     return arr;
   }
+}
+
+class FlavorRouteWidget {
+  final String? path;
+  final IconData? icon;
+  final String? title;
+  final Widget? child;
+  final Color? backgroundColor;
+  final bool? routeInDrawer;
+
+  FlavorRouteWidget(
+      {this.path,
+      this.icon,
+      this.title,
+      this.child,
+      this.backgroundColor,
+      this.routeInDrawer});
 }
 
 MaterialPageRoute bitePage(RouteSettings settings, Widget screen) =>

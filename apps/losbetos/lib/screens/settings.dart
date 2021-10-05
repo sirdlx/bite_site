@@ -1,6 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:losbetos/screens/account.dart';
+import 'package:losbetos/screens/profile.dart';
 import 'package:losbetos/state/state.dart';
 import 'package:provider/provider.dart' as Provider;
 
@@ -14,10 +15,8 @@ class ScreenSettings extends StatelessWidget {
       var app = context.watch<AppState>();
       return Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(6.0),
-          child: Material(
-            elevation: 1,
-            color: Theme.of(context).cardColor,
+          padding: const EdgeInsets.all(24.0),
+          child: Card(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: ListView(
@@ -32,8 +31,19 @@ class ScreenSettings extends StatelessWidget {
                     children: [
                       ListTile(
                         title: Text('Dark mode'),
-                        trailing: Switch(
+                        trailing: CupertinoSwitch(
+                          activeColor:
+                              Theme.of(context).toggleButtonsTheme.color,
                           value: app.useDark,
+                          onChanged: (value) => app.useDark = !app.useDark,
+                        ),
+                      ),
+                      ListTile(
+                        title: Text('Dark mode'),
+                        trailing: CupertinoSwitch(
+                          activeColor:
+                              Theme.of(context).toggleButtonsTheme.color,
+                          value: !app.useDark,
                           onChanged: (value) => app.useDark = !app.useDark,
                         ),
                       ),

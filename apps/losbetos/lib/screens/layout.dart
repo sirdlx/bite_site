@@ -1,11 +1,14 @@
-import 'package:flavor_client/components/route.dart';
-import 'package:flavor_client/layout/FlavorResponsiveView.dart';
-import 'package:flavor_client/layout/adaptive.dart';
+import 'dart:ui';
+
+import 'package:flavor/layout/FlavorResponsiveView.dart';
+import 'package:flavor/layout/adaptive.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:losbetos/components/pageviewer.dart';
 import 'package:losbetos/screens/cart.dart';
 import 'package:losbetos/state/state.dart';
+import 'package:losbetos/themes/light.dart';
 import 'package:losbetos/utilities/utilities.dart';
 import 'package:miniplayer/miniplayer.dart';
 import 'package:provider/provider.dart' as Provider;
@@ -39,16 +42,21 @@ class _ScreenLayoutState extends State<ScreenLayout> {
           breakpoints: {
             DisplayType.s: Scaffold(
               appBar: AppBar(
-                leading: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Image.asset(
-                    'assets/images/logo.png',
-                    fit: BoxFit.contain,
-                  ),
+                // leading: Padding(
+                //   padding: const EdgeInsets.all(10.0),
+                //   child: Image.asset(
+                //     'assets/images/logo.png',
+                //     fit: BoxFit.contain,
+                //   ),
+                // ),
+                // leadingWidth: 116,
+
+                leading: Icon(
+                  FlutterRemix.cactus_fill,
+                  // color: LBThemeLight.primaryColor,
                 ),
-                leadingWidth: 100,
               ),
-              body: buildBody(context, app),
+              body: SafeArea(child: buildBody(context, app)),
               bottomNavigationBar: _buildBottomNav(app),
               primary: true,
             ),
@@ -73,10 +81,13 @@ class _ScreenLayoutState extends State<ScreenLayout> {
             elevation: 1,
             onDestinationSelected: (i) => setState(() => _selectedIndex = i),
             extended: true,
-            leading: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Image.asset('assets/images/logo.png'),
+            leading: SafeArea(
+              child: Center(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(left: 12.0, right: 12, bottom: 16),
+                  child: Image.asset('assets/images/logo.png'),
+                ),
               ),
             ),
             destinations: app.routesForDrawer
@@ -138,88 +149,85 @@ class _ScreenLayoutState extends State<ScreenLayout> {
                       i,
                       Offstage(
                         offstage: _selectedIndex != i,
-                        child: PageViewItem(child: screen),
+                        child: PageViewItem(child: screen.child!),
                       ),
                     ))
                 .values
                 .toList()
-                  ..add(
-                    Offstage(
-                      offstage: false,
-                      child: Miniplayer(
-                        controller: miniPlayerController,
-                        minHeight: _playerMinHeight,
-                        maxHeight: MediaQuery.of(context).size.height,
-                        builder: (height, percentage) {
-                          if (height <= _playerMinHeight + 50.0)
-                            return Container(
-                              padding: EdgeInsets.all(8),
-                              color: Theme.of(context).scaffoldBackgroundColor,
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Flexible(
-                                            child: RichText(
-                                                text: TextSpan(
-                                                    text: 'Total : ',
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyText2!
-                                                        .copyWith(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w300),
-                                                    children: [
-                                                  TextSpan(
-                                                      text:
-                                                          '${toPricingText(app.cart.itemsTotal)}'),
-                                                ])),
-                                          ),
-                                          Flexible(
-                                            child: Text(
-                                              'Location : ',
-                                              overflow: TextOverflow.ellipsis,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .caption!
-                                                  .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                            ),
-                                          ),
-                                        ],
+              ..add(
+                Offstage(
+                  offstage: false,
+                  child: Miniplayer(
+                    controller: miniPlayerController,
+                    minHeight: _playerMinHeight,
+                    maxHeight: MediaQuery.of(context).size.height,
+                    builder: (height, percentage) {
+                      if (height <= _playerMinHeight + 50.0)
+                        return Container(
+                          padding: EdgeInsets.all(8),
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Flexible(
+                                        child: RichText(
+                                            text: TextSpan(
+                                                text: 'Total : ',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText2!
+                                                    .copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w300),
+                                                children: [
+                                              TextSpan(
+                                                  text:
+                                                      '${toPricingText(app.cart.itemsTotal)}'),
+                                            ])),
                                       ),
-                                    ),
+                                      Flexible(
+                                        child: Text(
+                                          'Location : ',
+                                          overflow: TextOverflow.ellipsis,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .caption!
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w500),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  IconButton(
-                                    icon: const Icon(
-                                      Icons.shopping_cart_outlined,
-                                    ),
-                                    onPressed: () {
-                                      miniPlayerControllerProvider.select(
-                                          (value) => value.state
-                                              .animateToHeight(
-                                                  state: PanelState.MAX));
-                                    },
-                                  ),
-                                  SizedBox(
-                                    width: 16,
-                                  )
-                                ],
+                                ),
                               ),
-                            );
-                          return ScreenCartView(app: app);
-                        },
-                      ),
-                    ),
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.shopping_cart_outlined,
+                                ),
+                                onPressed: () {
+                                  miniPlayerControllerProvider.select((value) =>
+                                      value.state.animateToHeight(
+                                          state: PanelState.MAX));
+                                },
+                              ),
+                              SizedBox(
+                                width: 16,
+                              )
+                            ],
+                          ),
+                        );
+                      return ScreenCartView(app: app);
+                    },
                   ),
+                ),
+              ),
           );
         },
       ),

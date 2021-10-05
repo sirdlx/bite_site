@@ -1,5 +1,3 @@
-import 'package:flavor_client/layout/FlavorResponsiveView.dart';
-import 'package:flavor_client/layout/adaptive.dart';
 import 'package:flutter/material.dart';
 import 'package:losbetos/components/gridItem.dart';
 import 'package:losbetos/models/menu/_functions.dart';
@@ -36,14 +34,15 @@ class CategoryGrid extends StatelessWidget {
                 //   icon: Icon(Icons.arrow_right_alt_outlined),
                 // ),
               ),
-              FlavorResponsiveView(
-                breakpoints: {
-                  DisplayType.s: buildGrid(),
-                  DisplayType.m: buildGrid(crossAxisCount: 3),
-                  DisplayType.l: buildGrid(crossAxisCount: 4),
-                  DisplayType.xl: buildGrid(crossAxisCount: 6),
-                },
-              ),
+              // FlavorResponsiveView(
+              //   breakpoints: {
+              //     DisplayType.s: buildGrid(),
+              //     DisplayType.m: buildGrid(crossAxisCount: 3),
+              //     DisplayType.l: buildGrid(crossAxisCount: 4),
+              //     DisplayType.xl: buildGrid(crossAxisCount: 6),
+              //   },
+              // ),
+              buildGrid(),
             ],
           ),
         ),
