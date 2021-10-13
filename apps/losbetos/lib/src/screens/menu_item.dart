@@ -1,11 +1,11 @@
-import 'package:flavor/components/page.dart';
+import 'package:flavor_client/components/page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:losbetosapp/components/hero_image.dart';
+import 'package:losbetosapp/src/components/hero_image.dart';
 import 'package:losbetosapp/main.dart';
-import 'package:losbetosapp/models/menu/_functions.dart';
-import 'package:losbetosapp/models/models.dart';
-import 'package:losbetosapp/utilities/utilities.dart';
+import 'package:losbetosapp/src/models/menu/_functions.dart';
+import 'package:losbetosapp/src/models/models.dart';
+import 'package:losbetosapp/src/utilities/utilities.dart';
 import 'package:provider/provider.dart' as Provider;
 
 class ScreenMenuItem extends StatefulWidget {

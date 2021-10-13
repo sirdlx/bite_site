@@ -1,5 +1,5 @@
-import 'package:losbetosapp/models/menu/menu.dart';
-import 'package:losbetosapp/models/models.dart';
+import 'package:losbetosapp/src/models/menu/menu.dart';
+import 'package:losbetosapp/src/models/models.dart';
 
 List<MenuCatagory> get getMenuCategories {
   return catagories.map((e) {

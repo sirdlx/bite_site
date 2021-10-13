@@ -1,15 +1,15 @@
-import 'package:flavor/layout/FlavorResponsiveView.dart';
-import 'package:flavor/layout/adaptive.dart';
+import 'package:flavor_client/layout/FlavorResponsiveView.dart';
+import 'package:flavor_client/layout/adaptive.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-import 'package:losbetosapp/components/category_grid.dart';
-import 'package:losbetosapp/components/grid_item.dart';
-import 'package:losbetosapp/components/menu_item_tile.dart';
+import 'package:losbetosapp/src/components/category_grid.dart';
+import 'package:losbetosapp/src/components/grid_item.dart';
+import 'package:losbetosapp/src/components/menu_item_tile.dart';
 import 'package:losbetosapp/main.dart';
-import 'package:losbetosapp/models/menu/_functions.dart';
-import 'package:losbetosapp/models/models.dart';
-import 'package:losbetosapp/utilities/utilities.dart';
+import 'package:losbetosapp/src/models/menu/_functions.dart';
+import 'package:losbetosapp/src/models/models.dart';
+import 'package:losbetosapp/src/utilities/utilities.dart';
 
 class ScreenMenu extends StatefulWidget {
   const ScreenMenu({Key? key}) : super(key: key);
@@ -156,7 +156,7 @@ class _PageSearchState extends State<ScreenMenu> {
 
   SliverPadding buildSearchDefaultView(BuildContext context) {
     return SliverPadding(
-      padding: EdgeInsets.symmetric(horizontal: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 4),
       sliver: SliverToBoxAdapter(
         child: FlavorResponsiveView(
           global: false,

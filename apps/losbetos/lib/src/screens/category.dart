@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:losbetosapp/components/menu_item_tile.dart';
-import 'package:losbetosapp/models/menu/_functions.dart';
-import 'package:losbetosapp/models/models.dart';
+import 'package:losbetosapp/src/components/menu_item_tile.dart';
+import 'package:losbetosapp/src/models/menu/_functions.dart';
+import 'package:losbetosapp/src/models/models.dart';
 
 class ScreenCategory extends StatefulWidget {
   final String id;

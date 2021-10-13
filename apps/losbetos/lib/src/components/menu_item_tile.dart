@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:losbetosapp/components/hero_image.dart';
-import 'package:losbetosapp/models/models.dart';
-import 'package:losbetosapp/utilities/utilities.dart';
+import 'package:losbetosapp/src/components/hero_image.dart';
+import 'package:losbetosapp/src/models/models.dart';
+import 'package:losbetosapp/src/utilities/utilities.dart';
 
 class MenuItemTile extends StatelessWidget {
   final Menuitem menuItem;

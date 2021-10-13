@@ -1,16 +1,15 @@
 import 'dart:ui';
-
-import 'package:flavor/components/route.dart';
-import 'package:flavor/layout/FlavorResponsiveView.dart';
-import 'package:flavor/layout/adaptive.dart';
+import 'package:flavor_client/components/route.dart';
+import 'package:flavor_client/layout/FlavorResponsiveView.dart';
+import 'package:flavor_client/layout/adaptive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:losbetosapp/components/pageviewer.dart';
+import 'package:losbetosapp/src/components/pageviewer.dart';
 
 import 'package:losbetosapp/main.dart';
 import 'package:losbetosapp/src/screens/cart.dart';
-import 'package:losbetosapp/utilities/utilities.dart';
+import 'package:losbetosapp/src/utilities/utilities.dart';
 import 'package:miniplayer/miniplayer.dart';
 
 final miniPlayerControllerProvider =

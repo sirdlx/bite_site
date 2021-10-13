@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-import 'package:losbetosapp/components/textField.dart';
+import 'package:losbetosapp/src/components/textField.dart';
 import 'package:losbetosapp/src/config/paths.dart';
 import 'package:losbetosapp/src/features/auth/auth_hookwidget.dart';
 import 'package:losbetosapp/src/features/auth/auth_repo.dart';

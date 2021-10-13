@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:losbetosapp/main.dart';
-import 'package:losbetosapp/models/models.dart';
+import 'package:losbetosapp/src/models/models.dart';
 import 'package:losbetosapp/src/screens/layout.dart';
 import 'package:losbetosapp/src/screens/menu_item.dart';
-import 'package:losbetosapp/utilities/utilities.dart';
+import 'package:losbetosapp/src/utilities/utilities.dart';
 import 'package:miniplayer/miniplayer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

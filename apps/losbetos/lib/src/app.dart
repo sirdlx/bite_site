@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:losbetosapp/src/features/settings/settings_controller.dart';
-import 'package:losbetosapp/themes/theme.dart';
+import 'package:losbetosapp/src/themes/theme.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {

@@ -26,10 +26,10 @@ dependencies:
   cloud_firestore: ^2.5.1
   provider:
   google_sign_in:
-  flavor:
-    path: ../../../flavor
+  flavor_client:
+    path: ../../../flavor/flavor_firebase/flavor_client
   flavor_auth:
-    path: ../../../flavor_auth
+    path: ../../../flavor/flavor_auth
 
   cloud_functions: "^3.0.4"
   flutter_riverpod: ^0.14.0+3

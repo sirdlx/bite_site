@@ -1,10 +1,10 @@
-import 'package:flavor/components/route.dart';
+import 'package:flavor_client/components/route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flavor_auth/flavor_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:losbetosapp/models/models.dart';
+import 'package:losbetosapp/src/models/models.dart';
 import 'package:losbetosapp/src/screens/account.dart';
 import 'package:losbetosapp/src/screens/category.dart';
 import 'package:losbetosapp/src/screens/layout.dart';
@@ -32,10 +32,10 @@ class SettingsController with ChangeNotifier {
 
   // Make ThemeMode a private variable so it is not updated directly without
   // also persisting the changes with the SettingsService.
-  late ThemeMode _themeMode;
+  late ThemeMode _themeMode = ThemeMode.system;
 
   // Allow Widgets to read the user's preferred ThemeMode.
-  ThemeMode get themeMode => _themeMode == null ? ThemeMode.system : _themeMode;
+  ThemeMode get themeMode => _themeMode;
 
   /// Load the user's settings from the SettingsService. It may load from a
   /// local database or the internet. The controller only knows it can load the

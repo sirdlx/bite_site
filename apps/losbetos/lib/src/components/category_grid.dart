@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:losbetosapp/components/grid_item.dart';
-import 'package:losbetosapp/models/menu/_functions.dart';
+import 'package:losbetosapp/src/components/grid_item.dart';
+import 'package:losbetosapp/src/models/menu/_functions.dart';
 
 class CategoryGrid extends StatelessWidget {
   final ScrollController? scrollController;
