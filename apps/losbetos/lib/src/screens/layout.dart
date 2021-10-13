@@ -51,7 +51,7 @@ class _ScreenLayoutState extends State<ScreenLayout> {
 
                   leading: const Icon(
                     FlutterRemix.cactus_fill,
-                    // color: LBThemeLight.primaryColor,
+                    // color: lbThemeLight.primaryColor,
                   ),
                 ),
                 body: SafeArea(child: buildBody(context)),

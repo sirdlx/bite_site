@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:losbetosapp/main.dart';
 import 'package:losbetosapp/src/screens/profile.dart';
-import 'package:provider/provider.dart' as Provider;
 
 // Turned off
 class ScreenSettings extends StatelessWidget {
@@ -14,6 +13,9 @@ class ScreenSettings extends StatelessWidget {
     return Consumer(builder: (context, watch, _) {
       var app = settingsController;
       return Scaffold(
+        appBar: AppBar(
+          title: const Text('Settings'),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Card(
@@ -22,24 +24,33 @@ class ScreenSettings extends StatelessWidget {
               child: ListView(
                 shrinkWrap: true,
                 children: [
-                  ProfileHeader(
-                    title: 'Settings',
+                  const ProfileHeader(
+                    title: 'Theme',
                   ),
                   ListView(
                     shrinkWrap: true,
                     // itemExtent: 60,
                     children: [
-                      ListTile(
-                        title: Text('Dark mode'),
-                        trailing: CupertinoSwitch(
-                          activeColor:
-                              Theme.of(context).toggleButtonsTheme.color,
-                          value: app.themeMode == ThemeMode.light,
-                          onChanged: (value) => app.updateThemeMode(
-                              app.themeMode == ThemeMode.light
-                                  ? ThemeMode.dark
-                                  : ThemeMode.light),
-                        ),
+                      CheckboxListTile(
+                        title: const Text('System'),
+                        // activeColor: Theme.of(context).toggleButtonsTheme.color,
+                        value: app.themeMode == ThemeMode.system,
+                        onChanged: (value) =>
+                            app.updateThemeMode(ThemeMode.system),
+                      ),
+                      CheckboxListTile(
+                        title: const Text('Light'),
+                        // activeColor: Theme.of(context).toggleButtonsTheme.color,
+                        value: app.themeMode == ThemeMode.light,
+                        onChanged: (value) =>
+                            app.updateThemeMode(ThemeMode.light),
+                      ),
+                      CheckboxListTile(
+                        title: const Text('Dark'),
+                        // activeColor: Theme.of(context).toggleButtonsTheme.color,
+                        value: app.themeMode == ThemeMode.dark,
+                        onChanged: (value) =>
+                            app.updateThemeMode(ThemeMode.dark),
                       ),
                     ],
                   ),

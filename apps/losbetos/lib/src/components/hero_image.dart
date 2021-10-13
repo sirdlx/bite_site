@@ -39,7 +39,7 @@ class BoxImage extends StatelessWidget {
           fit: BoxFit.cover,
         ),
       ),
-      child: child ?? null,
+      child: child,
     );
   }
 }

@@ -61,28 +61,18 @@ class SettingsController with ChangeNotifier {
     _themeMode = newThemeMode;
 
     // Important! Inform listeners a change has occurred.
-    notifyListeners();
 
+    await appBox!.put('_themeMode', _themeMode.toString());
+    notifyListeners();
     // Persist the changes to a local database or the internet using the
     // SettingService.
-    await _settingsService.updateThemeMode(newThemeMode);
+    // await _settingsService.updateThemeMode(newThemeMode);
   }
 
   late Box? appBox;
-  bool alreadyInit = false;
 
   FlavorUser? _user;
   FlavorUser? get user => _user != null ? _user! : null;
-
-  set user(FlavorUser? newUser) {
-    _user = newUser;
-    // if (_user != null) {
-    //   FirebaseFirestore.instance
-    //       .doc('users/${_user!.email}')
-    //       .update(_user!.toJson() as Map<String, dynamic>);
-    // }
-    updateAndSave();
-  }
 
   BSCart cart = BSCart();
 
@@ -114,19 +104,24 @@ class SettingsController with ChangeNotifier {
   }
 
   void updateAndSave() {
-    print('updateAndSave()::_themeMode::$_themeMode');
+    // print('updateAndSave()::_themeMode::$_themeMode');
     appBox!.put('_user', user != null ? user!.toJson() : null);
     appBox!.put('_cart', {'cart': cart.toList()});
-    appBox!.put('_themeMode', _themeMode);
     notifyListeners();
   }
 
   void loadAppSettingsFromDisk() {
-    // appBox!.delete('_cart');
-
     //
-    _themeMode = appBox!.get('_themeMode') ?? _themeMode;
-    print('loadAppSettingsFromDisk()::_themeMode::$_themeMode');
+    var __themeMode = appBox!.get('_themeMode');
+    if (__themeMode != null) {
+      if (__themeMode == "ThemeMode.dark") {
+        _themeMode = ThemeMode.dark;
+      } else if (__themeMode == "ThemeMode.light") {
+        _themeMode = ThemeMode.light;
+      } else if (__themeMode == "ThemeMode.system") {
+        _themeMode = ThemeMode.system;
+      }
+    }
     //
     var __user = appBox!.get('_user');
     print('loadAppSettingsFromDisk()::__user::$__user');

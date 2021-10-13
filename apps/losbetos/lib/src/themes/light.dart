@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-final ThemeData LBThemeLight = ThemeData(
-  primarySwatch: MaterialColor(4292371808, {
+final ThemeData lbThemeLight = ThemeData(
+  primarySwatch: const MaterialColor(4292371808, {
     50: Color(0xfffaebeb),
     100: Color(0xfff5d7d6),
     200: Color(0xffebb0ad),
@@ -14,28 +14,29 @@ final ThemeData LBThemeLight = ThemeData(
     900: Color(0xff290b0a)
   }),
   brightness: Brightness.light,
-  primaryColor: Color(0xffd86560),
+  primaryColor: const Color(0xffd86560),
   primaryColorBrightness: Brightness.dark,
-  primaryColorLight: Color(0xfff5d7d6),
-  primaryColorDark: Color(0xff7b221e),
-  canvasColor: Color(0xfffafafa),
-  scaffoldBackgroundColor: Color(0xfffafafa),
-  bottomAppBarColor: Color(0xffffffff),
-  cardColor: Color(0xffffffff),
-  dividerColor: Color(0x1f000000),
-  highlightColor: Color(0x66bcbcbc),
-  splashColor: Color(0x66c8c8c8),
-  selectedRowColor: Color(0xfff5f5f5),
-  unselectedWidgetColor: Color(0x8a000000),
-  disabledColor: Color(0x61000000),
-  toggleableActiveColor: Color(0xffa42d28),
-  secondaryHeaderColor: Color(0xfffaebeb),
-  backgroundColor: Color(0xffebb0ad),
-  dialogBackgroundColor: Color(0xffffffff),
-  indicatorColor: Color(0xffcd3932),
-  hintColor: Color(0x8a000000),
-  errorColor: Color(0xffd32f2f),
-  buttonTheme: ButtonThemeData(
+  primaryColorLight: const Color(0xfff5d7d6),
+  primaryColorDark: const Color(0xff7b221e),
+  canvasColor: const Color(0xfffafafa),
+  scaffoldBackgroundColor: const Color(0xfffafafa),
+  bottomAppBarColor: const Color(0xffffffff),
+  appBarTheme: const AppBarTheme(elevation: 0),
+  cardColor: const Color(0xffffffff),
+  dividerColor: const Color(0x1f000000),
+  highlightColor: const Color(0x66bcbcbc),
+  splashColor: const Color(0x66c8c8c8),
+  selectedRowColor: const Color(0xfff5f5f5),
+  unselectedWidgetColor: const Color(0x8a000000),
+  disabledColor: const Color(0x61000000),
+  toggleableActiveColor: const Color(0xffa42d28),
+  secondaryHeaderColor: const Color(0xfffaebeb),
+  backgroundColor: const Color(0xffebb0ad),
+  dialogBackgroundColor: const Color(0xffffffff),
+  indicatorColor: const Color(0xffcd3932),
+  hintColor: const Color(0x8a000000),
+  errorColor: const Color(0xffd32f2f),
+  buttonTheme: const ButtonThemeData(
     textTheme: ButtonTextTheme.normal,
     minWidth: 88,
     height: 36,
@@ -49,12 +50,12 @@ final ThemeData LBThemeLight = ThemeData(
       borderRadius: BorderRadius.all(Radius.circular(2.0)),
     ),
     alignedDropdown: false,
-    buttonColor: Color(0xffe0e0e0),
-    disabledColor: Color(0x61000000),
-    highlightColor: Color(0x29000000),
-    splashColor: Color(0x1f000000),
-    focusColor: Color(0x1f000000),
-    hoverColor: Color(0x0a000000),
+    buttonColor: const Color(0xffe0e0e0),
+    disabledColor: const Color(0x61000000),
+    highlightColor: const Color(0x29000000),
+    splashColor: const Color(0x1f000000),
+    focusColor: const Color(0x1f000000),
+    hoverColor: const Color(0x0a000000),
     colorScheme: ColorScheme(
       primary: Color(0xffd86560),
       primaryVariant: Color(0xff7b221e),
@@ -62,36 +63,36 @@ final ThemeData LBThemeLight = ThemeData(
       secondaryVariant: Color(0xff7b221e),
       surface: Color(0xffffffff),
       background: Color(0xffebb0ad),
-      error: Color(0xffd32f2f),
+      error: const Color(0xffd32f2f),
       onPrimary: Color(0xffffffff),
       onSecondary: Color(0xffffffff),
       onSurface: Color(0xff000000),
       onBackground: Color(0xffffffff),
-      onError: Color(0xffffffff),
+      onError: const Color(0xffffffff),
       brightness: Brightness.light,
     ),
   ),
   inputDecorationTheme: InputDecorationTheme(
     labelStyle: TextStyle(
-      color: Color(0xdd000000),
+      color: const Color(0xdd000000),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
     helperStyle: TextStyle(
-      color: Color(0xdd000000),
+      color: const Color(0xdd000000),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
     hintStyle: TextStyle(
-      color: Color(0xdd000000),
+      color: const Color(0xdd000000),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
     errorStyle: TextStyle(
-      color: Color(0xdd000000),
+      color: const Color(0xdd000000),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
@@ -101,28 +102,28 @@ final ThemeData LBThemeLight = ThemeData(
     contentPadding: EdgeInsets.only(top: 12, bottom: 12, left: 0, right: 0),
     isCollapsed: false,
     prefixStyle: TextStyle(
-      color: Color(0xdd000000),
+      color: const Color(0xdd000000),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
     suffixStyle: TextStyle(
-      color: Color(0xdd000000),
+      color: const Color(0xdd000000),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
     counterStyle: TextStyle(
-      color: Color(0xdd000000),
+      color: const Color(0xdd000000),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
     filled: false,
-    fillColor: Color(0x00000000),
+    fillColor: const Color(0x00000000),
     // errorBorder: UnderlineInputBorder(
     //   borderSide: BorderSide(
-    //     color: Color(0xff000000),
+    //     color: const Color(0xff000000),
     //     width: 1,
     //     style: BorderStyle.solid,
     //   ),
@@ -130,7 +131,7 @@ final ThemeData LBThemeLight = ThemeData(
     // ),
     focusedBorder: UnderlineInputBorder(
       borderSide: BorderSide(
-        color: Color(0xff000000),
+        color: const Color(0xff000000),
         width: 1,
         style: BorderStyle.solid,
       ),
@@ -138,7 +139,7 @@ final ThemeData LBThemeLight = ThemeData(
     ),
     // focusedErrorBorder: UnderlineInputBorder(
     //   borderSide: BorderSide(
-    //     color: Color(0xff000000),
+    //     color: const Color(0xff000000),
     //     width: 1,
     //     style: BorderStyle.solid,
     //   ),
@@ -146,7 +147,7 @@ final ThemeData LBThemeLight = ThemeData(
     // ),
     // disabledBorder: UnderlineInputBorder(
     //   borderSide: BorderSide(
-    //     color: Color(0xff000000),
+    //     color: const Color(0xff000000),
     //     width: 1,
     //     style: BorderStyle.solid,
     //   ),
@@ -154,7 +155,7 @@ final ThemeData LBThemeLight = ThemeData(
     // ),
     // enabledBorder: UnderlineInputBorder(
     //   borderSide: BorderSide(
-    //     color: Color(0xff000000),
+    //     color: const Color(0xff000000),
     //     width: 1,
     //     style: BorderStyle.solid,
     //   ),
@@ -162,7 +163,7 @@ final ThemeData LBThemeLight = ThemeData(
     // ),
     // border: UnderlineInputBorder(
     //   borderSide: BorderSide(
-    //     color: Color(0xff000000),
+    //     color: const Color(0xff000000),
     //     width: 1,
     //     style: BorderStyle.solid,
     //   ),
@@ -170,12 +171,12 @@ final ThemeData LBThemeLight = ThemeData(
     // ),
   ),
   iconTheme: IconThemeData(
-    color: Color(0xdd000000),
+    color: const Color(0xdd000000),
     opacity: 1,
     size: 24,
   ),
   primaryIconTheme: IconThemeData(
-    color: Color(0xffffffff),
+    color: const Color(0xffffffff),
     opacity: 1,
     size: 24,
   ),
@@ -194,7 +195,7 @@ final ThemeData LBThemeLight = ThemeData(
     valueIndicatorColor: null,
     showValueIndicator: null,
     valueIndicatorTextStyle: TextStyle(
-      color: Color(0xffffffff),
+      color: const Color(0xffffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
@@ -202,33 +203,33 @@ final ThemeData LBThemeLight = ThemeData(
   ),
   tabBarTheme: TabBarTheme(
     indicatorSize: TabBarIndicatorSize.tab,
-    labelColor: Color(0xffffffff),
-    unselectedLabelColor: Color(0xb2ffffff),
+    labelColor: const Color(0xffffffff),
+    unselectedLabelColor: const Color(0xb2ffffff),
   ),
   chipTheme: ChipThemeData(
-    backgroundColor: Color(0x1f000000),
+    backgroundColor: const Color(0x1f000000),
     brightness: Brightness.light,
-    deleteIconColor: Color(0xde000000),
-    disabledColor: Color(0x0c000000),
+    deleteIconColor: const Color(0xde000000),
+    disabledColor: const Color(0x0c000000),
     labelPadding: EdgeInsets.only(top: 0, bottom: 0, left: 8, right: 8),
     labelStyle: TextStyle(
-      color: Color(0xde000000),
+      color: const Color(0xde000000),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
     padding: EdgeInsets.only(top: 4, bottom: 4, left: 4, right: 4),
     secondaryLabelStyle: TextStyle(
-      color: Color(0x3d000000),
+      color: const Color(0x3d000000),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    secondarySelectedColor: Color(0x3dd86560),
-    selectedColor: Color(0x3d000000),
+    secondarySelectedColor: const Color(0x3dd86560),
+    selectedColor: const Color(0x3d000000),
     shape: StadiumBorder(
         side: BorderSide(
-      color: Color(0xff000000),
+      color: const Color(0xff000000),
       width: 0,
       style: BorderStyle.none,
     )),
@@ -236,7 +237,7 @@ final ThemeData LBThemeLight = ThemeData(
   dialogTheme: DialogTheme(
       shape: RoundedRectangleBorder(
     side: BorderSide(
-      color: Color(0xff000000),
+      color: const Color(0xff000000),
       width: 0,
       style: BorderStyle.none,
     ),

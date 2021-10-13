@@ -13,6 +13,7 @@ import 'src/app.dart';
 
 final settingsController = SettingsController(SettingsService());
 Widget _view(Widget child) => CupertinoApp(
+      debugShowCheckedModeBanner: false,
       home: child,
     );
 void main() async {
@@ -25,7 +26,8 @@ void main() async {
   ));
 
   runApp(FutureBuilder(
-    future: Firebase.initializeApp(),
+    future: Firebase.initializeApp()
+        .then((value) => Future.delayed(const Duration(seconds: 4))),
     builder: (context, snapshot) {
       const _loading = Scaffold(
         body: Center(

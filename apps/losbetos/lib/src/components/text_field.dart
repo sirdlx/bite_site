@@ -26,7 +26,7 @@ class LBTextField extends StatelessWidget {
       initialValue: initialValue,
       onSaved: onSaved,
       validator: (input) {
-        return input == null || input.length < 1 || !input.contains('@')
+        return input == null || input.isEmpty || !input.contains('@')
             ? 'Please enter a valid email'
             : null;
       },

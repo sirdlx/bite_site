@@ -37,9 +37,7 @@ class FutureState<T> extends StatelessWidget {
           case ConnectionState.done:
             return snapshot.data != null && !snapshot.hasData
                 ? doneWidgetBuilder(context, snapshot.data!)
-                : noneWidget != null
-                    ? noneWidget
-                    : Container();
+                : noneWidget ?? Container();
         }
       },
     );
