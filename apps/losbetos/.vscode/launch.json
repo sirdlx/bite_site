@@ -5,12 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "losbetos",
+            "name": "lostbetosapp",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "losbetos (profile mode)",
+            "name": "lostbetosapp (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"

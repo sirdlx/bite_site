@@ -1,7 +1,7 @@
 // import 'package:flavor_client/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:losbetos/themes/light.dart';
+import 'package:losbetosapp/themes/light.dart';
 
 final textTheme = GoogleFonts.contrailOneTextTheme().copyWith(
   subtitle2: TextStyle(color: Colors.red),

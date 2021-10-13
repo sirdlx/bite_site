@@ -11,8 +11,11 @@
 
     For more details:
     * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
   -->
-  <base href="/">
+  <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
@@ -21,38 +24,14 @@
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="losbetos">
+  <meta name="apple-mobile-web-app-title" content="losbetosapp">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-  <title>losbetos</title>
+  <title>losbetosapp</title>
   <link rel="manifest" href="manifest.json">
 </head>
 
 <body>
-
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-storage-compat.js"></script>
-  <script>
-    const firebaseApp = firebase.initializeApp({
-      apiKey: "AIzaSyCnYzzqZdHbbWol5JRUnW3SUt0rI8MzAr0",
-      authDomain: "dlxstudios-f6e64.firebaseapp.com",
-      databaseURL: "https://dlxstudios-f6e64.firebaseio.com",
-      projectId: "dlxstudios-f6e64",
-      storageBucket: "dlxstudios-f6e64.appspot.com",
-      messagingSenderId: "633139741304",
-      appId: "1:633139741304:web:936ad1eda7c0bcc97f238d",
-      measurementId: "G-YSH5N7PH5E"
-    });
-    const db = firebaseApp.firestore();
-    const auth = firebaseApp.auth();
-    // const analytics = getAnalytics(firebaseApp);
-  </script>
-
-
-
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
@@ -90,7 +69,7 @@
             if (!reg.active && (reg.installing || reg.waiting)) {
               // No active web worker and we have installed or are installing
               // one for the first time. Simply wait for it to activate.
-              waitForActivation(reg.installing ?? reg.waiting);
+              waitForActivation(reg.installing || reg.waiting);
             } else if (!reg.active.scriptURL.endsWith(serviceWorkerVersion)) {
               // When the app updates the serviceWorkerVersion changes, so we
               // need to ask the service worker to update.
@@ -119,6 +98,27 @@
       // Service workers not supported. Just drop the <script> tag.
       loadMainDartJs();
     }
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-functions.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+
+  <script type="module">
+    const firebaseConfig = {
+      apiKey: "AIzaSyCnYzzqZdHbbWol5JRUnW3SUt0rI8MzAr0",
+      authDomain: "dlxstudios-f6e64.firebaseapp.com",
+      databaseURL: "https://dlxstudios-f6e64.firebaseio.com",
+      projectId: "dlxstudios-f6e64",
+      storageBucket: "dlxstudios-f6e64.appspot.com",
+      messagingSenderId: "633139741304",
+      appId: "1:633139741304:web:936ad1eda7c0bcc97f238d",
+      measurementId: "G-YSH5N7PH5E"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
   </script>
 </body>
 

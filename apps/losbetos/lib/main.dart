@@ -2,114 +2,59 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' as Riverpod;
-import 'package:losbetos/components/future_state.dart';
-import 'package:losbetos/themes/theme.dart';
-import 'package:losbetos/state/state.dart';
-import 'package:losbetos/themes/light.dart';
-import 'package:url_strategy/url_strategy.dart';
-import 'package:provider/provider.dart' as Provider;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:losbetosapp/src/features/settings/settings_controller.dart';
+import 'package:losbetosapp/src/features/settings/settings_service.dart';
+
+import 'package:url_strategy/url_strategy.dart';
+
+import 'src/app.dart';
+
+final settingsController = SettingsController(SettingsService());
+Widget _view(Widget child) => CupertinoApp(
+      home: child,
+    );
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setPathUrlStrategy();
 
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarBrightness: Brightness.dark,
   ));
 
-  runApp(Riverpod.ProviderScope(
-    child: Provider.ChangeNotifierProvider(
-      create: (_) => AppState(),
-      child: BiteBootstrap(),
-    ),
-  ));
-}
-
-class BiteBootstrap extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight
-    ]);
-
-    var app = context.watch<AppState>();
-    print(
-        'app.useDark ? ThemeMode.dark : ThemeMode.light :: ${app.useDark ? ThemeMode.dark : ThemeMode.light}');
-    if (app.alreadyInit) {
-      return MaterialApp(
-        navigatorKey: GlobalNav,
-        debugShowCheckedModeBanner: false,
-        themeMode: app.useDark ? ThemeMode.dark : ThemeMode.light,
-        darkTheme: darkTheme(Colors.red, textTheme),
-        theme: lightTheme(Colors.red, textTheme),
-        // theme: LBThemeLight,
-
-        // initialRoute: '/',
-        onUnknownRoute: (settings) {
-          return MaterialPageRoute(
-            //   builder: (context) => PageError(
-            //     errorCode: 404.toString(),
-            //     msg: 'Unable to find "${settings.name}"',
-            //   ),
-            // );
-            builder: (context) => Container(),
-            fullscreenDialog: true,
-
-            settings: settings,
-            maintainState: true,
-          );
-        },
-
-        onGenerateRoute: app.router.generateRoute,
-      );
-    }
-    return FutureState<AppState>(
-      future: Future.delayed(Duration(milliseconds: 300))
-          .then((value) => Firebase.initializeApp())
-          .then((value) => app.init()),
-      waitingWidget: Container(
-        color: Colors.white,
-        constraints: BoxConstraints(minHeight: 200, maxHeight: 200),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // CircularProgressIndicator(),
-              // SizedBox(
-              //   height: 16,
-              // ),
-              SizedBox(
-                child: Image.asset('assets/images/logo.png'),
-                width: 300,
-              ),
-            ],
-          ),
+  runApp(FutureBuilder(
+    future: Firebase.initializeApp(),
+    builder: (context, snapshot) {
+      const _loading = Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
         ),
-      ),
-      doneWidgetBuilder: (context, app) {
-        return MaterialApp(
-          navigatorKey: GlobalNav,
-          debugShowCheckedModeBanner: false,
-          themeMode: app.useDark ? ThemeMode.dark : ThemeMode.light,
-          darkTheme: darkTheme(LBThemeLight.primaryColor, textTheme),
-          theme: lightTheme(LBThemeLight.primaryColor, textTheme),
-          // initialRoute: '/',
-          // onUnknownRoute: (settings) {
-          //   return MaterialPageRoute(
-          //     builder: (context) => PageError(
-          //       errorCode: 404.toString(),
-          //       msg: 'Unable to find "${settings.name}"',
-          //     ),
-          //   );
-          // },
+      );
+      const _error = Scaffold(
+        body: Center(
+          child: Text('Error'),
+        ),
+      );
 
-          onGenerateRoute: app.router.generateRoute,
-        );
-      },
-    );
-  }
+      if (snapshot.hasData && snapshot.hasError) {
+        _view(_error);
+      }
+
+      return _view(_loading);
+    },
+  ));
+
+  // Set up the SettingsController, which will glue user settings to multiple
+  // Flutter Widgets.
+
+  // Load the user's preferred theme while the splash screen is displayed.
+  // This prevents a sudden theme change when the app is first displayed.
+  await settingsController.loadSettings();
+
+  // Run the app and pass in the SettingsController. The app listens to the
+  // SettingsController for changes, then passes it further down to the
+  // SettingsView.
+  runApp(ProviderScope(child: MyApp(settingsController: settingsController)));
 }

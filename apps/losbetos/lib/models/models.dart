@@ -164,4 +164,8 @@ class BSCart {
     }
     return BSCart(items: items);
   }
+
+  void updateQuanity(int index, int quanity) {}
+
+  void addToCart(BSCartMenuItem bsCartMenuItem) {}
 }
