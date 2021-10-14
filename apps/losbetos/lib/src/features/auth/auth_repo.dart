@@ -3,12 +3,13 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavor_auth/flavor_auth.dart';
+
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:losbetosapp/src/config/paths.dart';
 
 abstract class BaseAuthRepository {
-  Stream<User?> get authStateChanges;
+  // Stream<User?> get authStateChanges;
   Future<void> signInAnonymously();
   User? getCurrentUser();
   Future<void> signOut();
@@ -24,25 +25,35 @@ abstract class BaseAuthRepository {
   // });
 }
 
-final firebaseAuthRepositoryProvider =
-    Provider<FirebaseAuthRepository>((ref) => FirebaseAuthRepository(ref.read));
+// final firebaseAuthRepositoryProvider =
+//     Provider<FirebaseAuthRepository>((ref) => FirebaseAuthRepository(ref.read));
 
 class FirebaseAuthRepository implements BaseAuthRepository {
-  static final _auth = FirebaseAuth.instance;
-  static final _firestore = FirebaseFirestore.instance;
+  static final fbAuth = FirebaseAuth.instance;
+  static final firestore = FirebaseFirestore.instance;
 
-  final Reader _read;
+  Future init() async {
+    // print('_user == null');
 
-  const FirebaseAuthRepository(this._read);
+    // // print(_user == null);
+    // if (_user == null) {
+    //   print('_repo.signInAnonymously');
+    //   // await _repo.signInAnonymously();
+    // }
+  }
 
-  @override
-  Stream<User?> get authStateChanges =>
-      _read(firebaseAuthProvider).authStateChanges();
+  Stream<User?> get authStateChanges => fbAuth.userChanges();
 
   @override
   Future<void> signInAnonymously() async {
     try {
-      await _read(firebaseAuthProvider).signInAnonymously();
+      await fbAuth.signInAnonymously();
+      // .then((cred) => FlavorUser(
+      //       email: cred.user!.email,
+      //       isAnonymous: true,
+      //       localId: cred.user!.uid,
+      //       refreshToken: cred.user!.refreshToken,
+      //     ));
     } on FirebaseAuthException catch (e) {
       throw CustomException(message: e.message);
     }
@@ -51,7 +62,8 @@ class FirebaseAuthRepository implements BaseAuthRepository {
   @override
   User? getCurrentUser() {
     try {
-      return _read(firebaseAuthProvider).currentUser;
+      return fbAuth.currentUser;
+      // return _read(firebaseAuthProvider).currentUser;
     } on FirebaseAuthException catch (e) {
       throw CustomException(message: e.message);
     }
@@ -60,8 +72,18 @@ class FirebaseAuthRepository implements BaseAuthRepository {
   @override
   Future<void> signOut() async {
     try {
-      await _read(firebaseAuthProvider).signOut();
-      await signInAnonymously();
+      // await _read(firebaseAuthProvider).signOut();
+      await fbAuth.signOut();
+      // return signInAnonymously().then((value) {
+      //   return FlavorUser(
+      //     displayName: value.user!.displayName,
+      //     email: value.user!.email,
+      //     emailVerified: value.user!.emailVerified,
+      //     localId: value.user!.uid,
+      //     photoUrl: value.user!.photoURL,
+      //     refreshToken: value.user!.refreshToken,
+      //   );
+      // });
     } on FirebaseAuthException catch (e) {
       throw CustomException(message: e.message);
     }
@@ -72,13 +94,13 @@ class FirebaseAuthRepository implements BaseAuthRepository {
     required String email,
     required String password,
   }) async {
-    UserCredential authResult = await _auth
+    UserCredential authResult = await fbAuth
         .createUserWithEmailAndPassword(
       email: email,
       password: password,
     )
         .onError((error, stackTrace) {
-      if (error.toString().contains('firebase_auth/email-already-in-use')) {
+      if (error.toString().contains('firebasefbAuth/email-already-in-use')) {
         return Future.error('Email "$email" is already in use. ');
       }
       return Future.error(error!);
@@ -86,7 +108,7 @@ class FirebaseAuthRepository implements BaseAuthRepository {
     User signedInUser = authResult.user!;
 
     print('path::${Paths.users}/${signedInUser.email}');
-    return await _firestore
+    return await firestore
         .doc('${Paths.users}/${signedInUser.email}')
         .get()
         .then((value) async {
@@ -94,11 +116,12 @@ class FirebaseAuthRepository implements BaseAuthRepository {
         var data = value.data();
         return FlavorUser(
           displayName:
-              data!.containsKey('displayName') ? data['displayName'] : null,
-          email: data.containsKey('email') ? data['email'] : null,
-          emailVerified:
-              data.containsKey('emailVerified') ? data['emailVerified'] : null,
-          localId: data.containsKey('uid') ? data['uid'] : null,
+              data!.containsKey('display_name') ? data['display_name'] : null,
+          phoneNumber:
+              data.containsKey('phone_number') ? data['phone_number'] : null,
+          email: signedInUser.email,
+          emailVerified: signedInUser.emailVerified,
+          localId: signedInUser.uid,
           photoUrl: signedInUser.photoURL,
           refreshToken: signedInUser.refreshToken,
         );
@@ -112,7 +135,7 @@ class FirebaseAuthRepository implements BaseAuthRepository {
           refreshToken: signedInUser.refreshToken,
         );
 
-        await _firestore.doc('${Paths.users}/$email').set(user.toMap());
+        await firestore.doc('${Paths.users}/$email').set(user.toMap());
 
         return user;
       }
@@ -123,7 +146,7 @@ class FirebaseAuthRepository implements BaseAuthRepository {
     required String email,
     required String password,
   }) async {
-    return await _auth
+    return await fbAuth
         .signInWithEmailAndPassword(email: email, password: password)
         .then((value) {
       return FirebaseFirestore.instance
@@ -131,16 +154,49 @@ class FirebaseAuthRepository implements BaseAuthRepository {
           .get();
     }).then((DocumentSnapshot<Map<String, dynamic>> userJson) {
       var data = userJson.data();
-      print('data::$data');
+      // print('data::$data');
 
       if (data == null) {
         return Future.error({'message': 'No user data'});
       }
       return FlavorUser(
-        displayName: data['displayName'],
+        displayName: data['display_name'],
         email: data['email'],
         emailVerified: data['emailVerified'],
         localId: data['localId'],
+      );
+    });
+  }
+
+  Future<FlavorUser> loginFromFBCache({
+    required User user,
+  }) async {
+    if (user.isAnonymous) {
+      return FlavorUser(
+        email: user.email,
+        isAnonymous: true,
+        localId: user.uid,
+        refreshToken: user.refreshToken,
+      );
+    }
+
+    return firestore
+        .doc('/users/${user.email}')
+        .get()
+        .then((DocumentSnapshot<Map<String, dynamic>> userJson) {
+      var data = userJson.data();
+      // print('data::$data');
+
+      if (data == null) {
+        return Future.error({'message': 'No user data'});
+      }
+      return FlavorUser(
+        email: user.email,
+        emailVerified: user.emailVerified,
+        localId: user.uid,
+        phoneNumber: data['phone_number'],
+        displayName: data['display_name'],
+        refreshToken: user.refreshToken,
       );
     });
   }

@@ -11,7 +11,9 @@ import 'package:url_strategy/url_strategy.dart';
 
 import 'src/app.dart';
 
+//
 final settingsController = SettingsController(SettingsService());
+//
 Widget _view(Widget child) => CupertinoApp(
       debugShowCheckedModeBanner: false,
       home: child,
@@ -25,13 +27,18 @@ void main() async {
     statusBarBrightness: Brightness.dark,
   ));
 
+  await settingsController.loadSettings();
+
   runApp(FutureBuilder(
-    future: Firebase.initializeApp()
-        .then((value) => Future.delayed(const Duration(seconds: 4))),
+    future: Future.delayed(const Duration(milliseconds: 0)),
     builder: (context, snapshot) {
-      const _loading = Scaffold(
+      var _loading = Scaffold(
         body: Center(
-          child: CircularProgressIndicator(),
+          child: Column(
+            children: const [
+              CircularProgressIndicator(),
+            ],
+          ),
         ),
       );
       const _error = Scaffold(
@@ -44,6 +51,11 @@ void main() async {
         _view(_error);
       }
 
+      if (snapshot.connectionState == ConnectionState.done) {
+        return ProviderScope(
+            child: MyApp(settingsController: settingsController));
+      }
+
       return _view(_loading);
     },
   ));
@@ -53,10 +65,9 @@ void main() async {
 
   // Load the user's preferred theme while the splash screen is displayed.
   // This prevents a sudden theme change when the app is first displayed.
-  await settingsController.loadSettings();
 
   // Run the app and pass in the SettingsController. The app listens to the
   // SettingsController for changes, then passes it further down to the
   // SettingsView.
-  runApp(ProviderScope(child: MyApp(settingsController: settingsController)));
+  // runApp();
 }

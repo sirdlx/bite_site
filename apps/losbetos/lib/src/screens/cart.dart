@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:losbetosapp/main.dart';
 import 'package:losbetosapp/src/models/models.dart';
 import 'package:losbetosapp/src/screens/layout.dart';
 import 'package:losbetosapp/src/screens/menu_item.dart';
 import 'package:losbetosapp/src/utilities/utilities.dart';
 import 'package:miniplayer/miniplayer.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/src/provider.dart';
 
 class ScreenCartView extends StatelessWidget {
   const ScreenCartView({
@@ -16,49 +17,49 @@ class ScreenCartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cart = settingsController.cart;
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: Text('Current Order'),
-        leading: GestureDetector(
-          onTap: () => context
-              .read(miniPlayerControllerProvider)
-              .state
-              .animateToHeight(state: PanelState.MIN),
-          child: Icon(FlutterRemix.close_circle_line),
+    return Consumer(builder: (context, ref, _) {
+      return Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          title: Text('Current Order'),
+          leading: GestureDetector(
+            onTap: () => ref
+                .read(miniPlayerControllerProvider)
+                .state
+                .animateToHeight(state: PanelState.MIN),
+            child: const Icon(FlutterRemix.close_circle_line),
+          ),
         ),
-      ),
-      bottomNavigationBar: cart.items.length > 0
-          ? Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  RichText(
-                      text: TextSpan(
-                          text: 'Total : ',
-                          style: Theme.of(context).textTheme.headline6,
-                          children: [
-                        TextSpan(text: '${toPricingText(cart.itemsTotal)}'),
-                      ])),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamed('/checkout');
-                    },
-                    child: Text(
-                      'Checkout',
-                      // style: Theme.of(context).textTheme.headline5,
+        bottomNavigationBar: cart.items.isNotEmpty
+            ? Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    RichText(
+                        text: TextSpan(
+                            text: 'Total : ',
+                            style: Theme.of(context).textTheme.headline6,
+                            children: [
+                          TextSpan(text: toPricingText(cart.itemsTotal)),
+                        ])),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/checkout');
+                      },
+                      child: const Text(
+                        'Checkout',
+                        // style: Theme.of(context).textTheme.headline5,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            )
-          : null,
-      body: CustomScrollView(
-        slivers: [
-          SliverFillRemaining(
-            child: Container(
+                  ],
+                ),
+              )
+            : null,
+        body: CustomScrollView(
+          slivers: [
+            SliverFillRemaining(
               child: FutureBuilder(
                   future: Future.delayed(Duration(milliseconds: 3000)),
                   builder: (context, snapshot) {
@@ -67,7 +68,7 @@ class ScreenCartView extends StatelessWidget {
                         margin: const EdgeInsets.all(16),
                         child: ListView.separated(
                           shrinkWrap: true,
-                          separatorBuilder: (context, index) => Divider(
+                          separatorBuilder: (context, index) => const Divider(
                             thickness: 1,
                           ),
                           itemBuilder: (context, index) => CartMenuItemTile(
@@ -86,7 +87,7 @@ class ScreenCartView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Flexible(
+                        const Flexible(
                           child: Icon(
                             FlutterRemix.shopping_bag_2_line,
                             size: 72,
@@ -102,10 +103,10 @@ class ScreenCartView extends StatelessWidget {
                     );
                   }),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    });
   }
 }
 

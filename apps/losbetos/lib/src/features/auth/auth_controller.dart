@@ -15,9 +15,9 @@ class AuthController extends StateNotifier<User?> {
 
   AuthController(this._read) : super(null) {
     _authStateChangesSubscription?.cancel();
-    _authStateChangesSubscription = _read(firebaseAuthRepositoryProvider)
-        .authStateChanges
-        .listen((user) => state = user);
+    // _authStateChangesSubscription = _read(firebaseAuthRepositoryProvider)
+    //     .authStateChanges
+    //     .listen((user) => state = user);
   }
 
   @override
@@ -27,13 +27,13 @@ class AuthController extends StateNotifier<User?> {
   }
 
   void appStarted() async {
-    final user = _read(firebaseAuthRepositoryProvider).getCurrentUser();
-    if (user == null) {
-      await _read(firebaseAuthRepositoryProvider).signInAnonymously();
-    }
+    // final user = _read(firebaseAuthRepositoryProvider).getCurrentUser();
+    // if (user == null) {
+    // await _read(firebaseAuthRepositoryProvider).signInAnonymously();
+    // }
   }
 
   void signOut() async {
-    await _read(firebaseAuthRepositoryProvider).signOut();
+    // await _read(firebaseAuthRepositoryProvider).signOut();
   }
 }

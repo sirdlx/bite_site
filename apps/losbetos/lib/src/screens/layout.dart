@@ -134,12 +134,12 @@ class _ScreenLayoutState extends State<ScreenLayout> {
             .toList());
   }
 
-  buildBody(BuildContext context) {
+  Widget buildBody(BuildContext context) {
     return Scaffold(
       body: Consumer(
-        builder: (context, watch, _) {
-          final miniPlayerController =
-              watch(miniPlayerControllerProvider).state;
+        builder: (context, ref, _) {
+          final MiniplayerController miniPlayerController =
+              ref.watch(miniPlayerControllerProvider).state;
           final app = settingsController;
           return Stack(
             children: app.routesForDrawer

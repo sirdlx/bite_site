@@ -5,18 +5,19 @@ class LBTextField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
-  final void Function(String)? onChanged;
   final String? initialValue;
   final void Function(String?)? onSaved;
+  final void Function(String)? onFieldSubmitted;
+
   const LBTextField({
     Key? key,
     this.labelText,
     this.controller,
-    required this.onChanged,
-    this.textInputAction,
     this.keyboardType,
+    this.textInputAction,
     this.initialValue,
     this.onSaved,
+    this.onFieldSubmitted,
   }) : super(key: key);
 
   @override
@@ -34,7 +35,7 @@ class LBTextField extends StatelessWidget {
       // cursorRadius: Radius.circular(16.0),
       keyboardType: keyboardType,
       textInputAction: textInputAction,
-      onChanged: onChanged,
+      onFieldSubmitted: onFieldSubmitted,
     );
   }
 }

@@ -1,20 +1,23 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:losbetosapp/src/features/auth/auth_controller.dart';
-import 'package:losbetosapp/src/features/auth/auth_repo.dart';
+import 'package:flavor_auth/flavor_auth.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:losbetosapp/src/features/auth/auth_service.dart';
 
-class AuthHookWidget extends ConsumerWidget {
-  const AuthHookWidget({Key? key, required this.builder}) : super(key: key);
+class AuthHookWidget extends StatelessWidget {
   final Widget Function(
-          BuildContext context, User? user, FirebaseAuthRepository controller)
+    BuildContext context,
+    LBAuthNotifier user,
+  ) // FirebaseAuthRepository controller)
       builder;
 
+  const AuthHookWidget({required this.builder, Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final user = watch(authControllerProvider);
-    // final controller = context.read(authControllerProvider.notifier);
-    final controller = watch(firebaseAuthRepositoryProvider);
-    return builder(context, user, controller);
+  Widget build(BuildContext context) {
+    return Consumer(
+      builder: (context, ref, child) =>
+          builder(context, ref.watch(authControllerProvider)),
+    );
   }
 }

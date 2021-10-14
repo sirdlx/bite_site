@@ -1,101 +1,109 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:losbetosapp/src/features/auth/auth_service.dart';
+import 'package:losbetosapp/src/screens/profile.dart';
 
 import 'package:losbetosapp/src/screens/signup.dart';
 
 import 'login.dart';
 
 class ScreenAccount extends StatefulWidget {
+  const ScreenAccount({Key? key}) : super(key: key);
+
   @override
-  _ScreenAccountState createState() => _ScreenAccountState();
+  State<ScreenAccount> createState() => _ScreenAccountState();
 }
 
 class _ScreenAccountState extends State<ScreenAccount> {
   @override
-  Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, _) {
-      return GestureDetector(
-        onTap: () => FocusManager.instance.primaryFocus!.unfocus(),
-        child: Scaffold(
-            body: Stack(
-          fit: StackFit.expand,
-          children: const [
-            // app.user != null ? ScreenProfile() : ScreenAccountPicker(),
-          ],
-        )),
-      );
-    });
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(
+    BuildContext context,
+  ) {
+    return Consumer(
+      builder: (context, ref, child) {
+        var auth = ref.watch(authControllerProvider);
+        // print('auth.user?.isAnonymous::${auth.user?.isAnonymous}');
+        if (auth.user == null) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (auth.user!.isAnonymous == false) {
+          return ScreenProfile(auth: auth);
+        } else {
+          return Scaffold(body: ScreenAccountPicker(auth: auth));
+        }
+      },
+    );
   }
 }
 
 class ScreenAccountPicker extends StatelessWidget {
-  const ScreenAccountPicker({Key? key}) : super(key: key);
+  final LBAuthNotifier auth;
+
+  const ScreenAccountPicker({Key? key, required this.auth}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, _) {
-      return SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.all(16),
-          height: 260,
-          width: 300,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                'Choose your account',
-                style: Theme.of(context).textTheme.headline6,
+    return SingleChildScrollView(
+      child: Container(
+        margin: const EdgeInsets.all(16),
+        height: 260,
+        width: 300,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              'Choose your account',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            ElevatedButton.icon(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.resolveWith(
+                    (states) => Colors.white70),
               ),
-              ElevatedButton.icon(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.resolveWith(
-                      (states) => Colors.green),
-                ),
-                icon: Icon(FlutterRemix.mail_fill),
-                onPressed: () => showDialog(
-                  context: context,
-                  builder: (context) => LoginScreenV2(),
-                ),
-                label: Text('Email'),
-              ),
-              ElevatedButton.icon(
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.resolveWith((states) => Colors.red),
-                ),
-                icon: Icon(FlutterRemix.google_fill),
-                onPressed: () => showDialog(
-                  context: context,
-                  builder: (context) => LoginScreenV2(),
-                ),
-                label: Text('Google'),
-              ),
-              ElevatedButton.icon(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.resolveWith(
-                      (states) => Colors.blueAccent),
-                ),
-                icon: Icon(FlutterRemix.facebook_box_fill),
-                onPressed: () => showDialog(
-                  context: context,
-                  builder: (context) => LoginScreenV2(),
-                ),
-                label: Container(
-                  child: Text('Facebook'),
+              icon: const Icon(FlutterRemix.mail_fill),
+              onPressed: () => showDialog(
+                context: context,
+                builder: (context) => LoginScreenV2(
+                  auth: auth,
                 ),
               ),
-            ],
-          ),
+              label: const Text('Email'),
+            ),
+            ElevatedButton.icon(
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.resolveWith((states) => Colors.red),
+              ),
+              icon: const Icon(FlutterRemix.google_fill),
+              onPressed: () => {},
+              label: const Text('Google'),
+            ),
+            ElevatedButton.icon(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.resolveWith(
+                    (states) => Colors.blueAccent),
+              ),
+              icon: const Icon(FlutterRemix.facebook_box_fill),
+              onPressed: () => {},
+              label: const Text('Facebook'),
+            ),
+          ],
         ),
-      );
-    });
+      ),
+    );
   }
 }
 
 class LoginScreenV2 extends StatelessWidget {
-  const LoginScreenV2({Key? key}) : super(key: key);
+  final LBAuthNotifier auth;
+
+  const LoginScreenV2({Key? key, required this.auth}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -130,11 +138,15 @@ class LoginScreenV2 extends StatelessWidget {
                   children: [
                     Container(
                       margin: const EdgeInsets.all(16),
-                      child: LoginScreen(),
+                      child: LoginScreen(
+                        auth: auth,
+                      ),
                     ),
                     Container(
                       margin: const EdgeInsets.all(16),
-                      child: SignupScreen(),
+                      child: SignupScreen(
+                        auth: auth,
+                      ),
                     )
                   ],
                 ),

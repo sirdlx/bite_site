@@ -77,15 +77,15 @@ class _PageSearchState extends State<ScreenMenu> {
 
             viewMode == View_Mode.search
                 ? buildSearchResults()
-                : SliverToBoxAdapter(),
+                : const SliverToBoxAdapter(),
             // //
             // //
             // //
             // //
             viewMode == View_Mode.category
                 ? FutureBuilder<MenuCatagory?>(
-                    future: Future.delayed(Duration(milliseconds: 0)).then(
-                        (value) => Future.value(
+                    future: Future.delayed(const Duration(milliseconds: 0))
+                        .then((value) => Future.value(
                             getMenuCategorySingle(selectedCategory!))),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
@@ -121,29 +121,29 @@ class _PageSearchState extends State<ScreenMenu> {
                           child: Container(
                             // color: Colors.red,
                             height: 500,
-                            child: Center(
+                            child: const Center(
                               child: CircularProgressIndicator(),
                             ),
                           ),
                         ),
                       );
                     })
-                : SliverToBoxAdapter(),
+                : const SliverToBoxAdapter(),
             //
             //
             // Popular Section
             viewMode == View_Mode.main
                 ? buildSearchDefaultView(context)
-                : SliverToBoxAdapter(),
+                : const SliverToBoxAdapter(),
 
             // // Category Grid Section
 
             viewMode == View_Mode.main
                 ? SliverToBoxAdapter(
                     child: CategoryGrid(scrollController: _scrollController))
-                : SliverToBoxAdapter(),
+                : const SliverToBoxAdapter(),
 
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: SizedBox(
                 height: 100,
               ),
@@ -356,7 +356,7 @@ class _PageSearchState extends State<ScreenMenu> {
           child: ListTile(
             tileColor: Theme.of(context).cardColor,
             contentPadding: const EdgeInsets.all(0),
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(8))),
             subtitle: viewMode == View_Mode.main ||
                     viewMode == View_Mode.category

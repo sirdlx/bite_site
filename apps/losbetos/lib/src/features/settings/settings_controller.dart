@@ -3,7 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flavor_auth/flavor_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:losbetosapp/src/features/auth/auth_service.dart';
 import 'package:losbetosapp/src/models/models.dart';
 import 'package:losbetosapp/src/screens/account.dart';
 import 'package:losbetosapp/src/screens/category.dart';
@@ -36,6 +38,8 @@ class SettingsController with ChangeNotifier {
 
   // Allow Widgets to read the user's preferred ThemeMode.
   ThemeMode get themeMode => _themeMode;
+
+  // Provider<LBAuthNotifier> auth = authControllerProvider;
 
   /// Load the user's settings from the SettingsService. It may load from a
   /// local database or the internet. The controller only knows it can load the
@@ -71,8 +75,8 @@ class SettingsController with ChangeNotifier {
 
   late Box? appBox;
 
-  FlavorUser? _user;
-  FlavorUser? get user => _user != null ? _user! : null;
+  // FlavorUser? _user;
+  // FlavorUser? get user => _user != null ? _user! : null;
 
   BSCart cart = BSCart();
 
@@ -105,7 +109,7 @@ class SettingsController with ChangeNotifier {
 
   void updateAndSave() {
     // print('updateAndSave()::_themeMode::$_themeMode');
-    appBox!.put('_user', user != null ? user!.toJson() : null);
+    // appBox!.put('_user', user != null ? user!.toJson() : null);
     appBox!.put('_cart', {'cart': cart.toList()});
     notifyListeners();
   }
@@ -124,15 +128,15 @@ class SettingsController with ChangeNotifier {
     }
     //
     var __user = appBox!.get('_user');
-    print('loadAppSettingsFromDisk()::__user::$__user');
-    _user = __user != null
-        ? FlavorUser(
-            displayName: __user['displayName'],
-            email: __user['email'],
-            emailVerified: __user['emailVerified'],
-            localId: __user['localId'],
-          )
-        : null;
+    // print('loadAppSettingsFromDisk()::__user::$__user');
+    // _user = __user != null
+    //     ? FlavorUser(
+    //         displayName: __user['displayName'],
+    //         email: __user['email'],
+    //         emailVerified: __user['emailVerified'],
+    //         localId: __user['localId'],
+    //       )
+    //     : null;
 
     //
     Map _cart = appBox!.get('_cart') ?? {};
@@ -149,7 +153,7 @@ class SettingsController with ChangeNotifier {
   }
 
   List<FlavorRouteWidget> get dashRoutes {
-    if (user != null) {}
+    // if (user != null) {}
     return [
       FlavorRouteWidget(
         path: '/',
