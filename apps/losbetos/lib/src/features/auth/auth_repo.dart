@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavor_auth/flavor_auth.dart';
 
-import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:losbetosapp/src/config/paths.dart';
 
@@ -107,6 +106,7 @@ class FirebaseAuthRepository implements BaseAuthRepository {
     });
     User signedInUser = authResult.user!;
 
+    // ignore: avoid_print
     print('path::${Paths.users}/${signedInUser.email}');
     return await firestore
         .doc('${Paths.users}/${signedInUser.email}')

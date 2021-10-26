@@ -34,7 +34,7 @@ class Menuitem {
   final String? title;
   final String? description;
   final int basePrice;
-  final String type = 'bitesite.catagory';
+  final String type = 'bitesite.menu.item';
   final String? imageUrl;
   final String? categoryId;
 

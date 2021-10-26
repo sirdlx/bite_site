@@ -5,9 +5,11 @@ import 'package:losbetosapp/src/utilities/utilities.dart';
 
 class MenuItemTile extends StatelessWidget {
   final Menuitem menuItem;
+  final void Function()? onTap;
   const MenuItemTile({
     Key? key,
     required this.menuItem,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -40,10 +42,7 @@ class MenuItemTile extends StatelessWidget {
               //     ),
             )
           : null,
-      // onTap: () {
-      //   GlobalNav.currentState!.pushNamed(
-      //       '/menu/category/${menuItem.categoryId}/item/${menuItem.id}');
-      // },
+      onTap: onTap,
       trailing: Text(toPricingText(menuItem.basePrice)),
     );
   }

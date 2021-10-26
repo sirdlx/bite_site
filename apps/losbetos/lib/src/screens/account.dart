@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:losbetosapp/src/components/card_section.dart';
 import 'package:losbetosapp/src/features/auth/auth_service.dart';
 import 'package:losbetosapp/src/screens/profile.dart';
 
@@ -34,7 +35,7 @@ class _ScreenAccountState extends State<ScreenAccount> {
         } else if (auth.user!.isAnonymous == false) {
           return ScreenProfile(auth: auth);
         } else {
-          return Scaffold(body: ScreenAccountPicker(auth: auth));
+          return ScreenAccountPicker(auth: auth);
         }
       },
     );
@@ -48,53 +49,50 @@ class ScreenAccountPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        margin: const EdgeInsets.all(16),
-        height: 260,
-        width: 300,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              'Choose your account',
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            ElevatedButton.icon(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.resolveWith(
-                    (states) => Colors.white70),
-              ),
-              icon: const Icon(FlutterRemix.mail_fill),
-              onPressed: () => showDialog(
-                context: context,
-                builder: (context) => LoginScreenV2(
-                  auth: auth,
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          CardSection(
+            headerText: 'Choose your account',
+            children: [
+              ListTile(
+                tileColor: Colors.white70,
+                leading: const Icon(FlutterRemix.mail_fill),
+                onTap: () => showDialog(
+                  context: context,
+                  builder: (context) => LoginScreenV2(
+                    auth: auth,
+                  ),
                 ),
+                title: const Text('Email'),
               ),
-              label: const Text('Email'),
-            ),
-            ElevatedButton.icon(
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.resolveWith((states) => Colors.red),
+              ListTile(
+                tileColor: Colors.red,
+                leading: const Icon(FlutterRemix.google_fill),
+                onTap: () => showDialog(
+                  context: context,
+                  builder: (context) => LoginScreenV2(
+                    auth: auth,
+                  ),
+                ),
+                title: const Text('Google'),
               ),
-              icon: const Icon(FlutterRemix.google_fill),
-              onPressed: () => {},
-              label: const Text('Google'),
-            ),
-            ElevatedButton.icon(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.resolveWith(
-                    (states) => Colors.blueAccent),
+              ListTile(
+                tileColor: Colors.blueAccent,
+                leading: const Icon(FlutterRemix.facebook_box_fill),
+                onTap: () => showDialog(
+                  context: context,
+                  builder: (context) => LoginScreenV2(
+                    auth: auth,
+                  ),
+                ),
+                title: const Text('Facebook'),
               ),
-              icon: const Icon(FlutterRemix.facebook_box_fill),
-              onPressed: () => {},
-              label: const Text('Facebook'),
-            ),
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
   }

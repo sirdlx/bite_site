@@ -21,15 +21,17 @@ class ScreenCartView extends StatelessWidget {
       return Scaffold(
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: Colors.transparent,
-          title: Text('Current Order'),
-          leading: GestureDetector(
-            onTap: () => ref
-                .read(miniPlayerControllerProvider)
-                .state
-                .animateToHeight(state: PanelState.MIN),
-            child: const Icon(FlutterRemix.close_circle_line),
-          ),
+          // backgroundColor: Colors.transparent,
+          title: const Text('Current Order'),
+          // leading: GestureDetector(
+          //   // onTap: () => ref
+          //   //     .read(miniPlayerControllerProvider)
+          //   //     .state
+          //   //     .animateToHeight(state: PanelState.MIN),
+
+          //   onTap: () => settingsController.globalNavKey.currentState!.pop(),
+          //   child: const Icon(FlutterRemix.close_circle_line),
+          // ),
         ),
         bottomNavigationBar: cart.items.isNotEmpty
             ? Padding(
@@ -38,12 +40,14 @@ class ScreenCartView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     RichText(
-                        text: TextSpan(
-                            text: 'Total : ',
-                            style: Theme.of(context).textTheme.headline6,
-                            children: [
+                      text: TextSpan(
+                        text: 'Total : ',
+                        style: Theme.of(context).textTheme.headline6,
+                        children: [
                           TextSpan(text: toPricingText(cart.itemsTotal)),
-                        ])),
+                        ],
+                      ),
+                    ),
                     ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).pushNamed('/checkout');

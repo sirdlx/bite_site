@@ -19,6 +19,7 @@ class LBAuthNotifier extends ChangeNotifier {
         _user = await repo.loginFromFBCache(user: event);
       }
 
+      // ignore: avoid_print
       print('user::$_user');
     });
 

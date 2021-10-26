@@ -33,8 +33,9 @@ class ScreenProfile extends StatelessWidget {
         return SingleChildScrollView(
           controller: ScrollController(),
           child: Padding(
-            padding: const EdgeInsets.all(24.0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 buildProfileSection(context, user, auth.repo.getCurrentUser()!),
                 buildOrderSection(context, user, {}),
@@ -60,13 +61,13 @@ class ScreenProfile extends StatelessWidget {
       headerText: 'Orders',
       children: <Widget>[
         ListTile(
-          onTap: () => Navigator.of(context).pushNamed('/orders'),
+          onTap: () => Navigator.of(context).pushNamed('/orders/1'),
           title: const Text('Order 1'),
           subtitle: const Text('Order 1'),
         ),
         ListTile(
           tileColor: Colors.red,
-          onTap: () => Navigator.of(context).pushNamed('/orders'),
+          onTap: () => Navigator.of(context).pushNamed('/orders/2'),
           title: const Text('Orders 2'),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,51 +97,53 @@ class ScreenProfile extends StatelessWidget {
       text: fuser.phoneNumber ?? '',
     );
 
-    List<LBTextField> _textFields = [
-      LBTextField(
-        labelText: 'Name',
-        controller: displayNameTextEditingController,
-        // initialValue: auth.user?.displayName,
+    List<Widget> _textFields = [
+      ListTile(
+        title: LBTextField(
+          labelText: 'Name',
+          controller: displayNameTextEditingController,
+          // initialValue: auth.user?.displayName,
 
-        onFieldSubmitted: (dn) async {
-          await auth.repo
-              .getCurrentUser()!
-              .updateDisplayName(dn)
-              .then((value) => print('updated name'));
-          await FirebaseFirestore.instance
-              .doc(userDocPath(fuser))
-              .update({'display_name': dn});
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Updated Display Name')));
-        },
+          onFieldSubmitted: (dn) async {
+            await auth.repo
+                .getCurrentUser()!
+                .updateDisplayName(dn)
+                .then((value) => print('updated name'));
+            await FirebaseFirestore.instance
+                .doc(userDocPath(fuser))
+                .update({'display_name': dn});
+            ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Updated Display Name')));
+          },
+        ),
       ),
-      LBTextField(
-        labelText: 'Email',
-        controller: emailTextEditingController,
-        onFieldSubmitted: (dn) async {
-          await FirebaseAuth.instance.currentUser!.updateEmail(dn);
-          await FirebaseFirestore.instance
-              .doc(userDocPath(fuser))
-              .update({'email': dn});
-        },
+      ListTile(
+        title: LBTextField(
+          labelText: 'Email',
+          controller: emailTextEditingController,
+          onFieldSubmitted: (dn) async {
+            await auth.repo.getCurrentUser()!.updateEmail(dn);
+            await FirebaseFirestore.instance
+                .doc(userDocPath(fuser))
+                .update({'email': dn});
+          },
+        ),
       ),
-      LBTextField(
-        labelText: 'Phone Number',
-        controller: phoneTextEditingController,
-        onFieldSubmitted: (dn) async {
-          await FirebaseFirestore.instance
-              .doc(userDocPath(fuser))
-              .update({'phone_number': dn});
-          // await FirebaseAuth.instance.currentUser?.updatePhoneNumber(PhoneAuthCredential);
-        },
+      ListTile(
+        title: LBTextField(
+          labelText: 'Phone Number',
+          controller: phoneTextEditingController,
+          onFieldSubmitted: (dn) async {
+            await FirebaseFirestore.instance
+                .doc(userDocPath(fuser))
+                .update({'phone_number': dn});
+            // await FirebaseAuth.instance.currentUser?.updatePhoneNumber(PhoneAuthCredential);
+          },
+        ),
       ),
     ];
 
     return CardSection(
-      headerTrailing: IconButton(
-        onPressed: () => Navigator.of(context).pushNamed('/orders'),
-        icon: const Icon(FlutterRemix.arrow_right_circle_line),
-      ),
       headerText: 'Profile',
       children: <Widget>[
         Form(

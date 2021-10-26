@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:losbetosapp/src/components/hero_image.dart';
+import 'package:losbetosapp/src/themes/light.dart';
 
 class BiteGridItem extends StatelessWidget {
   final String? subtitle;
@@ -55,7 +56,7 @@ class BiteGridItem extends StatelessWidget {
         child: GridTile(
           child: child ??
               Container(
-                color: Colors.red,
+                color: lbThemeLight.primaryColor,
                 height: double.infinity,
                 width: double.infinity,
               ),

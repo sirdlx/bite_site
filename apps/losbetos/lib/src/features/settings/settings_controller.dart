@@ -1,19 +1,17 @@
 import 'package:flavor_client/components/route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flavor_auth/flavor_auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:losbetosapp/src/features/auth/auth_service.dart';
 import 'package:losbetosapp/src/models/models.dart';
 import 'package:losbetosapp/src/screens/account.dart';
+import 'package:losbetosapp/src/screens/cart.dart';
 import 'package:losbetosapp/src/screens/category.dart';
-import 'package:losbetosapp/src/screens/layout.dart';
-import 'package:losbetosapp/src/screens/menu.dart';
-import 'package:losbetosapp/src/screens/menu_item.dart';
+import 'package:losbetosapp/src/screens/layout02.dart';
+import 'package:losbetosapp/src/screens/menu02.dart';
+import 'package:losbetosapp/src/screens/menu_item02.dart';
 import 'package:losbetosapp/src/screens/orders.dart';
-import 'package:losbetosapp/src/screens/settings.dart';
 import 'package:regex_router/regex_router.dart';
 
 import 'settings_service.dart';
@@ -80,25 +78,19 @@ class SettingsController with ChangeNotifier {
 
   BSCart cart = BSCart();
 
-  List<FlavorRouteWidget> get routesDrawer {
-    List<FlavorRouteWidget> arr = [];
-    for (var i = 0; i < dashRoutes.length; i++) {
-      FlavorRouteWidget ii = dashRoutes[i];
-      if (ii.routeInDrawer == true) {
-        arr.add(ii);
-      }
-    }
-    return arr;
-  }
-
   get router => RegexRouter.create({
         // "/": (context, _) => AppLayoutWidget(),
-        "/": (context, _) => ScreenLayout(routes: routesDrawer),
+        // "/": (context, _) => ScreenLayout(routes: routesForDrawer),
+        "/": (context, _) => LBScreenLayout(routes: routesForDrawer),
+
+        // "/menu/category/:catId/item/:itemId/": (context, args) =>
+        //     ScreenMenuItem(id: args["itemId"]!),
+
         "/menu/category/:catId/item/:itemId/": (context, args) =>
-            ScreenMenuItem(id: args["itemId"]!),
+            LBScreenMenuItem(id: args["itemId"]!),
         "/menu/category/:catId": (context, args) =>
             ScreenCategory(id: args["catId"]!),
-        "/orders": (context, args) => ScreenOrders(),
+        "/orders": (context, args) => const ScreenOrders(),
         "/orders/:orderID": (context, args) =>
             ScreenOrders(id: args["orderID"]!),
       });
@@ -155,12 +147,37 @@ class SettingsController with ChangeNotifier {
   List<FlavorRouteWidget> get dashRoutes {
     // if (user != null) {}
     return [
+      // FlavorRouteWidget(
+      //   path: '/',
+      //   icon: CupertinoIcons.home,
+      //   title: 'Menu',
+      //   child: const ScreenMenu(),
+      //   backgroundColor: Colors.green,
+      //   routeInDrawer: true,
+      // ),
       FlavorRouteWidget(
         path: '/',
         icon: CupertinoIcons.home,
         title: 'Menu',
-        child: const ScreenMenu(),
+        child: const LBScreenMenu(),
         backgroundColor: Colors.green,
+        routeInDrawer: true,
+      ),
+
+      FlavorRouteWidget(
+        path: '/cart',
+        icon: FlutterRemix.shopping_bag_2_line,
+        title: 'Cart',
+        child: const ScreenCartView(),
+        backgroundColor: Colors.green,
+        routeInDrawer: true,
+      ),
+
+      FlavorRouteWidget(
+        path: '/ordrers',
+        icon: FlutterRemix.history_line,
+        title: 'Orders',
+        child: const ScreenOrders(),
         routeInDrawer: true,
       ),
       FlavorRouteWidget(
@@ -171,14 +188,14 @@ class SettingsController with ChangeNotifier {
         backgroundColor: Colors.green,
         routeInDrawer: true,
       ),
-      FlavorRouteWidget(
-        path: '/settings',
-        icon: CupertinoIcons.settings,
-        title: 'Settings',
-        child: ScreenSettings(),
-        backgroundColor: Colors.green,
-        routeInDrawer: true,
-      ),
+      // FlavorRouteWidget(
+      //   path: '/settings',
+      //   icon: CupertinoIcons.settings,
+      //   title: 'Settings',
+      //   child: ScreenSettings(),
+      //   backgroundColor: Colors.green,
+      //   routeInDrawer: true,
+      // ),
     ];
   }
 
@@ -193,20 +210,3 @@ class SettingsController with ChangeNotifier {
     return arr;
   }
 }
-
-// class FlavorRouteWidget {
-//   final String? path;
-//   final IconData? icon;
-//   final String? title;
-//   final Widget? child;
-//   final Color? backgroundColor;
-//   final bool? routeInDrawer;
-
-//   FlavorRouteWidget(
-//       {this.path,
-//       this.icon,
-//       this.title,
-//       this.child,
-//       this.backgroundColor,
-//       this.routeInDrawer});
-// }

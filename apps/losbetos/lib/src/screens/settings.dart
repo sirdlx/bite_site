@@ -9,13 +9,10 @@ class ScreenSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var app = settingsController;
-
     return Scaffold(
       body: SingleChildScrollView(
-        controller: ScrollController(),
         child: Padding(
-          padding: const EdgeInsets.all(4.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -24,23 +21,26 @@ class ScreenSettings extends StatelessWidget {
                   CheckboxListTile(
                     title: const Text('System'),
                     // activeColor: Theme.of(context).toggleButtonsTheme.color,
-                    value: app.themeMode == ThemeMode.system,
-                    onChanged: (value) => app.updateThemeMode(ThemeMode.system),
+                    value: settingsController.themeMode == ThemeMode.system,
+                    onChanged: (value) =>
+                        settingsController.updateThemeMode(ThemeMode.system),
                   ),
                   CheckboxListTile(
                     title: const Text('Light'),
                     // activeColor: Theme.of(context).toggleButtonsTheme.color,
-                    value: app.themeMode == ThemeMode.light,
-                    onChanged: (value) => app.updateThemeMode(ThemeMode.light),
+                    value: settingsController.themeMode == ThemeMode.light,
+                    onChanged: (value) =>
+                        settingsController.updateThemeMode(ThemeMode.light),
                   ),
                   CheckboxListTile(
                     title: const Text('Dark'),
                     // activeColor: Theme.of(context).toggleButtonsTheme.color,
-                    value: app.themeMode == ThemeMode.dark,
-                    onChanged: (value) => app.updateThemeMode(ThemeMode.dark),
+                    value: settingsController.themeMode == ThemeMode.dark,
+                    onChanged: (value) =>
+                        settingsController.updateThemeMode(ThemeMode.dark),
                   ),
                 ],
-                headerText: 'Settings',
+                headerText: 'Theme',
               ),
             ],
           ),

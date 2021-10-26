@@ -19,33 +19,32 @@ class CardSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          shrinkWrap: true,
-          children: [
-            ListTile(
-              title: Text(
-                headerText,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6!
-                    .copyWith(fontWeight: FontWeight.bold),
-              ),
-              subtitle: headerSubtitleText != null
-                  ? Text(
-                      headerSubtitleText!,
-                      // style: Theme.of(context)
-                      //     .textTheme
-                      //     .headline6!
-                      //     .copyWith(fontWeight: FontWeight.bold),
-                    )
-                  : null,
-              trailing: headerTrailing,
+      child: Column(
+        children: [
+          ListTile(
+            title: Text(
+              headerText,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6!
+                  .copyWith(fontWeight: FontWeight.bold),
             ),
-            ...children
-          ],
-        ),
+            subtitle: headerSubtitleText != null
+                ? Text(
+                    headerSubtitleText!,
+                    // style: Theme.of(context)
+                    //     .textTheme
+                    //     .headline6!
+                    //     .copyWith(fontWeight: FontWeight.bold),
+                  )
+                : null,
+            trailing: headerTrailing,
+          ),
+          ...children,
+          const SizedBox(
+            height: 16,
+          )
+        ],
       ),
     );
   }
