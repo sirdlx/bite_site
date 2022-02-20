@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavor_auth/flavor_auth.dart';
 
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:losbetosapp/src/config/paths.dart';
 
 abstract class BaseAuthRepository {
@@ -210,9 +209,3 @@ class CustomException implements Exception {
   @override
   String toString() => 'CustomException { message: $message }';
 }
-
-final firebaseAuthProvider =
-    Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
-
-final firebaseFirestoreProvider =
-    Provider<FirebaseFirestore>((ref) => FirebaseFirestore.instance);

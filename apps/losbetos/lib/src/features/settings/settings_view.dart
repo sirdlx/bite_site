@@ -1,51 +1,64 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:losbetosapp/main.dart';
+import 'package:losbetosapp/src/components/card_section.dart';
 
-import 'settings_controller.dart';
-
-/// Displays the various settings that can be customized by the user.
-///
-/// When a user changes a setting, the SettingsController is updated and
-/// Widgets that listen to the SettingsController are rebuilt.
-class SettingsView extends StatelessWidget {
-  const SettingsView({Key? key, required this.controller}) : super(key: key);
-
-  static const routeName = '/settings';
-
-  final SettingsController controller;
+// Turned off
+class ScreenSettings extends StatelessWidget {
+  const ScreenSettings({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        // Glue the SettingsController to the theme selection DropdownButton.
-        //
-        // When a user selects a theme from the dropdown list, the
-        // SettingsController is updated, which rebuilds the MaterialApp.
-        child: DropdownButton<ThemeMode>(
-          // Read the selected themeMode from the controller
-          value: controller.themeMode,
-          // Call the updateThemeMode method any time the user selects a theme.
-          onChanged: controller.updateThemeMode,
-          items: const [
-            DropdownMenuItem(
-              value: ThemeMode.system,
-              child: Text('System Theme'),
-            ),
-            DropdownMenuItem(
-              value: ThemeMode.light,
-              child: Text('Light Theme'),
-            ),
-            DropdownMenuItem(
-              value: ThemeMode.dark,
-              child: Text('Dark Theme'),
-            )
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              CardSection(
+                children: [
+                  CheckboxListTile(
+                    title: const Text('System'),
+                    // activeColor: Theme.of(context).toggleButtonsTheme.color,
+                    value: appController.themeMode == ThemeMode.system,
+                    onChanged: (value) =>
+                        appController.updateThemeMode(ThemeMode.system),
+                  ),
+                  CheckboxListTile(
+                    title: const Text('Light'),
+                    // activeColor: Theme.of(context).toggleButtonsTheme.color,
+                    value: appController.themeMode == ThemeMode.light,
+                    onChanged: (value) =>
+                        appController.updateThemeMode(ThemeMode.light),
+                  ),
+                  CheckboxListTile(
+                    title: const Text('Dark'),
+                    // activeColor: Theme.of(context).toggleButtonsTheme.color,
+                    value: appController.themeMode == ThemeMode.dark,
+                    onChanged: (value) =>
+                        appController.updateThemeMode(ThemeMode.dark),
+                  ),
+                ],
+                headerText: 'Theme',
+              ),
+            ],
+          ),
         ),
       ),
+      // appBar: AppBar(
+      //   title: const Text('Settings'),
+      // ),
+      // body: Padding(
+      //   padding: const EdgeInsets.all(24.0),
+      //   child: CardSection(
+      //     headerText: '',
+      //     headerTrailing: Container(),
+      //     children: [
+      //
+      //     ],
+      //   ),
+      // ),
     );
   }
 }

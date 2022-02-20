@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:losbetosapp/src/themes/light.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 final textTheme = GoogleFonts.contrailOneTextTheme().copyWith(
   subtitle2: const TextStyle(color: Colors.red),
@@ -22,6 +23,16 @@ Map<int, Color> color = {
 
 MaterialColor colorCustom = MaterialColor(0xFFA73030, color);
 
+ThemeData darkTheme2(Color primary, TextTheme textTheme) =>
+    FlexColorScheme.dark(
+      colors: FlexSchemeColor.from(primary: primary),
+    ).toTheme;
+
+ThemeData lightTheme2(Color primary, TextTheme textTheme) =>
+    FlexColorScheme.light(
+      colors: FlexSchemeColor.from(primary: primary),
+    ).toTheme;
+
 ThemeData darkTheme(Color primary, TextTheme textTheme) => ThemeData.from(
       colorScheme: ColorScheme.dark(
         primary: primary,
@@ -40,7 +51,7 @@ ThemeData darkTheme(Color primary, TextTheme textTheme) => ThemeData.from(
           visualDensity: VisualDensity.adaptivePlatformDensity,
         )
         .copyWith(
-          inputDecorationTheme: InputDecorationTheme(
+          inputDecorationTheme: const InputDecorationTheme(
             fillColor: Colors.amber,
             labelStyle: TextStyle(color: Colors.white),
             suffixStyle: TextStyle(color: Colors.white),

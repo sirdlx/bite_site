@@ -1,0 +1,446 @@
+
+
+[
+    // {
+    //     Popular Items
+    //     The most commonly ordered items and dishes 
+    
+    // },
+    {
+        Breakfast Burritos After 10 AM
+        Steak Breakfast Burrito
+        Served with cheese, potatoes and eggs
+        $7.70
+        À La Mexicana Burrito
+        Pico de gallo, eggs, potato and cheese.
+        $5.69
+        Beto's Burrito
+        Chorizo, sausage, ham, bacon, eggs and cheese.
+        $7.19
+        Green Chiles Burrito
+        Potatoes, eggs and cheese
+        $6.13
+        Steak Bacon Burrito
+        Potatoes, cheese and eggs
+        $7.39
+        Ham, Cheese, Potatoes and Eggs Burrito
+        $5.43
+        Chorizo, Cheese, Potatoes and Eggs Burrito
+        $5.43
+        Sausage, Cheese, Potatoes and Eggs Burrito
+        $5.79
+        Bacon, Cheese, Potatoes and Eggs Burrito
+        $7.24
+        Bean, Cheese, Potatoes and Eggs Burrito
+        $5.29
+        Cheese, Potatoes and Eggs Burrito
+        $5.29"
+        
+    },
+    {
+        
+        
+            
+            Side Orders and Extras
+            French Fries
+            $3.05
+            1/2 Pint of Pico De Gallo
+            $2.70
+            1/2 Pint of Rice
+            $2.70
+            1/2 Pint of Beans
+            $2.70
+            1/2 Pint of Guacamole
+            $5.05
+            Cheese
+            $1.65
+            Guacamole
+            $1.85
+            Sour Cream
+            $1.65
+            Hot Carrots
+            $1.65
+    },
+    {
+
+        Desserts
+        Churros
+        $1.95
+        Churros
+        $4.05
+        Cheesecake
+        $3.70
+        Rice Pudding
+        $3.70
+        
+    },
+    {
+        Beverages
+        Soda
+        $2.20
+        Water
+        $2.15
+        Juice
+        $2.40
+        
+    },
+    {
+        
+        
+        Mexican Drinks and Sodas
+        Horchata Drink
+        $2.20
+        Jamaica Drink
+        $2.20
+        Mexican Coke
+        $2.70
+        
+    },
+    {
+        
+        Salad
+        Nacho Salad
+        $7.40
+        Chipotle Grilled Chicken Salad
+        $7.40
+        Caesar Salad
+        $7.20
+        Shrimp Taco Salad
+        $8.40
+        Veggie Taco Salad
+        $7.75
+        
+    },
+    {
+        Los Betos Specialties
+        Carne Asada Fries
+        $11.24
+        3 Rolled Tacos Dinner
+        Rolled tacos. Tacos come with shredded beef inside. Served with rice and beans.
+        $6.75
+        Rolled Tacos Dinner
+        Rolled tacos. Tacos come with shredded beef inside. Served with rice and beans.
+        $9.24
+        Burrito Dinner
+        Served with rice and beans
+        $7.40
+        Mexican BowlBeef or chicken
+        Served with rice and beans
+        $6.25
+        Carne Asada Super Burrito
+        Burrito includes rice, beans, guacamole, cheese, sour cream, lettuce and pico de gallo
+        $8.24
+        3 Mini Chimichangas
+        Includes rice and beans
+        $7.60
+        Sampler Platter
+        3 mini chimichangas (chicken), 3 rolled tacos, 2 chicken crispy tacos and 1 mini taco salad. Rice and beans, guacamole, cream, pico de gallo, cheese and mixed veggies. Choice of dressing for dipping. Serves 2-3 people
+        $17.24
+    },
+    {
+       Tacos
+       Ground Beef Taco
+       $2.85
+       Shredded Beef Taco
+       $3.25
+       Carne Asada Taco
+       $3.70
+       Chicken Taco
+       $4.20
+       3 Rolled Tacos and Cheese
+       Tacos come with shredded beef inside
+       $4.20
+       3 Rolled Tacos and Guacamole
+       Tacos come with shredded beef inside
+       $4.75
+       Carnitas Taco
+       $3.70
+       Fish Taco
+       $3.70
+       Adobada Taco
+       $3.90
+       Green Chili Taco
+       $3.70
+       Chile Relleno Taco
+       $3.70
+       Shrimp Taco
+       $4.70
+       Pastor Taco
+       $3.90
+    },
+    {
+        
+        Tortas
+        Beef Torta
+        $4.70
+        Ham Torta
+        $4.40
+        Chorizo Torta
+        $4.70
+        Chicken Torta
+        $4.70
+        Machaca Torta
+        $4.70
+        Carne Asada Torta
+        $7.20
+        Carnitas Torta
+        $5.40
+        Adobada Torta
+        $5.40
+        Pastor Torta
+        $7.20
+    },
+    {
+        Burritos
+        Ground Beef Burrito
+        Beef, lettuce and cheese. Wet burrito would be topped with enchilada sauce
+        $5.60
+        California Burrito
+        Potatoes, carne asada, cheese and pico de gallo. Wet burrito would be topped with enchilada sauce
+        $7.95
+        Machaca Burrito
+        Machaca (dried beef), eggs, bell pepper and onion. Wet burrito would be topped with enchilada sauce
+        $6.50
+        Chorizo Burrito
+        Chorizo, potato, and egg. Wet burrito would be topped with enchilada sauce
+        $5.60
+        Mixed Burrito
+        Mixed with beef and bean, bell pepper and onion. Wet burrito would be topped with enchilada sauce
+        $5.60
+        Beef Burrito
+        Beef, bell pepper and onion. Wet burrito would be topped with enchilada sauce
+        $5.90
+        Chicken Burrito
+        Red chicken and onion. Wet burrito would be topped with enchilada sauce
+        $5.90
+        Pollo Asado Burrito
+        Grilled chicken, pico de gallo and sour cream. Wet burrito would be topped with enchilada sauce
+        $6.05
+        Beans Burrito
+        Beans and cheese. Wet burrito would be topped with enchilada sauce
+        $3.90
+        Carnitas Burrito
+        Pork carnitas, pico de gallo and guacamole. Wet burrito would be topped with enchilada sauce
+        $5.90
+        Fish Burrito
+        Fish, pico de gallo, mayonnaise and cabbage. Wet burrito would be topped with enchilada sauce
+        $5.60
+        Veggie Burrito
+        Rice, beans, guacamole, lettuce and pico de gallo and sour cream. Wet burrito would be topped with enchilada sauce
+        $5.40
+        Adobada Burrito
+        Pork in red chili sauce, pico and guacamole. Wet burrito would be topped with enchilada sauce
+        $5.90
+        Chile Relleno Burrito
+        Cheese chili relleno with lettuce, pico de gallo and sour cream. Wet burrito would be topped with enchilada sauce
+        $5.70
+        Green Chili Burrito
+        Rice and beans
+        $5.60
+        Chile Colorado Burrito
+        Red chili meat and rice
+        $5.90
+        Carne Asada Burrito
+        Grilled steak, pico de gallo and guacamole. Wet burrito would be topped with enchilada sauce
+        $7.95
+        Carne Asada Plain Burrito
+        Grilled steak only is more meat. Wet burrito would be topped with enchilada sauce.
+        $9.20
+        Texas Burrito
+        Chicken, potato, sour cream and cheese. Wet burrito would be topped with enchilada sauce.
+        $6.05
+        Shrimp Burrito
+        Wet burrito would be topped with enchilada sauce.
+        $7.70
+        Chicken Fajita Burrito
+        Chicken fajita, bell pepper and onion. Wet burrito would be topped with enchilada sauce.
+        $7.70
+        Beef Fajita Burrito
+        Beef fajita, bell pepper and onion. Wet burrito would be topped with enchilada sauce.
+        $8.75
+        Pastor Burrito
+        Pork, pineapple and onion. Wet burrito would be topped with enchilada sauce.
+        $6.40
+        Cancun Burrito
+        Chicken, avocado, pico de gallo and beans. Wet burrito would be topped with enchilada sauce.
+        $7.20
+        Super Carne Asada Burrito
+        Grilled steak with even more meat. Wet burrito would be topped with enchilada sauce.
+        $9.20
+    },
+    {
+        // rest
+        Chimichangas
+        Add side of rice and beans for an additional charge.
+        Beef Chimichanga
+        $7.95
+        Chicken Chimichanga
+        $7.70
+        Ground Beef Chimichanga
+        $7.95
+        Carne Asada Chimichanga
+        $8.20
+    },
+    {
+        EnchiladasBeef Enchilada
+        $6.15
+        Chicken Enchilada
+        $6.15
+        Mixed Enchilada
+        $6.15
+        Cheese Enchilada
+        $6.15
+        Ground Beef Enchilada
+        $6.15
+    },
+    {
+        Quesadillas
+        Cheese Quesadilla
+        $4.30
+        Chicken Quesadilla
+        $6.40
+        Carne Asada Quesadilla
+        $9.24
+        Caramelo Quesadilla
+        $8.40
+        Supreme Quesadilla
+        $9.50
+        Al Pastor Quesadilla
+        $7.40
+        Carnitas Quesadilla
+        $7.40
+        Shrimp Quesadilla
+        $9.75
+        Beef Quesadilla
+        $6.20
+    },
+    {
+       
+        Chips & Salsa, Tostadas and Nachos
+        Bean Tostadas
+        $3.70
+        Beef Tostadas
+        $4.40
+        Chicken Tostada
+        $4.40
+        Ground Beef Tostada
+        $4.40
+        Chips with Guacamole
+        $5.70
+        Carne Asada Super Nachos
+        $11.24
+        Chicken Super Nachos
+        $9.40
+        Ground Beef Super Nachos
+        $9.70
+        Chips and Salsa
+        $4.70
+    },
+    {
+        
+        Combination Plates
+        Include rice and beans.
+        Tostada and Taco Combo Plate
+        Comes with bean tostada and chicken taco.
+        $8.95
+        2 Beef Tacos Combo Plate
+        $9.20
+        2 Enchiladas Combo Plate
+        Choice of chicken or beef enchiladas. Comes with choice of flour or corn tortillas.
+        $9.20
+        Tostada and Enchilada Combo PlateComes with bean tostada and choice of chicken or beef enchilada. Comes with choice of flour or corn tortillas.
+        $9.20
+        Taco and Enchilada Combo PlateChoice of chicken or beef taco and choice of chicken or beef enchilada. Comes with choice of flour or corn tortillas.
+        $9.20
+        Burrito and Enchilada Combo Plate
+        Choice of chicken or beef burrito and choice of chicken or beef enchilada. Comes with choice of flour or corn tortillas.
+        $9.70
+        2 Beef Burritos Combo Plate
+        $10.20
+        2 Carne Asada Tacos Combo Plate
+        $11.75
+        2 Chicken Tacos Combo Plate
+        $9.20
+        Carne Asada Combo Plate
+        $11.75
+        2 Fish Tacos Combo Plate
+        $9.40
+        Carnitas Combo Plate
+        $9.90
+        Burrito and Taco Combo Plate
+        Choice of chicken or beef burrito and choice of chicken or beef taco. Comes with choice of flour or corn tortillas.
+        $9.70
+        Pollo Asada Combo Plate
+        $9.70
+        Adobado Combo PlatePork in red chili sauce. Comes with choice of flour or corn tortillas.
+        $9.95
+        Green Chili Combo Plate
+        $9.20
+        2 Chiles Rellenos Combo Plate
+        $9.40
+        2 Ground Beef Tacos Combo Plate
+        $9.40
+        Shrimp Combo Plate
+        $11.40
+        Chicken Fajitas Combo Plate
+        $10.40
+        Steak Fajitas Combo Plate
+        $11.40
+        Al Pastor Combo Plate
+        Served with flour or corn tortilla.$9.70
+    },
+    {
+        Breakfast Mains
+        Come with beans.Ham and Eggs Breakfast
+        $6.20
+        Bacon and Eggs Breakfast
+        $7.20
+        Machaca and Eggs Breakfast
+        $6.40
+        Huevos Rancheros Breakfast
+        $5.90
+        Sausage and Eggs Breakfast
+        $6.70
+        Bistec Ranchero Breakfast
+        $8.95
+        Huevos à La Mexicana Breakfast
+        $5.90
+        Chorizo and Eggs Breakfast
+        $6.40
+        Chilaquiles Potosinos Breakfast
+        $4.95
+        Con Huevo Breakfast
+        $5.20
+    },
+    {
+        Breakfast Combination Plates
+        Come with beans and choice of corn or flour tortillas. Add rice for an additional charge.
+        Breakfast Ham with Egg Combo Plate
+        $6.20
+        Breakfast Machaca with Egg Combo Plate
+        $6.40
+        Breakfast Sausage with Egg Combo Plate
+        $6.70
+        Breakfast Huevos à La Mexicana Combo Plate
+        $5.90
+        Breakfast Chorizo and Eggs Combo Plate
+        $6.40
+        Breakfast Bacon and Eggs Combo Plate
+        $8.20
+        Breakfast Huevos Rancheros Combo Plate
+        $5.90
+        Breakfast Bistec Rancheros Combo Plate
+        $9.75
+        Breakfast Chilaquiles Potosinos Combo Plate
+        $5.20
+    },
+    {
+        Soups
+        Pozole Soup
+        $9.20
+        Cocido Soup
+        $9.20
+        Albondigas Soup
+        $9.20
+    }
+]

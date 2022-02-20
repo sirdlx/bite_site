@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "dlxstudios-f6e64"
+  },
+  "targets": {
+    "dlxstudios-f6e64": {
+      "hosting": {
+        "losbetosapp": [
+          "dlxstudios-f6e64"
+        ]
+      }
+    }
+  }
+}
